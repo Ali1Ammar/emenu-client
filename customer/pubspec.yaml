@@ -1,0 +1,38 @@
+name: customer
+description: A new Flutter project.
+
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared:
+    path: ../shared
+  cupertino_icons: ^1.0.2
+  freezed_annotation:  ^1.1.0
+  riverpod: ^2.0.0-dev.0
+  hooks_riverpod: ^2.0.0-dev.0
+  flutter_riverpod: ^2.0.0-dev.0
+  shared_preferences:
+  auto_size_text:
+  json_annotation:
+  socket_io_client: ^1.0.2
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^1.0.0
+  freezed: ^1.1.1
+  json_serializable:
+
+flutter:
+
+
+  uses-material-design: true
+
