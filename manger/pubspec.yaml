@@ -18,12 +18,19 @@ dependencies:
   freezed_annotation:  ^1.1.0
   riverpod: ^2.0.0-dev.0
   hooks_riverpod: ^2.0.0-dev.0
+  flutter_hooks:
   flutter_riverpod: ^2.0.0-dev.0
+  state_notifier: 0.7.2+1
   shared_preferences:
   auto_size_text:
   json_annotation:
-  fluent_ui: ^3.6.0
+  fluent_ui: 
+    git: https://github.com/bdlukaa/fluent_ui.git
   socket_io_client: ^1.0.2
+  auto_route: ^3.2.1
+  dio:
+  form_field_validator: ^1.1.0
+  file_picker: ^4.3.2
   
 dev_dependencies:
   flutter_test:
@@ -32,6 +39,8 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   freezed: ^1.1.1
   json_serializable:
+  auto_route_generator:
+  build_runner:
 
 
 
