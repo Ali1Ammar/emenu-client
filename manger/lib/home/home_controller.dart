@@ -1,4 +1,5 @@
 import 'package:manger/home/home_state.dart';
+import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/login/login_provider.dart';
 import 'package:manger/login/user.dart';
 import 'package:manger/main/auto_router.dart';
@@ -21,32 +22,37 @@ class HomeController extends StateNotifier<HomeState> {
       : super(const HomeState.loading());
 
   init() async {
-    Resturant? resturant;
-    if (user.resturantId != null) {
-      resturant = await resturantService.getLinkedResturant();
-    }
     if (user.isSystemAdmin) {
       final rests = await resturantService.getAllResturantForAdmins();
-      final _state =
-          HomeState.loadedSystemAdmin(rests, resturant) as LoadedAllResturant;
+      final _state = HomeState.loadedSystemAdmin(rests) as LoadedAllResturant;
       state = _state;
+
       if (rests.isEmpty) {
         return read(autoRouteProvider).replace(const NewResturantPageRoute());
       }
-      if (rests.length == 1 && rests.first.id == resturant?.id) {
-        //admin has only one resturant linked wiht him
+
+      if (rests.length == 1 && rests.first.id == user.resturantId) {
+        //admin has only one resturant linked wiht
+        final resturant = await resturantService.getLinkedResturant();
+        read(currentLinkedResturant.notifier).state =
+            AsyncValue.data(resturant);
         return read(autoRouteProvider)
             .replace(const HomeResturantMangePageRoute());
       }
-      return read(autoRouteProvider).replace(HomeSystemPageRoute(data: _state));
+
+      return read(autoRouteProvider)
+          .replace(HomeSystemPageRoute(resturants: _state.resturnats));
     } else {
-      if (resturant == null) {
+      if (user.resturantId == null) {
         state = const HomeState.emptyUser();
-      } else {
-        state = HomeState.loadedUserResturant(resturant);
-        return read(autoRouteProvider)
-            .replace(const HomeResturantMangePageRoute());
+        return;
       }
+      final resturant = await resturantService.getLinkedResturant();
+      read(currentLinkedResturant.notifier).state = AsyncValue.data(resturant);
+
+      state = HomeState.loadedUserResturant(resturant);
+      return read(autoRouteProvider)
+          .replace(const HomeResturantMangePageRoute());
     }
   }
 }

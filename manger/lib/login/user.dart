@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part "user.g.dart";
 
-
 @JsonSerializable()
 class User {
   final int id;
@@ -14,7 +13,7 @@ class User {
   @JsonKey(ignore: true)
   late bool isSystemAdmin;
 
-  User(this.id, this.userName, this.resturantId, this.permissons){
+  User(this.id, this.userName, this.resturantId, this.permissons) {
     isSystemAdmin = permissons.contains(UserPermissions.SystemAdmin);
   }
 
@@ -29,11 +28,9 @@ enum UserPermissions {
   Kitchen,
 }
 
-
-extension UserPermissionsExt on UserPermissions{
-  String get ar{
+extension UserPermissionsExt on UserPermissions {
+  String get ar {
     switch (this) {
-   
       case UserPermissions.SystemAdmin:
         return "مدير نظام";
       case UserPermissions.ResturantAdmin:

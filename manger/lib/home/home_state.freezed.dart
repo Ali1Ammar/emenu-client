@@ -22,15 +22,13 @@ class _$HomeStateTearOff {
     return const LoadingHome();
   }
 
-  LoadedAllResturant loadedSystemAdmin(
-      List<Resturant> resturnats, Resturant? linkedResturnat) {
+  LoadedAllResturant loadedSystemAdmin(List<Resturant> resturnats) {
     return LoadedAllResturant(
       resturnats,
-      linkedResturnat,
     );
   }
 
-  LoadedUserResturant loadedUserResturant(Resturant resturnats) {
+  LoadedUserResturant loadedUserResturant(RealtionResturant resturnats) {
     return LoadedUserResturant(
       resturnats,
     );
@@ -49,28 +47,24 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            List<Resturant> resturnats, Resturant? linkedResturnat)
-        loadedSystemAdmin,
-    required TResult Function(Resturant resturnats) loadedUserResturant,
+    required TResult Function(List<Resturant> resturnats) loadedSystemAdmin,
+    required TResult Function(RealtionResturant resturnats) loadedUserResturant,
     required TResult Function() emptyUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
     required TResult orElse(),
   }) =>
@@ -158,10 +152,8 @@ class _$LoadingHome implements LoadingHome {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            List<Resturant> resturnats, Resturant? linkedResturnat)
-        loadedSystemAdmin,
-    required TResult Function(Resturant resturnats) loadedUserResturant,
+    required TResult Function(List<Resturant> resturnats) loadedSystemAdmin,
+    required TResult Function(RealtionResturant resturnats) loadedUserResturant,
     required TResult Function() emptyUser,
   }) {
     return loading();
@@ -171,9 +163,8 @@ class _$LoadingHome implements LoadingHome {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
   }) {
     return loading?.call();
@@ -183,9 +174,8 @@ class _$LoadingHome implements LoadingHome {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
     required TResult orElse(),
   }) {
@@ -242,7 +232,7 @@ abstract class $LoadedAllResturantCopyWith<$Res> {
   factory $LoadedAllResturantCopyWith(
           LoadedAllResturant value, $Res Function(LoadedAllResturant) then) =
       _$LoadedAllResturantCopyWithImpl<$Res>;
-  $Res call({List<Resturant> resturnats, Resturant? linkedResturnat});
+  $Res call({List<Resturant> resturnats});
 }
 
 /// @nodoc
@@ -259,17 +249,12 @@ class _$LoadedAllResturantCopyWithImpl<$Res>
   @override
   $Res call({
     Object? resturnats = freezed,
-    Object? linkedResturnat = freezed,
   }) {
     return _then(LoadedAllResturant(
       resturnats == freezed
           ? _value.resturnats
           : resturnats // ignore: cast_nullable_to_non_nullable
               as List<Resturant>,
-      linkedResturnat == freezed
-          ? _value.linkedResturnat
-          : linkedResturnat // ignore: cast_nullable_to_non_nullable
-              as Resturant?,
     ));
   }
 }
@@ -277,16 +262,14 @@ class _$LoadedAllResturantCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedAllResturant implements LoadedAllResturant {
-  const _$LoadedAllResturant(this.resturnats, this.linkedResturnat);
+  const _$LoadedAllResturant(this.resturnats);
 
   @override
   final List<Resturant> resturnats;
-  @override
-  final Resturant? linkedResturnat;
 
   @override
   String toString() {
-    return 'HomeState.loadedSystemAdmin(resturnats: $resturnats, linkedResturnat: $linkedResturnat)';
+    return 'HomeState.loadedSystemAdmin(resturnats: $resturnats)';
   }
 
   @override
@@ -295,16 +278,12 @@ class _$LoadedAllResturant implements LoadedAllResturant {
         (other.runtimeType == runtimeType &&
             other is LoadedAllResturant &&
             const DeepCollectionEquality()
-                .equals(other.resturnats, resturnats) &&
-            const DeepCollectionEquality()
-                .equals(other.linkedResturnat, linkedResturnat));
+                .equals(other.resturnats, resturnats));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(resturnats),
-      const DeepCollectionEquality().hash(linkedResturnat));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(resturnats));
 
   @JsonKey(ignore: true)
   @override
@@ -315,39 +294,35 @@ class _$LoadedAllResturant implements LoadedAllResturant {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            List<Resturant> resturnats, Resturant? linkedResturnat)
-        loadedSystemAdmin,
-    required TResult Function(Resturant resturnats) loadedUserResturant,
+    required TResult Function(List<Resturant> resturnats) loadedSystemAdmin,
+    required TResult Function(RealtionResturant resturnats) loadedUserResturant,
     required TResult Function() emptyUser,
   }) {
-    return loadedSystemAdmin(resturnats, linkedResturnat);
+    return loadedSystemAdmin(resturnats);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
   }) {
-    return loadedSystemAdmin?.call(resturnats, linkedResturnat);
+    return loadedSystemAdmin?.call(resturnats);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
     required TResult orElse(),
   }) {
     if (loadedSystemAdmin != null) {
-      return loadedSystemAdmin(resturnats, linkedResturnat);
+      return loadedSystemAdmin(resturnats);
     }
     return orElse();
   }
@@ -391,12 +366,10 @@ class _$LoadedAllResturant implements LoadedAllResturant {
 }
 
 abstract class LoadedAllResturant implements HomeState {
-  const factory LoadedAllResturant(
-          List<Resturant> resturnats, Resturant? linkedResturnat) =
+  const factory LoadedAllResturant(List<Resturant> resturnats) =
       _$LoadedAllResturant;
 
   List<Resturant> get resturnats;
-  Resturant? get linkedResturnat;
   @JsonKey(ignore: true)
   $LoadedAllResturantCopyWith<LoadedAllResturant> get copyWith =>
       throw _privateConstructorUsedError;
@@ -407,7 +380,7 @@ abstract class $LoadedUserResturantCopyWith<$Res> {
   factory $LoadedUserResturantCopyWith(
           LoadedUserResturant value, $Res Function(LoadedUserResturant) then) =
       _$LoadedUserResturantCopyWithImpl<$Res>;
-  $Res call({Resturant resturnats});
+  $Res call({RealtionResturant resturnats});
 }
 
 /// @nodoc
@@ -429,7 +402,7 @@ class _$LoadedUserResturantCopyWithImpl<$Res>
       resturnats == freezed
           ? _value.resturnats
           : resturnats // ignore: cast_nullable_to_non_nullable
-              as Resturant,
+              as RealtionResturant,
     ));
   }
 }
@@ -440,7 +413,7 @@ class _$LoadedUserResturant implements LoadedUserResturant {
   const _$LoadedUserResturant(this.resturnats);
 
   @override
-  final Resturant resturnats;
+  final RealtionResturant resturnats;
 
   @override
   String toString() {
@@ -469,10 +442,8 @@ class _$LoadedUserResturant implements LoadedUserResturant {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            List<Resturant> resturnats, Resturant? linkedResturnat)
-        loadedSystemAdmin,
-    required TResult Function(Resturant resturnats) loadedUserResturant,
+    required TResult Function(List<Resturant> resturnats) loadedSystemAdmin,
+    required TResult Function(RealtionResturant resturnats) loadedUserResturant,
     required TResult Function() emptyUser,
   }) {
     return loadedUserResturant(resturnats);
@@ -482,9 +453,8 @@ class _$LoadedUserResturant implements LoadedUserResturant {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
   }) {
     return loadedUserResturant?.call(resturnats);
@@ -494,9 +464,8 @@ class _$LoadedUserResturant implements LoadedUserResturant {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
     required TResult orElse(),
   }) {
@@ -545,10 +514,10 @@ class _$LoadedUserResturant implements LoadedUserResturant {
 }
 
 abstract class LoadedUserResturant implements HomeState {
-  const factory LoadedUserResturant(Resturant resturnats) =
+  const factory LoadedUserResturant(RealtionResturant resturnats) =
       _$LoadedUserResturant;
 
-  Resturant get resturnats;
+  RealtionResturant get resturnats;
   @JsonKey(ignore: true)
   $LoadedUserResturantCopyWith<LoadedUserResturant> get copyWith =>
       throw _privateConstructorUsedError;
@@ -593,10 +562,8 @@ class _$EmptyUser implements EmptyUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(
-            List<Resturant> resturnats, Resturant? linkedResturnat)
-        loadedSystemAdmin,
-    required TResult Function(Resturant resturnats) loadedUserResturant,
+    required TResult Function(List<Resturant> resturnats) loadedSystemAdmin,
+    required TResult Function(RealtionResturant resturnats) loadedUserResturant,
     required TResult Function() emptyUser,
   }) {
     return emptyUser();
@@ -606,9 +573,8 @@ class _$EmptyUser implements EmptyUser {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
   }) {
     return emptyUser?.call();
@@ -618,9 +584,8 @@ class _$EmptyUser implements EmptyUser {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Resturant> resturnats, Resturant? linkedResturnat)?
-        loadedSystemAdmin,
-    TResult Function(Resturant resturnats)? loadedUserResturant,
+    TResult Function(List<Resturant> resturnats)? loadedSystemAdmin,
+    TResult Function(RealtionResturant resturnats)? loadedUserResturant,
     TResult Function()? emptyUser,
     required TResult orElse(),
   }) {

@@ -6,27 +6,29 @@ import 'package:shared/shared.dart';
 
 class ResturantCard extends StatelessWidget {
   final Resturant resturant;
-  const ResturantCard({Key? key, required this.resturant}) : super(key: key);
+  final VoidCallback? onToggleActivate;
+  const ResturantCard(
+      {Key? key, required this.resturant, this.onToggleActivate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Column(
         children: [
-          Image.network(
-           getImageUrl(resturant.img) ,
-            width: 200,
-            height: 200,
+          Expanded(
+            child: Image.network(
+              getImageUrl(resturant.img),
+            ),
           ),
           Text(resturant.name),
           Row(
             children: [
               Text(resturant.isDisabled ? "غير نشط" : "نشط"),
-              Button(
-                  child: Text(resturant.isDisabled ? "تفعيل" : "ايقاف"),
-                  onPressed: () {
-                    //TODO
-                  })
+              if (onToggleActivate != null)
+                Button(
+                    child: Text(resturant.isDisabled ? "تفعيل" : "ايقاف"),
+                    onPressed: onToggleActivate)
             ],
           )
         ],

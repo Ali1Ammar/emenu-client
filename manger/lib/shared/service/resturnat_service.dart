@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:manger/login/user.dart';
 import 'package:manger/new_rest/new_rest_value.dart';
@@ -21,18 +23,18 @@ class ResturantService {
         .toList();
   }
 
-  Future<Resturant> getLinkedResturant() async {
+  Future<RealtionResturant> getLinkedResturant() async {
     final res = await dio.get(
-      '/resturant/admin',
+      '/resturantadmin',
     );
-    return Resturant.fromJson(res.data as Map<String, dynamic>);
+    return RealtionResturant.fromJson(res.data as Map<String, dynamic>);
   }
 
-  Future<Resturant> getResturantViaId(int id) async {
+  Future<RealtionResturant> getResturantViaId(int id) async {
     final res = await dio.get(
       '/admin/resturant/$id',
     );
-    return Resturant.fromJson(res.data as Map<String, dynamic>);
+    return RealtionResturant.fromJson(res.data as Map<String, dynamic>);
   }
 
   Future<Resturant> createResturant(NewResturantDto dto) async {
@@ -41,6 +43,10 @@ class ResturantService {
     final res =
         await dio.post('/admin/resturant', data: FormData.fromMap(json));
     return Resturant.fromJson(res.data as Map<String, dynamic>);
+  }
+
+  Future<void> changeActive(int id, bool val) async {
+    await dio.post('/admin/resturant/$id/active/$val');
   }
 }
 

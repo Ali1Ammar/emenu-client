@@ -30,10 +30,13 @@ class SystemLoginPage extends ConsumerWidget {
                 cont.password = v;
               },
             ),
-            if(cont.showButton) fluent.FilledButton(child: Text("تسجيل دخول") ,
-            onPressed: (){
-              cont.pressLogin();
-            },)
+            if (cont.showButton)
+              fluent.FilledButton(
+                child: Text("تسجيل دخول"),
+                onPressed: () {
+                  cont.pressLogin();
+                },
+              )
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-
-
 class CheckServer implements Exception {
   @override
   String toString() {
@@ -7,10 +5,10 @@ class CheckServer implements Exception {
   }
 }
 
-class BadRequrest implements Exception{
+class BadRequrest implements Exception {
   final String msg;
 
   BadRequrest(this.msg);
-    @override
-  String toString()=>msg;
+  @override
+  String toString() => msg;
 }

@@ -24,7 +24,7 @@ Map<String, dynamic> _$MainCategoryToJson(MainCategory instance) =>
       'desc': instance.desc,
       'img': instance.img,
       'resturantId': instance.resturantId,
-      'children': instance.children,
+      'children': instance.children.map((e) => e.toJson()).toList(),
     };
 
 SubCategory _$SubCategoryFromJson(Map<String, dynamic> json) => SubCategory(

@@ -17,10 +17,9 @@ class SettingController extends StateNotifier<SettingValue> {
 
   void init() {
     final val = inst.getString(_key);
-    if(val==null){
-      state = state.copyWith(isFirstOpen:true);
-      inst.setString(_key, jsonEncode( state.copyWith(isFirstOpen:false)));
-
+    if (val == null) {
+      state = state.copyWith(isFirstOpen: true);
+      inst.setString(_key, jsonEncode(state.copyWith(isFirstOpen: false)));
     }
     if (val != null) {
       state = SettingValue.fromJson(jsonDecode(val) as Map<String, dynamic>);

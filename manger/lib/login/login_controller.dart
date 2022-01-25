@@ -34,17 +34,17 @@ class LoginControllerr extends ChangeNotifier {
       final data = await service.login(_username!, _password!);
       read(loginProvider.notifier).state = data;
       read(autoRouteProvider).replace(const HomePageRoute());
-    } catch(e)  {
-      showErrorDialogViaRead(e , read);
+    } catch (e) {
+      showErrorDialogViaRead(e, read);
     }
   }
 
   refresh() async {
-        try {
+    try {
       final data = await service.refresh();
       read(loginProvider.notifier).state = data;
-    } catch(e)  {
-      showErrorDialogViaRead(e , read);
+    } catch (e) {
+      showErrorDialogViaRead(e, read);
     }
   }
 }

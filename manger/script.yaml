@@ -1,0 +1,23 @@
+connect : adb connect 192.168.3.39
+tcpip : adb tcpip 5555
+build : flutter packages pub run build_runner build
+buildd : flutter packages pub run build_runner build  --delete-conflicting-outputs
+assest: fluttergen
+# releases :  echo $version
+run-dash : flutter run -t lib/main_dashboard.dart -d linux
+outdated : flutter pub outdated
+uploadr : dart '/home/aliammar/Desktop/sjaj/app/script_data2sqlite/sqlite/sqlitetpdump.dart' true 12 app let bio
+sqltofile : dart '/home/aliammar/Desktop/sjaj/app/script_data2sqlite/sqlite/sqlitetpdump.dart' false 12 app let bio
+
+logcatd : adb logcat | grep -F "`adb shell ps | grep com.sjaj.iq.debug  | tr -s [:space:] ' ' | cut -d' ' -f2`"
+logcat : adb logcat | grep -F "`adb shell ps | grep com.sjaj.iq  | tr -s [:space:] ' ' | cut -d' ' -f2`"
+uploadgoogle : cd ../fastlane & fastlane google
+
+resize : mogrify -path ./screenshotnew/scale -resize 1242x2208  ./screenshotnew/samsung-note10plus/*.png
+resize-7 :  mogrify -path ./screenshotnew/scale-7 -resize 2048x2732!  ./screenshotnew/nexus9/*.png
+resize-10 :  mogrify -path ./screenshotnew/scale-7 -resize 2048x2732!  ./screenshotnew/nexus9/*.png
+error : flutter symbolize -d ./debug-info/appbundle/2.3.4+277/app.android-arm.symbols -i ./stacktrack/error.txt
+error64 : flutter symbolize -d ./debug-info/appbundle/2.3.4+277/app.android-arm64.symbols -i ./stacktrack/error.txt
+errorx64 : flutter symbolize -d ./debug-info/appbundle/2.3.4+277/app.android-x64.symbols -i ./stacktrack/error.txt
+
+

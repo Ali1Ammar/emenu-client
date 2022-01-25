@@ -6,8 +6,10 @@ part 'setting_value.g.dart';
 
 @freezed
 class SettingValue with _$SettingValue {
-  const factory SettingValue({required ThemeMode mode,@Default(true) bool isFirstOpen}) = _SettingValue;
+  const factory SettingValue(
+      {required ThemeMode mode,
+      @Default(true) bool isFirstOpen}) = _SettingValue;
 
-  factory SettingValue.fromJson(Map<String, dynamic> json) => _$SettingValueFromJson(json);
-  
+  factory SettingValue.fromJson(Map<String, dynamic> json) =>
+      _$SettingValueFromJson(json);
 }

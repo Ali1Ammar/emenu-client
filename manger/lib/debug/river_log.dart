@@ -1,10 +1,9 @@
-
-
 import 'package:riverpod/riverpod.dart';
 
-class RiverLogger implements ProviderObserver{
+class RiverLogger implements ProviderObserver {
   @override
-  void didAddProvider(ProviderBase provider, Object? value, ProviderContainer container) {
+  void didAddProvider(
+      ProviderBase provider, Object? value, ProviderContainer container) {
     print("didAddProvider $provider $value");
   }
 
@@ -14,13 +13,15 @@ class RiverLogger implements ProviderObserver{
   }
 
   @override
-  void didUpdateProvider(ProviderBase provider, Object? previousValue, Object? newValue, ProviderContainer container) {
-    print("didUpdateProvider $provider previousValue $previousValue, newValue $newValue ");
+  void didUpdateProvider(ProviderBase provider, Object? previousValue,
+      Object? newValue, ProviderContainer container) {
+    print(
+        "didUpdateProvider $provider previousValue $previousValue, newValue $newValue ");
   }
 
   @override
-  void providerDidFail(ProviderBase provider, Object error, StackTrace stackTrace, ProviderContainer container) {
+  void providerDidFail(ProviderBase provider, Object error,
+      StackTrace stackTrace, ProviderContainer container) {
     print("providerDidFail $provider $error");
   }
-
 }

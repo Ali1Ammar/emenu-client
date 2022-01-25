@@ -27,8 +27,9 @@ class MainApp extends StatelessWidget {
             routeInformationParser: configDto.router.defaultRouteParser(),
             themeMode: setting.mode,
             theme: fluent.ThemeData(),
-            locale: fluent.Locale("ar",'iq'),
-            builder: (_,c)=>fluent.Directionality(textDirection: fluent.TextDirection.rtl, child: c!),
+            locale: fluent.Locale("ar", 'iq'),
+            builder: (_, c) => fluent.Directionality(
+                textDirection: fluent.TextDirection.rtl, child: c!),
             darkTheme: fluent.ThemeData(brightness: Brightness.dark),
             routerDelegate: configDto.router.delegate(),
             color: fluent.Colors.magenta);

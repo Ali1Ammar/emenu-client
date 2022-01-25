@@ -29,7 +29,7 @@ class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<HomeSystemPageRouteArgs>();
       return MaterialPageX<dynamic>(
           routeData: routeData,
-          child: HomeSystemPage(key: args.key, data: args.data));
+          child: HomeSystemPage(key: args.key, resturants: args.resturants));
     },
     HomeResturantMangePageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
@@ -71,24 +71,24 @@ class SystemLoginPageRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [HomeSystemPage]
 class HomeSystemPageRoute extends PageRouteInfo<HomeSystemPageRouteArgs> {
-  HomeSystemPageRoute({Key? key, required LoadedAllResturant data})
+  HomeSystemPageRoute({Key? key, required List<Resturant> resturants})
       : super(HomeSystemPageRoute.name,
             path: '/home-system-page',
-            args: HomeSystemPageRouteArgs(key: key, data: data));
+            args: HomeSystemPageRouteArgs(key: key, resturants: resturants));
 
   static const String name = 'HomeSystemPageRoute';
 }
 
 class HomeSystemPageRouteArgs {
-  const HomeSystemPageRouteArgs({this.key, required this.data});
+  const HomeSystemPageRouteArgs({this.key, required this.resturants});
 
   final Key? key;
 
-  final LoadedAllResturant data;
+  final List<Resturant> resturants;
 
   @override
   String toString() {
-    return 'HomeSystemPageRouteArgs{key: $key, data: $data}';
+    return 'HomeSystemPageRouteArgs{key: $key, resturants: $resturants}';
   }
 }
 

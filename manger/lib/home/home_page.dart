@@ -32,17 +32,21 @@ class _HomePageState extends State<HomePage> {
                 index: 1,
                 itemBuilder: (context, i) {
                   return homeCont.map<Widget>(
-                      loading: (value) => CenterLoading(),
+                      loading: (value) => f.FilledButton(
+                          child: const CenterLoading(),
+                          onPressed: () {
+                            ref.read(homeControllerProvider.notifier).init();
+                          }),
                       loadedUserResturant: (_) {
-                        return CenterLoading(); //should ne redirect to another page via controller
+                        return const CenterLoading(); //should ne redirect to another page via controller
                       },
-                      emptyUser: (_) => Text("توصال مع مسؤل لاضافتك لمطعم"),
+                      emptyUser: (_) =>
+                          const Text("توصال مع مسؤل لاضافتك لمطعم"),
                       loadedSystemAdmin: (s) {
-                        if (s.resturnats.isNotEmpty &&
-                            s.linkedResturnat != null) {
+                        if (s.resturnats.isNotEmpty) {
                           return buildButtons(login, user);
                         } else {
-                          return CenterLoading(); //should ne redirect to another page via controller
+                          return const CenterLoading(); //should ne redirect to another page via controller
                         }
                       });
                 }));
