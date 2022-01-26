@@ -4,7 +4,7 @@ part "new_category_value.g.dart";
 
 @JsonSerializable()
 class NewCategoryValue {
-  String? name;
+  String? title;
   String? desc;
   String? img;
   List<String> children = [""];

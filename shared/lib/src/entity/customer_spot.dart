@@ -11,7 +11,7 @@ class CustomerSpot {
   final String identifier;
   final bool isDisabled;
   final int resturantId;
-  final int kitchenId ;
+  final int? kitchenId ;
   CustomerSpot(this.id,  this.isDisabled, this.resturantId, this.identifier, this.kitchenId);
 
   factory CustomerSpot.fromJson(Map<String, dynamic> json) => _$CustomerSpotFromJson(json);

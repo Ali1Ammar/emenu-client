@@ -28,6 +28,24 @@ showErrorDialog(Object error, BuildContext context) {
   );
 }
 
+showLoading(Future val, BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return const ContentDialog(
+        title: Text("جار تحميل"),
+        content: ProgressRing(),
+      );
+    },
+  );
+  val.whenComplete(() => Navigator.of(context).pop());
+}
+
+showLoadingViaRead(Future val, Reader read) {
+  showLoading(val, read(autoRouteProvider).navigatorKey.currentState!.context);
+}
+
 showErrorDialogViaRead(Object error, Reader read) {
   showErrorDialog(
       error, read(autoRouteProvider).navigatorKey.currentState!.context);

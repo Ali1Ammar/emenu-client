@@ -8,7 +8,7 @@ part of 'new_category_value.dart';
 
 NewCategoryValue _$NewCategoryValueFromJson(Map<String, dynamic> json) =>
     NewCategoryValue()
-      ..name = json['name'] as String?
+      ..title = json['title'] as String?
       ..desc = json['desc'] as String?
       ..img = json['img'] as String?
       ..children =
@@ -16,7 +16,7 @@ NewCategoryValue _$NewCategoryValueFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$NewCategoryValueToJson(NewCategoryValue instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'title': instance.title,
       'desc': instance.desc,
       'img': instance.img,
       'children': instance.children,

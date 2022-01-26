@@ -18,30 +18,30 @@ class AddResturantService {
   Future<void> addCategorty(NewCategoryValue dto) async {
     final json = dto.toJson();
     json['img'] = await MultipartFile.fromFile(dto.img!);
-    await dio.post('resturantadmin/main-category',
+    await dio.post('/resturantadmin/main-category',
         data: FormData.fromMap(json));
   }
 
   Future<void> addMeal(NewMealValue dto) async {
     final json = dto.toJson();
     json['img'] = await MultipartFile.fromFile(dto.img!);
-    await dio.post('resturantadmin/meal', data: FormData.fromMap(json));
+    await dio.post('/resturantadmin/meal', data: FormData.fromMap(json));
   }
 
   Future<void> addOrderType(NewOrderTypeValue dto) async {
     final json = dto.toJson();
-    await dio.post('resturantadmin/order-type', data: json);
+    await dio.post('/resturantadmin/order-type', data: json);
   }
 
   Future<void> addSpot(NewSpotValue dto) async {
     final json = dto.toJson();
-    await dio.post('resturantadmin/customer-spot', data: json);
+    await dio.post('/resturantadmin/customerSpot', data: json);
   }
 
   Future<void> addKitchen(String name) async {
     // final json = dto.toJson();
     // json['img'] = await MultipartFile.fromFile(dto.img!);
-    await dio.post('resturantadmin/kitchen', data: {"name": name});
+    await dio.post('/resturantadmin/kitchen', data: {"name": name});
   }
 }
 

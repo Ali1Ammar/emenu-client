@@ -24,6 +24,7 @@ class CreateMealWidget extends HookConsumerWidget {
     final value = _value.value;
     return Column(
       children: [
+        const Text("اضافة وجبة جديدة"),
         TextFormBox(
           header: "العنوان",
           onChanged: (val) {

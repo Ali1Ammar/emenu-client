@@ -14,7 +14,7 @@ class HomeResturantMangePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(resturnatHomeControllerProvider);
+    final cont = ref.watch(resturnatHomeControllerProvider);
     final state = ref.watch(currentLinkedResturant);
     final rest = state.value;
     return ScaffoldPage(
@@ -28,29 +28,49 @@ class HomeResturantMangePage extends ConsumerWidget {
         ),
         title: Text("ادارة المطعم"),
       ),
-      content: Column(
+      content: ListView(
         children: [
           if (state.isRefreshing) const CircularProgressIndicator(),
-          if (rest != null) ...[
-            SizedBox(
-              height: 200,
-              child: ResturantCard(
-                resturant: rest,
-                // onToggleActivate: () async {
-                //     await context.riverpod.read(resturantServiceProvider).changeActive(item.id, item.isDisabled);
-                // }
-              ),
+          if (state.isError)
+            Column(
+              children: [
+                Text(state.asError!.error.toString()),
+                Button(
+                    child: Text("restart"),
+                    onPressed: () {
+                      cont.initResturant();
+                    })
+              ],
             ),
-            if (rest.mainCategory.isEmpty) const CreateCategoryWidget(),
-            if (rest.kitchen.isEmpty) const CreateKitchenWidget(),
-            if (rest.orderType.isEmpty) const CreateOrderTypeWidget(),
-            if (rest.customerSpot.isEmpty) const CreateCusmoterSpotWidget(),
-            if (rest.mainCategory.isNotEmpty && rest.kitchen.isNotEmpty)
-              CreateMealWidget(
-                category: rest.mainCategory,
-                kitchen: rest.kitchen,
-              )
-          ]
+          if (rest != null)
+            ...[
+              SizedBox(
+                height: 200,
+                child: ResturantCard(
+                  resturant: rest,
+                  // onToggleActivate: () async {
+                  //     await context.riverpod.read(resturantServiceProvider).changeActive(item.id, item.isDisabled);
+                  // }
+                ),
+              ),
+              if (rest.mainCategory.isEmpty) const CreateCategoryWidget(),
+              if (rest.kitchen.isEmpty) const CreateKitchenWidget(),
+              if (rest.orderType.isEmpty) const CreateOrderTypeWidget(),
+              if (rest.customerSpot.isEmpty) const CreateCusmoterSpotWidget(),
+              if (rest.mainCategory.isNotEmpty && rest.kitchen.isNotEmpty)
+                CreateMealWidget(
+                  category: rest.mainCategory,
+                  kitchen: rest.kitchen,
+                )
+            ].map((e) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: e,
+                    ),
+                  ),
+                ))
         ],
       ),
     );

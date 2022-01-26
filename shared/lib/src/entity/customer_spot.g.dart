@@ -11,7 +11,7 @@ CustomerSpot _$CustomerSpotFromJson(Map<String, dynamic> json) => CustomerSpot(
       json['isDisabled'] as bool,
       json['resturantId'] as int,
       json['identifier'] as String,
-      json['kitchenId'] as int,
+      json['kitchenId'] as int?,
     );
 
 Map<String, dynamic> _$CustomerSpotToJson(CustomerSpot instance) =>

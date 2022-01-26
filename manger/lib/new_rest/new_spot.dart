@@ -10,14 +10,15 @@ class CreateCusmoterSpotWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _value = useState("");
+    final _value = useState("طاولة رقم");
     final _valueNum = useState(0);
 
     return Column(
       children: [
+        const Text("اضافة طاولات / اماكن الزبائن"),
         TextFormBox(
           header: "بادئة الاسم",
-          placeholder: "طاولة رقم",
+          initialValue:_value.value ,
           onChanged: (val) {
             _value.value = val;
           },

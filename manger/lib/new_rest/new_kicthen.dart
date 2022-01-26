@@ -12,6 +12,7 @@ class CreateKitchenWidget extends HookConsumerWidget {
     final _value = useState("");
     return Column(
       children: [
+        const Text("اضافة مطبخ جديد"),
         TextFormBox(
           header: "الاسم",
           placeholder: "المطبخ الرئيسي",

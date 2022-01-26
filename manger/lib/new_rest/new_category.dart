@@ -17,10 +17,11 @@ class CreateCategoryWidget extends HookConsumerWidget {
     final value = _value.value;
     return Column(
       children: [
+        const Text("اضافة تصنيف جديد"),
         TextFormBox(
           header: "الاسم",
           onChanged: (val) {
-            value.name = val;
+            value.title = val;
           },
         ),
         TextFormBox(
@@ -68,6 +69,7 @@ class _CreateSubCategoryWidgetState extends State<CreateSubCategoryWidget> {
                 icon: const Icon(FluentIcons.add),
                 onPressed: () {
                   widget.values.add("");
+                  setState(() {});
                 })
           ],
         ),
@@ -76,6 +78,7 @@ class _CreateSubCategoryWidgetState extends State<CreateSubCategoryWidget> {
             return RemoveStackWidget(
               onPressed: () {
                 widget.values.removeAt(i);
+                setState(() {});
               },
               child: TextFormBox(
                 header: "اسم تصنيف فرعي",

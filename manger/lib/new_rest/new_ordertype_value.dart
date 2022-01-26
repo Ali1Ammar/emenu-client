@@ -5,9 +5,11 @@ part "new_ordertype_value.g.dart";
 
 @JsonSerializable()
 class NewOrderTypeValue {
-  String? name;
-  String? paymentMsg;
-  String? deliverType;
+  String? name = 'الرئيسية';
+  String? paymentMsg="توجهة الى كاشير للدفع حاليا لاكمال الطلب رجاءا";
+  String? deliverMsg="تم اعداد طلبك وسيتم توصيله من الويتر حاليا";
+  DeliverType? deliverType = DeliverType.employeerDeliverFood;
+  PaymentType? paymentType = PaymentType.afterTakeOrder ;
 
   SelectKitchenVia selectKitchenVia = SelectKitchenVia.None;
   // NewOrderTypeValue(this.name, this.paymentMsg, this.deliverType, this.selectKitchenVia);

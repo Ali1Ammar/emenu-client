@@ -23,9 +23,8 @@ class AddToken extends Interceptor {
     } else if (err.type == DioErrorType.response) {
       throw BadRequrest((err.response!.data as Map)['message'].toString());
       // print(err.message);
-    } else {
-      handler.next(err);
     }
+    handler.next(err);
   }
 
   @override

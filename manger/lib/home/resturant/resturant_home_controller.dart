@@ -1,3 +1,5 @@
+import 'package:manger/shared/dialog.dart';
+import 'package:manger/shared/logger.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
@@ -28,17 +30,29 @@ class ResturnatHomtController {
   }
 
   initResturant() async {
-    if (state.value != null) {
-      state = AsyncValue.data(state.value!, isRefreshing: true);
-    } else {
-      state = const AsyncValue.loading();
+    try {
+      if (state.value != null) {
+        state = AsyncValue.data(state.value!, isRefreshing: true);
+      } else {
+        state = const AsyncValue.loading();
+      }
+      final rest = await resturantService.getLinkedResturant();
+      state = AsyncValue.data(rest);
+    } catch (e,s) {
+      debugLog(e, s);
+      state = AsyncValue.error(e,stackTrace: s);
+      showErrorDialogViaRead(e, read);
     }
-    final rest = await resturantService.getLinkedResturant();
-    state = AsyncValue.data(rest);
   }
 
   addToResturant(Future<void> Function() call) async {
-    await call();
-    initResturant();
+    try {
+      final future = call();
+      showLoadingViaRead(future, read);
+      await future;
+    } catch (e) {
+      showErrorDialogViaRead(e, read);
+    }
+    await initResturant();
   }
 }

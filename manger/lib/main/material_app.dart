@@ -28,8 +28,11 @@ class MainApp extends StatelessWidget {
             themeMode: setting.mode,
             theme: fluent.ThemeData(),
             locale: fluent.Locale("ar", 'iq'),
-            builder: (_, c) => fluent.Directionality(
-                textDirection: fluent.TextDirection.rtl, child: c!),
+            builder: (_, c) => Theme(
+                  data: ThemeData.dark(), //TODO
+                  child: fluent.Directionality(
+                      textDirection: fluent.TextDirection.rtl, child: c!),
+                ),
             darkTheme: fluent.ThemeData(brightness: Brightness.dark),
             routerDelegate: configDto.router.delegate(),
             color: fluent.Colors.magenta);
