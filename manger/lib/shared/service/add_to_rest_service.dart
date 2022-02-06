@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:manger/login/user.dart';
 import 'package:manger/new_rest/meal/new_meal_value.dart';
@@ -6,6 +8,7 @@ import 'package:manger/new_rest/new_ordertype_value.dart';
 import 'package:manger/new_rest/new_spot_vale.dart';
 import 'package:manger/shared/dio_client.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:shared/shared.dart';
 
 final addResturantServiceProvider =
     Provider.autoDispose((_) => AddResturantService(_.watch(dioProvicer)));
@@ -22,10 +25,11 @@ class AddResturantService {
         data: FormData.fromMap(json));
   }
 
-  Future<void> addMeal(NewMealValue dto) async {
+  Future<Meal> addMeal(NewMealValue dto) async {
     final json = dto.toJson();
     json['img'] = await MultipartFile.fromFile(dto.img!);
-    await dio.post('/resturantadmin/meal', data: FormData.fromMap(json));
+    final res =  await dio.post('/resturantadmin/meal', data: FormData.fromMap(json));
+    return Meal.fromJson(res.data) ;
   }
 
   Future<void> addOrderType(NewOrderTypeValue dto) async {

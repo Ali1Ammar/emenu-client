@@ -38,6 +38,16 @@ class _$AppRouter extends RootStackRouter {
     NewResturantPageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const NewResturantPage());
+    },
+    MealMangePageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const MealMangePage());
+    },
+    OrderTrackPageRoute.name: (routeData) {
+      final args = routeData.argsAs<OrderTrackPageRouteArgs>();
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: OrderTrackPage(key: args.key, orderTrack: args.orderTrack));
     }
   };
 
@@ -48,7 +58,9 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(HomeSystemPageRoute.name, path: '/home-system-page'),
         RouteConfig(HomeResturantMangePageRoute.name,
             path: '/home-resturant-mange-page'),
-        RouteConfig(NewResturantPageRoute.name, path: '/new-resturant-page')
+        RouteConfig(NewResturantPageRoute.name, path: '/new-resturant-page'),
+        RouteConfig(MealMangePageRoute.name, path: '/meal-mange-page'),
+        RouteConfig(OrderTrackPageRoute.name, path: '/order-track-page')
       ];
 }
 
@@ -109,4 +121,37 @@ class NewResturantPageRoute extends PageRouteInfo<void> {
       : super(NewResturantPageRoute.name, path: '/new-resturant-page');
 
   static const String name = 'NewResturantPageRoute';
+}
+
+/// generated route for
+/// [MealMangePage]
+class MealMangePageRoute extends PageRouteInfo<void> {
+  const MealMangePageRoute()
+      : super(MealMangePageRoute.name, path: '/meal-mange-page');
+
+  static const String name = 'MealMangePageRoute';
+}
+
+/// generated route for
+/// [OrderTrackPage]
+class OrderTrackPageRoute extends PageRouteInfo<OrderTrackPageRouteArgs> {
+  OrderTrackPageRoute({Key? key, required OrderTrack orderTrack})
+      : super(OrderTrackPageRoute.name,
+            path: '/order-track-page',
+            args: OrderTrackPageRouteArgs(key: key, orderTrack: orderTrack));
+
+  static const String name = 'OrderTrackPageRoute';
+}
+
+class OrderTrackPageRouteArgs {
+  const OrderTrackPageRouteArgs({this.key, required this.orderTrack});
+
+  final Key? key;
+
+  final OrderTrack orderTrack;
+
+  @override
+  String toString() {
+    return 'OrderTrackPageRouteArgs{key: $key, orderTrack: $orderTrack}';
+  }
 }

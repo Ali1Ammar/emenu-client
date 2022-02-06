@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:manger/login/user.dart';
 import 'package:manger/new_rest/new_rest_value.dart';
@@ -29,6 +27,29 @@ class ResturantService {
     );
     return RealtionResturant.fromJson(res.data as Map<String, dynamic>);
   }
+
+  Future<List<Meal>> getLinkedResturantMeal() async {
+    final res = await dio.get(
+      '/resturantadmin/meal',
+    );
+    return (res.data as List).map((e) => Meal.fromJson(e)).toList();
+  }
+
+    Future<List<Order>> getLinkedKitchenDoneOrder(int id) async {
+    final res = await dio.get(
+      '/order/admin/kitchen/$id/current',
+    );
+    return (res.data as List).map((e) => Order.fromJson(e)).toList();
+  }
+
+      Future<List<Order>> getLinkedDoneOrder() async {
+    final res = await dio.get(
+      '/order/admin/current',
+    );
+    return (res.data as List).map((e) => Order.fromJson(e)).toList();
+  }
+  
+
 
   Future<RealtionResturant> getResturantViaId(int id) async {
     final res = await dio.get(

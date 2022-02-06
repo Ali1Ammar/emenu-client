@@ -3,7 +3,10 @@ import 'package:manger/home/home_page.dart';
 import 'package:manger/home/resturant/home_resturant_mange.dart';
 import 'package:manger/home/home_state.dart';
 import 'package:manger/home/home_system_mange.dart';
+import 'package:manger/order_track/order_track_controller.dart';
+import 'package:manger/order_track/order_track_page.dart';
 import 'package:manger/login/system_login_page.dart';
+import 'package:manger/meal/meal_mange_page.dart';
 import 'package:manger/new_rest/new_rest_page.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,12 @@ final autoRouteProvider =
       page: HomeResturantMangePage,
     ),
     AutoRoute(page: NewResturantPage),
+        AutoRoute(page: MealMangePage),
+                AutoRoute(page: OrderTrackPage),
+
+        
+
+    
   ],
 )
 class AppRouter extends _$AppRouter {}
