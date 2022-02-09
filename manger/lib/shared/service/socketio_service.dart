@@ -59,33 +59,38 @@ class SocketIoService {
   final Reader read;
 
   SocketIoService(this.read, this.socket);
-  Stream<Order> lisienToKitchenOrder(int kitchenId, int restId) {
-    socket.emitWithAck("subsribeToResturnatKitchenOrder", kitchenId,
-        ack: (data) {
-      log("act $data");
-    });
-    return _lisienToOrder("order");
+  Stream<List<Order>> lisienToKitchenOrder(int kitchenId, int restId) {
+    final controller = _lisienToOrder("order");
+    _emitSubscribeAndAddAck(
+        "subsribeToResturnatKitchenOrder", kitchenId, controller);
+
+    return controller.stream;
   }
 
-  Stream<Order> lisienTResturantOrder() {
-    socket.emitWithAck("subsribeToResturnatOrder", null, ack: (data) {
-      log("act $data");
-    });
-    return _lisienToOrder("order");
+  Stream<List<Order>> lisienTResturantOrder() {
+    final controller = _lisienToOrder("order");
+    _emitSubscribeAndAddAck("subsribeToResturnatOrder", null, controller);
+    return controller.stream;
   }
 
-  Stream<Order> _lisienToOrder(String key) {
-    late final StreamController<Order> controller;
-    controller = StreamController<Order>(onListen: () {
-      socket.on(
-          key, (data) {
-            final order = Order.fromJson(data);
-            controller.add(order);
-          });
+  void _emitSubscribeAndAddAck(
+      String key, dynamic data, StreamController<List<Order>> cont) {
+    socket.emitWithAck(key, data, ack: (data) {
+      cont.add((data as List).map((e) => Order.fromJson(e)).toList());
+    });
+  }
+
+  StreamController<List<Order>> _lisienToOrder(String key) {
+    late final StreamController<List<Order>> controller;
+    controller = StreamController<List<Order>>(onListen: () {
+      socket.on(key, (data) {
+        final order = Order.fromJson(data);
+        controller.add([order]);
+      });
     }, onCancel: () {
       if (socket.connected) socket.off(key);
     });
 
-    return controller.stream;
+    return controller;
   }
 }

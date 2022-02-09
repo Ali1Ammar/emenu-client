@@ -22,12 +22,6 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
       }
   init() async {
     await catchAndLogError(() async {
-      final order =
-          await input.selectCurrentOrder(read(resturantServiceProvider));
-      state = OrderTrackState.loaded(orders: order);
-    });
-
-    await catchAndLogError(() async {
       await lisienToScoket();
     });
   }
@@ -38,7 +32,7 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
         input.getStreamOrder(read(socketIoServiceProvider)).listen((event) {
       state = state.map(
           init: (_) => _,
-          loaded: (_) => _.copyWith(orders: _.orders..add(event)));
+          loaded: (_) => _.copyWith(orders: _.orders..addAll(event)));
     });
   }
 
@@ -51,9 +45,9 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
 
 abstract class OrderTrack {
   String get title;
-  Future<List<Order>> selectCurrentOrder(
-      ResturantService resturantService);
-  Stream<Order> getStreamOrder(SocketIoService socketIoService);
+  // Future<List<Order>> selectCurrentOrder(
+  //     ResturantService resturantService);
+  Stream<List<Order>> getStreamOrder(SocketIoService socketIoService);
   const OrderTrack();
   factory OrderTrack.kitchen(Kitchen kitchen) => OrderTrackKitchen(kitchen);
   factory OrderTrack.resturant() => OrderTrackResturnat();
@@ -65,15 +59,15 @@ class OrderTrackKitchen extends OrderTrack {
   OrderTrackKitchen(this.kitchen);
 
   @override
-  Stream<Order> getStreamOrder(socketIoService) {
+  Stream<List<Order>> getStreamOrder(socketIoService) {
     return socketIoService.lisienToKitchenOrder(
         kitchen.id, kitchen.resturantId);
   }
 
-  @override
-  Future<List<Order>> selectCurrentOrder(resturantService) async {
-    return await resturantService.getLinkedKitchenDoneOrder(kitchen.id);
-  }
+  // @override
+  // Future<List<Order>> selectCurrentOrder(resturantService) async {
+  //   return await resturantService.getLinkedKitchenDoneOrder(kitchen.id);
+  // }
 
   @override
   late final String title = "طلبات المطبخ : ${kitchen.name}";
@@ -81,14 +75,14 @@ class OrderTrackKitchen extends OrderTrack {
 
 class OrderTrackResturnat extends OrderTrack {
   @override
-  Stream<Order> getStreamOrder(socketIoService) {
+  Stream<List<Order>> getStreamOrder(socketIoService) {
     return socketIoService.lisienTResturantOrder();
   }
 
-  @override
-  Future<List<Order>> selectCurrentOrder(resturantService) async {
-    return await resturantService.getLinkedDoneOrder();
-  }
+  // @override
+  // Future<List<Order>> selectCurrentOrder(resturantService) async {
+  //   return await resturantService.getLinkedDoneOrder();
+  // }
 
   @override
   late final title = "طلبات المطعم كامل";
