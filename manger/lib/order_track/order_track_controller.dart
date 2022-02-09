@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:manger/order_track/order_track_state.dart';
+import 'package:manger/shared/service/order_service.dart';
 import 'package:manger/shared/service/socketio_service.dart';
 import 'package:manger/shared/logger.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
+import 'package:tuple/tuple.dart';
 
 final orderTrackControllerProvider = StateNotifierProvider.autoDispose
     .family<OrderTrackController, OrderTrackState, OrderTrack>(
@@ -16,10 +18,12 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
 
   final OrderTrack input;
   StreamSubscription? subscription;
+  StreamSubscription? subscriptionChange;
+
   OrderTrackController(this.input, this.read)
-      : super(OrderTrackState.init(input)){
-        init();
-      }
+      : super(OrderTrackState.init(input)) {
+    init();
+  }
   init() async {
     await catchAndLogError(() async {
       await lisienToScoket();
@@ -28,17 +32,46 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
 
   lisienToScoket() {
     subscription?.cancel();
-    subscription =
-        input.getStreamOrder(read(socketIoServiceProvider)).listen((event) {
-      state = state.map(
-          init: (_) => _,
-          loaded: (_) => _.copyWith(orders: _.orders..addAll(event)));
+    subscriptionChange?.cancel();
+
+    final streams = input.getStreamOrder(read(socketIoServiceProvider));
+    subscription = streams.item1.listen((event) {
+      state.map(
+          init: (_) {
+            state = OrderTrackState.loaded(orders: event);
+          },
+          loaded: (_) => state = _.copyWith(orders: _.orders..addAll(event)));
+
+      subscriptionChange = streams.item2.listen((event) {
+        state.mapOrNull(loaded: (_) {
+          final orderIndex =
+              _.orders.indexWhere((element) => element.id == event.id);
+          if (orderIndex != -1) {
+            final oldOrder = _.orders[orderIndex];
+            final newOrder =
+                oldOrder.copyWith(isPayed: event.isPayed, status: event.status);
+            _.orders[orderIndex] = newOrder;
+            state = _.copyWith(orders: _.orders);
+          }
+        });
+      });
     });
+  }
+
+  clickChangeStatus(Order order, OrderStatus status) async {
+    //TODO change the button at ui
+    await read(orderServiceProvider).statusUpdate(order.id, status);
+  }
+
+  clickPay(Order order) async {
+    //TODO change the button at ui
+    await read(orderServiceProvider).payed(order.id);
   }
 
   @override
   void dispose() {
     subscription?.cancel();
+    subscriptionChange?.cancel();
     super.dispose();
   }
 }
@@ -47,7 +80,8 @@ abstract class OrderTrack {
   String get title;
   // Future<List<Order>> selectCurrentOrder(
   //     ResturantService resturantService);
-  Stream<List<Order>> getStreamOrder(SocketIoService socketIoService);
+  Tuple2<Stream<List<Order>>, Stream<OrderChange>> getStreamOrder(
+      SocketIoService socketIoService);
   const OrderTrack();
   factory OrderTrack.kitchen(Kitchen kitchen) => OrderTrackKitchen(kitchen);
   factory OrderTrack.resturant() => OrderTrackResturnat();
@@ -59,7 +93,8 @@ class OrderTrackKitchen extends OrderTrack {
   OrderTrackKitchen(this.kitchen);
 
   @override
-  Stream<List<Order>> getStreamOrder(socketIoService) {
+  Tuple2<Stream<List<Order>>, Stream<OrderChange>> getStreamOrder(
+      socketIoService) {
     return socketIoService.lisienToKitchenOrder(
         kitchen.id, kitchen.resturantId);
   }
@@ -75,7 +110,8 @@ class OrderTrackKitchen extends OrderTrack {
 
 class OrderTrackResturnat extends OrderTrack {
   @override
-  Stream<List<Order>> getStreamOrder(socketIoService) {
+  Tuple2<Stream<List<Order>>, Stream<OrderChange>> getStreamOrder(
+      socketIoService) {
     return socketIoService.lisienTResturantOrder();
   }
 

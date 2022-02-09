@@ -35,21 +35,6 @@ class ResturantService {
     return (res.data as List).map((e) => Meal.fromJson(e)).toList();
   }
 
-    Future<List<Order>> getLinkedKitchenDoneOrder(int id) async {
-    final res = await dio.get(
-      '/order/admin/kitchen/$id/current',
-    );
-    return (res.data as List).map((e) => Order.fromJson(e)).toList();
-  }
-
-      Future<List<Order>> getLinkedDoneOrder() async {
-    final res = await dio.get(
-      '/order/admin/current',
-    );
-    return (res.data as List).map((e) => Order.fromJson(e)).toList();
-  }
-  
-
 
   Future<RealtionResturant> getResturantViaId(int id) async {
     final res = await dio.get(

@@ -6,6 +6,7 @@ import 'package:manger/shared/logger.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 import 'package:socket_io_client/socket_io_client.dart';
+import 'package:tuple/tuple.dart';
 
 final socketIo = Provider((_) {
   final socket = io(
@@ -59,18 +60,22 @@ class SocketIoService {
   final Reader read;
 
   SocketIoService(this.read, this.socket);
-  Stream<List<Order>> lisienToKitchenOrder(int kitchenId, int restId) {
+  Tuple2<Stream<List<Order>>, Stream<OrderChange>> lisienToKitchenOrder(
+      int kitchenId, int restId) {
     final controller = _lisienToOrder("order");
+    final controllerOrderChange = _lisienToOrderChange();
+
     _emitSubscribeAndAddAck(
         "subsribeToResturnatKitchenOrder", kitchenId, controller);
 
-    return controller.stream;
+    return Tuple2(controller.stream, controllerOrderChange.stream);
   }
 
-  Stream<List<Order>> lisienTResturantOrder() {
+  Tuple2<Stream<List<Order>>, Stream<OrderChange>> lisienTResturantOrder() {
     final controller = _lisienToOrder("order");
+    final controllerOrderChange = _lisienToOrderChange();
     _emitSubscribeAndAddAck("subsribeToResturnatOrder", null, controller);
-    return controller.stream;
+    return Tuple2(controller.stream, controllerOrderChange.stream);
   }
 
   void _emitSubscribeAndAddAck(
@@ -89,6 +94,20 @@ class SocketIoService {
       });
     }, onCancel: () {
       if (socket.connected) socket.off(key);
+    });
+
+    return controller;
+  }
+
+  StreamController<OrderChange> _lisienToOrderChange() {
+    late final StreamController<OrderChange> controller;
+    controller = StreamController<OrderChange>(onListen: () {
+      socket.on("order-change", (data) {
+        final order = OrderChange.fromJson(data);
+        controller.add(order);
+      });
+    }, onCancel: () {
+      if (socket.connected) socket.off("order-change");
     });
 
     return controller;
