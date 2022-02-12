@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/meal/meal_mange_controller.dart';
 import 'package:manger/new_rest/meal/new_meal_value.dart';
-import 'package:manger/shared/service/add_to_rest_service.dart';
 import 'package:manger/shared/widget/img_picker.dart';
+import 'package:manger/shared/widget/list_adder.dart';
 import 'package:manger/shared/widget/loadind.dart';
 import 'package:shared/shared.dart';
 
@@ -80,6 +80,10 @@ class CreateMealWidget extends HookConsumerWidget {
               items: mainCateSelect.value!.children
                   .map((e) => ComboboxItem(value: e, child: Text(e.title)))
                   .toList()),
+        Text("اضافات / مثلا / ازاله البصل"),
+        ListAddWidget(onEdit: (list) {
+          _value.value.extra = list;
+        }),
         FilledButton(
             child: Text("اضافة"),
             onPressed: () {

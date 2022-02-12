@@ -10,6 +10,7 @@ class NewMealValue {
   double? price;
   int? kitchenId;
   int? subCategoryId;
+  List<String>? extra;
 
   Map<String, dynamic> toJson() => _$NewMealValueToJson(this);
 }

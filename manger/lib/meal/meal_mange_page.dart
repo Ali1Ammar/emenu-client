@@ -15,13 +15,13 @@ class MealMangePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(mealMangerControllerProvider);
     return ScaffoldPage(
-      header: const Header(title: "ادارة المطعم"),
+      header: const Header(title: "ادارة الوجبات"),
       content: state.map<Widget>(
           init: (_) => _.isError ? const Text("error") : const CenterLoading(),
           loaded: (state) {
             if (state.addNewMeal) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              return ListView(
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (state.isRefreshing)
                     const CenterLoading()
@@ -53,7 +53,7 @@ class MealMangePage extends ConsumerWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Text("اضافة مطعم جديد"),
+                          Text("اضافة وجبة جديدة"),
                           SizedBox(
                             height: 30,
                           ),

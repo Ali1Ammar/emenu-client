@@ -9,6 +9,8 @@ import 'package:manger/new_rest/new_category.dart';
 import 'package:manger/new_rest/new_kicthen.dart';
 import 'package:manger/new_rest/new_ordertype.dart';
 import 'package:manger/new_rest/new_spot.dart';
+import 'package:manger/shared/img_url.dart';
+import 'package:manger/shared/service/resturnat_service.dart';
 import 'package:manger/shared/widget/resturant_card.dart';
 import 'package:shared/shared.dart';
 
@@ -23,82 +25,52 @@ class HomeResturantMangePage extends ConsumerWidget {
     var shouldDisplayKitchen = rest?.orderType
         .any((element) => element.selectKitchenVia != SelectKitchenVia.None);
     return ScaffoldPage(
-      header: const PageHeader(
-        commandBar: SizedBox(
-          width: 400,
-          child: TextBox(
-            maxLines: 1,
-            suffix: Icon(FluentIcons.search),
-          ),
+      header: PageHeader(
+        title: Row(
+          children: [
+            if (rest != null) ...[
+              Image.network(
+                getImageUrl(rest.img),
+                height: 80,
+              ),
+              Text(" ادارة المطعم "),
+              Text(
+                rest.name,
+                style: Theme.of(context).textTheme.headline3,
+              ),
+              Expanded(child: SizedBox()),
+              Column(
+                children: [
+                  Text(rest.isDisabled ? "غير نشط" : "نشط"),
+                  Button(
+                      child: Text(rest.isDisabled ? "تفعيل" : "ايقاف"),
+                      onPressed: () {
+                        cont.toggleEnable();
+                      })
+                ],
+              )
+            ] else
+              Text(" ادارة المطعم ")
+          ],
         ),
-        title: Text("ادارة المطعم"),
       ),
-      content: ListView(
+      content: Column(
         children: [
           if (state.isRefreshing) const CircularProgressIndicator(),
-          if (state.isError)
-            Column(
-              children: [
-                Text(state.asError!.error.toString()),
-                Button(
-                    child: Text("restart"),
-                    onPressed: () {
-                      cont.initResturant();
-                    })
-              ],
-            ),
+          if (state.isError) ...[
+            Text(state.asError!.error.toString()),
+            Button(
+                child: Text("restart"),
+                onPressed: () {
+                  cont.initResturant();
+                })
+          ],
           if (rest != null)
             ...[
-              SizedBox(
-                height: 200,
-                child: ResturantCard(
-                  resturant: rest,
-                  // onToggleActivate: () async {
-                  //     await context.riverpod.read(resturantServiceProvider).changeActive(item.id, item.isDisabled);
-                  // }
-                ),
-              ),
               if (rest.mainCategory.isEmpty) const CreateCategoryWidget(),
               if (rest.kitchen.isEmpty) const CreateKitchenWidget(),
               if (rest.orderType.isEmpty) const CreateOrderTypeWidget(),
               if (rest.customerSpot.isEmpty) const CreateCusmoterSpotWidget(),
-              if (rest.mainCategory.isNotEmpty && rest.kitchen.isNotEmpty)
-                FilledButton(
-                    child: Text("اداه الوجبات"),
-                    onPressed: () {
-                      ref
-                          .read(autoRouteProvider)
-                          .push(const MealMangePageRoute());
-                    }),
-              if (rest.kitchen.isNotEmpty)
-                Column(
-                  children: [
-                    FilledButton(
-                        child: Text("تتبع جميع الطلبات"),
-                        onPressed: () {
-                          ref.read(autoRouteProvider).push(OrderTrackPageRoute(
-                              orderTrack: OrderTrack.resturant()));
-                        }),
-                    if (shouldDisplayKitchen!) ...[
-                      Text("تتبع المطابخ الاتية : "),
-                      ...rest.kitchen.map((e) => FilledButton(
-                          child: Text(e.name),
-                          onPressed: () {
-                            ref.read(autoRouteProvider).push(
-                                OrderTrackPageRoute(
-                                    orderTrack: OrderTrack.kitchen(e)));
-                          }))
-                    ]
-                  ],
-                ),
-              // if (rest.customerSpot)
-              // Column(
-              //   children: [
-              //     Text("طرق الطلب"),
-              //     ...rest.kitchen.map((e) =>
-              //         FilledButton(child: Text(e.name), onPressed: () {}))
-              //   ],
-              // )
             ].map((e) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
@@ -108,8 +80,73 @@ class HomeResturantMangePage extends ConsumerWidget {
                     ),
                   ),
                 )),
+          if (rest != null)
+            Expanded(
+              child: GridView(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 6),
+                children: [
+                  if (rest.mainCategory.isNotEmpty && rest.kitchen.isNotEmpty)
+                    FilledButton(
+                        child: centerTextButton("اعدادات الوجبات", context),
+                        onPressed: () {
+                          ref
+                              .read(autoRouteProvider)
+                              .push(const MealMangePageRoute());
+                        }),
+                  if (rest.kitchen.isNotEmpty) ...[
+                    FilledButton(
+                        child: centerTextButton("تتبع جميع الطلبات", context),
+                        onPressed: () {
+                          ref.read(autoRouteProvider).push(OrderTrackPageRoute(
+                              orderTrack: OrderTrack.resturant()));
+                        }),
+                    if (shouldDisplayKitchen!)
+                      ...rest.kitchen.map((e) => FilledButton(
+                          child: centerTextButton(e.name, context),
+                          onPressed: () {
+                            ref.read(autoRouteProvider).push(
+                                OrderTrackPageRoute(
+                                    orderTrack: OrderTrack.kitchen(e)));
+                          })),
+                    FilledButton(
+                        child: centerTextButton("اعدادت المطابخ", context),
+                        onPressed: () {}),
+                    FilledButton(
+                        child: centerTextButton("اعدادت طرق الطلب", context),
+                        onPressed: () {}),
+                    FilledButton(
+                        child: centerTextButton("اعدادت المطعم", context),
+                        onPressed: () {}),
+                    FilledButton(
+                        child: centerTextButton("اعدادت التصنيفات", context),
+                        onPressed: () {}),
+                    FilledButton(
+                        child: centerTextButton("اعدادت الطاولات", context),
+                        onPressed: () {}),
+                    FilledButton(
+                        child: centerTextButton("التقيمات", context),
+                        onPressed: () {}),
+                                            FilledButton(
+                        child: centerTextButton("الاحصائيات", context),
+                        onPressed: () {}),
+                  ]
+                ]
+                    .map((e) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: e,
+                        ))
+                    .toList(),
+              ),
+            )
         ],
       ),
     );
   }
+
+  Widget centerTextButton(String txt, BuildContext context) => Center(
+          child: Text(
+        txt,
+        style: Theme.of(context).textTheme.headline6,
+      ));
 }

@@ -12,7 +12,8 @@ NewMealValue _$NewMealValueFromJson(Map<String, dynamic> json) => NewMealValue()
   ..img = json['img'] as String?
   ..price = (json['price'] as num?)?.toDouble()
   ..kitchenId = json['kitchenId'] as int?
-  ..subCategoryId = json['subCategoryId'] as int?;
+  ..subCategoryId = json['subCategoryId'] as int?
+  ..extra = (json['extra'] as List<dynamic>?)?.map((e) => e as String).toList();
 
 Map<String, dynamic> _$NewMealValueToJson(NewMealValue instance) =>
     <String, dynamic>{
@@ -22,4 +23,5 @@ Map<String, dynamic> _$NewMealValueToJson(NewMealValue instance) =>
       'price': instance.price,
       'kitchenId': instance.kitchenId,
       'subCategoryId': instance.subCategoryId,
+      'extra': instance.extra,
     };

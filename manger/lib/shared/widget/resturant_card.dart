@@ -14,15 +14,13 @@ class ResturantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
+      child: Row(
         children: [
-          Expanded(
-            child: Image.network(
-              getImageUrl(resturant.img),
-            ),
+          Image.network(
+            getImageUrl(resturant.img),
           ),
-          Text(resturant.name),
-          Row(
+          Text(resturant.name , style: Theme.of(context).textTheme.headline3 ,),
+          Column(
             children: [
               Text(resturant.isDisabled ? "غير نشط" : "نشط"),
               if (onToggleActivate != null)

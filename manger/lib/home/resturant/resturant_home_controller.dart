@@ -38,11 +38,17 @@ class ResturnatHomtController {
       }
       final rest = await resturantService.getLinkedResturant();
       state = AsyncValue.data(rest);
-    } catch (e,s) {
+    } catch (e, s) {
       debugLog(e, s);
-      state = AsyncValue.error(e,stackTrace: s);
+      state = AsyncValue.error(e, stackTrace: s);
       showErrorDialogViaRead(e, read);
     }
+  }
+
+  toggleEnable() async {
+    await resturantService.changeActive(
+        state.value!.id, state.value!.isDisabled);
+    initResturant();
   }
 
   addToResturant(Future<void> Function() call) async {

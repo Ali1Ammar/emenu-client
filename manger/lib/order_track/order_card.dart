@@ -61,25 +61,25 @@ class OrderCard extends StatelessWidget {
               runSpacing: 5,
               children: [
                 if (onPayed != null)
-                  ButtunIcon(
+                  ButtonIcon(
                     icon:const fluent.Icon(Icons.payments),
                     child:const Text("دفع"),
                     onPressed: onPayed!,
                   ),
                 if (onCancel != null)
-                  ButtunIcon(
+                  ButtonIcon(
                     icon: const fluent.Icon(Icons.cancel),
                     child:const Text("الغاء"),
                     onPressed: onCancel!,
                   ),
                 if (onDeliverd != null)
-                  ButtunIcon(
+                  ButtonIcon(
                     icon:const fluent.Icon(Icons.delivery_dining),
                     child:const Text("توصيل"),
                     onPressed: onDeliverd!,
                   ),
                 if (onDoneKitchen != null)
-                  ButtunIcon(
+                  ButtonIcon(
                     icon:const fluent.Icon(Icons.kitchen),
                     child: const Text("انتهى طبخ"),
                     onPressed: onDoneKitchen!,
