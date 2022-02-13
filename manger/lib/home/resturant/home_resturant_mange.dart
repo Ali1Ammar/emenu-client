@@ -4,14 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/order_track/order_track_controller.dart';
 import 'package:manger/main/auto_router.dart';
-import 'package:manger/new_rest/meal/new_meal.dart';
 import 'package:manger/new_rest/new_category.dart';
 import 'package:manger/new_rest/new_kicthen.dart';
 import 'package:manger/new_rest/new_ordertype.dart';
 import 'package:manger/new_rest/new_spot.dart';
 import 'package:manger/shared/img_url.dart';
-import 'package:manger/shared/service/resturnat_service.dart';
-import 'package:manger/shared/widget/resturant_card.dart';
 import 'package:shared/shared.dart';
 
 class HomeResturantMangePage extends ConsumerWidget {
@@ -29,16 +26,26 @@ class HomeResturantMangePage extends ConsumerWidget {
         title: Row(
           children: [
             if (rest != null) ...[
-              Image.network(
-                getImageUrl(rest.img),
-                height: 80,
+              SizedBox.square(dimension: 120,
+                // aspectRatio: 1,
+                child: ClipOval(
+                  child: Image.network(
+                    getImageUrl(rest.img),
+                    // height:120,
+                    // width: 220,
+                    fit: BoxFit.fitHeight ,
+                  ),
+                ),
               ),
-              Text(" ادارة المطعم "),
+             const Padding(
+                padding:  EdgeInsets.all(8.0),
+                child:  Text(" ادارة المطعم "),
+              ),
               Text(
                 rest.name,
                 style: Theme.of(context).textTheme.headline3,
               ),
-              Expanded(child: SizedBox()),
+              const Expanded(child: SizedBox()),
               Column(
                 children: [
                   Text(rest.isDisabled ? "غير نشط" : "نشط"),
@@ -50,7 +57,7 @@ class HomeResturantMangePage extends ConsumerWidget {
                 ],
               )
             ] else
-              Text(" ادارة المطعم ")
+             const Text(" ادارة المطعم ")
           ],
         ),
       ),
@@ -60,7 +67,7 @@ class HomeResturantMangePage extends ConsumerWidget {
           if (state.isError) ...[
             Text(state.asError!.error.toString()),
             Button(
-                child: Text("restart"),
+                child: const Text("restart"),
                 onPressed: () {
                   cont.initResturant();
                 })
