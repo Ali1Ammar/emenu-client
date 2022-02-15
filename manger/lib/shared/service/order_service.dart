@@ -1,6 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:manger/login/user.dart';
-import 'package:manger/new_rest/new_rest_value.dart';
 import 'package:manger/shared/dio_client.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';

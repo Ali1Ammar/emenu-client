@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:manger/main/auto_router.dart';
 import 'package:manger/meal/meal_mange_controller.dart';
 import 'package:manger/new_rest/meal/new_meal.dart';
 import 'package:manger/shared/widget/header.dart';
@@ -14,12 +13,14 @@ class MealMangePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(mealMangerControllerProvider);
+        final cont = ref.watch(mealMangerControllerProvider.notifier);
+
     return ScaffoldPage(
       header: const Header(title: "ادارة الوجبات"),
       content: state.map<Widget>(
           init: (_) => _.isError ? const Text("error") : const CenterLoading(),
           loaded: (state) {
-            if (state.addNewMeal) {
+            if (state.editMode ) {
               return ListView(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -31,10 +32,10 @@ class MealMangePage extends ConsumerWidget {
                       onPressed: () {
                         ref
                             .read(mealMangerControllerProvider.notifier)
-                            .setAddMeal(false);
+                            .setEditMode(false,null);
                       },
                     ),
-                  const CreateMealWidget(),
+                   CreateMealWidget(oldDto: state.oldEdited , ),
                 ],
               );
             }
@@ -48,7 +49,7 @@ class MealMangePage extends ConsumerWidget {
                       onPressed: () {
                         ref
                             .read(mealMangerControllerProvider.notifier)
-                            .setAddMeal(true);
+                            .setEditMode(true,null);
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,12 +66,13 @@ class MealMangePage extends ConsumerWidget {
                     final item = state.meals[i - 1];
                     return MealCard(
                       item: item,
+                      onEdit: (){
+                              ref
+                            .read(mealMangerControllerProvider.notifier)
+                            .setEditMode(true,i-1);
+                      } ,
                       onToggleActivate: () async {
-                        //TODO we need controller here
-                        // await context.riverpod
-                        //     .read(resturantServiceProvider)
-                        //     .changeActive(item.id, item.isDisabled);
-                        // data.resturnats[i - 1] = item.isDisabled;
+                       cont.onToggleActivate(item);
                       },
                     );
                   }

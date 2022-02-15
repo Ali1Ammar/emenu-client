@@ -54,7 +54,7 @@ class HomeSystemPage extends StatelessWidget {
                   //TODO we need controller here
                   await context.riverpod
                       .read(resturantServiceProvider)
-                      .changeActive(item.id, item.isDisabled);
+                      .changeActiveByAdmin(item.id, !item.isDisabled);
                   // data.resturnats[i - 1] = item.isDisabled;
                 },
               );

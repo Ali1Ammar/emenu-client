@@ -28,8 +28,19 @@ class AddResturantService {
   Future<Meal> addMeal(NewMealValue dto) async {
     final json = dto.toJson();
     json['img'] = await MultipartFile.fromFile(dto.img!);
-    final res =  await dio.post('/resturantadmin/meal', data: FormData.fromMap(json));
-    return Meal.fromJson(res.data) ;
+    final res =
+        await dio.post('/resturantadmin/meal', data: FormData.fromMap(json));
+    return Meal.fromJson(res.data);
+  }
+
+  Future<Meal> editMeal(NewMealValue dto,int id) async {
+    final json = dto.toJson();
+    if (dto.img != null) {
+      json['img'] = await MultipartFile.fromFile(dto.img!);
+    }
+    final res =
+        await dio.put('/resturantadmin/meal/$id', data: FormData.fromMap(json));
+    return Meal.fromJson(res.data);
   }
 
   Future<void> addOrderType(NewOrderTypeValue dto) async {
@@ -43,8 +54,6 @@ class AddResturantService {
   }
 
   Future<void> addKitchen(String name) async {
-    // final json = dto.toJson();
-    // json['img'] = await MultipartFile.fromFile(dto.img!);
     await dio.post('/resturantadmin/kitchen', data: {"name": name});
   }
 }

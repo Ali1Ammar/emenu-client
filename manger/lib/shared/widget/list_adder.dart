@@ -2,24 +2,35 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:manger/shared/widget/button_icon.dart';
 
 class ListAddWidget extends StatefulWidget {
-  final void Function(List<String> list) onEdit;
-  const ListAddWidget({Key? key, required this.onEdit}) : super(key: key);
+  final List<String>? initValues;
+  const ListAddWidget({Key? key, this.initValues})
+      : super(key: key);
 
   @override
-  _ListAddWidgetState createState() => _ListAddWidgetState();
+  ListAddWidgetState createState() => ListAddWidgetState();
 }
 
-class _ListAddWidgetState extends State<ListAddWidget> {
-  List<TextEditingController> list = [TextEditingController()];
+class ListAddWidgetState extends State<ListAddWidget> {
+  late List<TextEditingController> list;
+
+  @override
+  void initState() {
+    if (widget.initValues != null) {
+      list = widget.initValues!
+          .map((e) => TextEditingController(text: e))
+          .toList();
+    } else {
+      list = [TextEditingController()];
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ...list.map((cont) => TextBox(
               controller: cont,
-              onEditingComplete: (){
-                                    widget.onEdit(list.map((e) => e.text).toList());
-              },
               outsideSuffix: IconButton(
                   icon: Icon(FluentIcons.remove),
                   onPressed: () {

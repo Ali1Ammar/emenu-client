@@ -1,28 +1,30 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/meal/meal_mange_controller.dart';
+import 'package:manger/meal/meal_mange_state.dart';
 import 'package:manger/new_rest/meal/new_meal_value.dart';
+import 'package:manger/shared/dialog.dart';
 import 'package:manger/shared/widget/img_picker.dart';
 import 'package:manger/shared/widget/list_adder.dart';
 import 'package:manger/shared/widget/loadind.dart';
 import 'package:shared/shared.dart';
 
 class CreateMealWidget extends HookConsumerWidget {
-  // final List<MainCategory> category;
-  // final List<Kitchen> kitchen;
-  const CreateMealWidget({
-    Key? key,
-  }) : super(key: key);
+  final OldEditMealDto? oldDto;
+  const CreateMealWidget({Key? key, this.oldDto}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final old = oldDto?.old;
     final rest = ref.watch(currentLinkedResturant);
     final _value = useState(NewMealValue());
-    final mainCateSelect = useState<MainCategory?>(null);
-    final subCateSelect = useState<SubCategory?>(null);
-    final kitchenSelect = useState<Kitchen?>(null);
+    final mainCateSelect = useState<MainCategory?>(oldDto?.mainCategory);
+    final subCateSelect = useState<SubCategory?>(oldDto?.subCategory);
+    final kitchenSelect = useState<Kitchen?>(oldDto?.kitchen);
+    final GlobalKey<ListAddWidgetState> listExtraKey = useMemoized(()=>GlobalKey());
     if (!rest.isData) {
       return const CenterLoading();
     }
@@ -34,12 +36,14 @@ class CreateMealWidget extends HookConsumerWidget {
         const Text("اضافة وجبة جديدة"),
         TextFormBox(
           header: "العنوان",
+          initialValue: old?.title,
           onChanged: (val) {
             value.title = val;
           },
         ),
         TextFormBox(
           header: "الوصف",
+          initialValue: old?.desc,
           onChanged: (val) {
             value.desc = val;
           },
@@ -49,8 +53,11 @@ class CreateMealWidget extends HookConsumerWidget {
         }),
         TextFormBox(
           header: "السعر",
+          initialValue: old?.price.toString(),
+          inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9.,]+')) ],
+          keyboardType: TextInputType.number,
           onChanged: (val) {
-            value.price = double.parse(val);
+            value.price = double.tryParse(val);
           },
         ),
         Combobox<Kitchen>(
@@ -80,14 +87,34 @@ class CreateMealWidget extends HookConsumerWidget {
               items: mainCateSelect.value!.children
                   .map((e) => ComboboxItem(value: e, child: Text(e.title)))
                   .toList()),
-        Text("اضافات / مثلا / ازاله البصل"),
-        ListAddWidget(onEdit: (list) {
-          _value.value.extra = list;
-        }),
+        const Text("اضافات / مثلا / ازاله البصل"),
+        ListAddWidget(
+          initValues: old?.extra,
+          key: listExtraKey,
+          // onEdit: (list) {
+          //   _value.value.extra = list;
+          // }
+        ),
         FilledButton(
-            child: Text("اضافة"),
+            child: const Text("اضافة"),
             onPressed: () {
-              ref.read(mealMangerControllerProvider.notifier).addMeal(value);
+              value.extra =
+                  listExtraKey.currentState!.list.map((e) => e.text).toList();
+              if (oldDto != null) {
+                if (value.isAllNull) {
+                  showErrorDialog("جميع العناصر لم يتم تغيرها", context);
+                  return;
+                }
+                ref
+                    .read(mealMangerControllerProvider.notifier)
+                    .editMealDone(value);
+              } else {
+                if (value.isAnyRequiredNull) {
+                  showErrorDialog("رجاء ملئ جميع الحقول", context);
+                  return;
+                }
+                ref.read(mealMangerControllerProvider.notifier).addMeal(value);
+              }
             })
       ],
     );

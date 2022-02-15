@@ -27,12 +27,14 @@ class _$MealMangeStateTearOff {
   LodedMeals loaded(
       {required List<Meal> meals,
       required List<Meal> searchedMeals,
-      dynamic addNewMeal = false,
+      OldEditMealDto? oldEdited = null,
+      bool editMode = false,
       bool isRefreshing = false}) {
     return LodedMeals(
       meals: meals,
       searchedMeals: searchedMeals,
-      addNewMeal: addNewMeal,
+      oldEdited: oldEdited,
+      editMode: editMode,
       isRefreshing: isRefreshing,
     );
   }
@@ -47,7 +49,7 @@ mixin _$MealMangeState {
   TResult when<TResult extends Object?>({
     required TResult Function(bool isError) init,
     required TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,7 +57,7 @@ mixin _$MealMangeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isError)? init,
     TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)?
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)?
         loaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +65,7 @@ mixin _$MealMangeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isError)? init,
     TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)?
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)?
         loaded,
     required TResult orElse(),
   }) =>
@@ -171,7 +173,7 @@ class _$InitMeals implements InitMeals {
   TResult when<TResult extends Object?>({
     required TResult Function(bool isError) init,
     required TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)
         loaded,
   }) {
     return init(isError);
@@ -182,7 +184,7 @@ class _$InitMeals implements InitMeals {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isError)? init,
     TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)?
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)?
         loaded,
   }) {
     return init?.call(isError);
@@ -193,7 +195,7 @@ class _$InitMeals implements InitMeals {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isError)? init,
     TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)?
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)?
         loaded,
     required TResult orElse(),
   }) {
@@ -252,7 +254,8 @@ abstract class $LodedMealsCopyWith<$Res> {
   $Res call(
       {List<Meal> meals,
       List<Meal> searchedMeals,
-      dynamic addNewMeal,
+      OldEditMealDto? oldEdited,
+      bool editMode,
       bool isRefreshing});
 }
 
@@ -269,7 +272,8 @@ class _$LodedMealsCopyWithImpl<$Res> extends _$MealMangeStateCopyWithImpl<$Res>
   $Res call({
     Object? meals = freezed,
     Object? searchedMeals = freezed,
-    Object? addNewMeal = freezed,
+    Object? oldEdited = freezed,
+    Object? editMode = freezed,
     Object? isRefreshing = freezed,
   }) {
     return _then(LodedMeals(
@@ -281,7 +285,14 @@ class _$LodedMealsCopyWithImpl<$Res> extends _$MealMangeStateCopyWithImpl<$Res>
           ? _value.searchedMeals
           : searchedMeals // ignore: cast_nullable_to_non_nullable
               as List<Meal>,
-      addNewMeal: addNewMeal == freezed ? _value.addNewMeal : addNewMeal,
+      oldEdited: oldEdited == freezed
+          ? _value.oldEdited
+          : oldEdited // ignore: cast_nullable_to_non_nullable
+              as OldEditMealDto?,
+      editMode: editMode == freezed
+          ? _value.editMode
+          : editMode // ignore: cast_nullable_to_non_nullable
+              as bool,
       isRefreshing: isRefreshing == freezed
           ? _value.isRefreshing
           : isRefreshing // ignore: cast_nullable_to_non_nullable
@@ -296,7 +307,8 @@ class _$LodedMeals implements LodedMeals {
   const _$LodedMeals(
       {required this.meals,
       required this.searchedMeals,
-      this.addNewMeal = false,
+      this.oldEdited = null,
+      this.editMode = false,
       this.isRefreshing = false});
 
   @override
@@ -305,14 +317,17 @@ class _$LodedMeals implements LodedMeals {
   final List<Meal> searchedMeals;
   @JsonKey()
   @override
-  final dynamic addNewMeal;
+  final OldEditMealDto? oldEdited;
+  @JsonKey()
+  @override
+  final bool editMode;
   @JsonKey()
   @override
   final bool isRefreshing;
 
   @override
   String toString() {
-    return 'MealMangeState.loaded(meals: $meals, searchedMeals: $searchedMeals, addNewMeal: $addNewMeal, isRefreshing: $isRefreshing)';
+    return 'MealMangeState.loaded(meals: $meals, searchedMeals: $searchedMeals, oldEdited: $oldEdited, editMode: $editMode, isRefreshing: $isRefreshing)';
   }
 
   @override
@@ -323,8 +338,8 @@ class _$LodedMeals implements LodedMeals {
             const DeepCollectionEquality().equals(other.meals, meals) &&
             const DeepCollectionEquality()
                 .equals(other.searchedMeals, searchedMeals) &&
-            const DeepCollectionEquality()
-                .equals(other.addNewMeal, addNewMeal) &&
+            const DeepCollectionEquality().equals(other.oldEdited, oldEdited) &&
+            const DeepCollectionEquality().equals(other.editMode, editMode) &&
             const DeepCollectionEquality()
                 .equals(other.isRefreshing, isRefreshing));
   }
@@ -334,7 +349,8 @@ class _$LodedMeals implements LodedMeals {
       runtimeType,
       const DeepCollectionEquality().hash(meals),
       const DeepCollectionEquality().hash(searchedMeals),
-      const DeepCollectionEquality().hash(addNewMeal),
+      const DeepCollectionEquality().hash(oldEdited),
+      const DeepCollectionEquality().hash(editMode),
       const DeepCollectionEquality().hash(isRefreshing));
 
   @JsonKey(ignore: true)
@@ -347,10 +363,10 @@ class _$LodedMeals implements LodedMeals {
   TResult when<TResult extends Object?>({
     required TResult Function(bool isError) init,
     required TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)
         loaded,
   }) {
-    return loaded(meals, searchedMeals, addNewMeal, isRefreshing);
+    return loaded(meals, searchedMeals, oldEdited, editMode, isRefreshing);
   }
 
   @override
@@ -358,10 +374,11 @@ class _$LodedMeals implements LodedMeals {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(bool isError)? init,
     TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)?
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)?
         loaded,
   }) {
-    return loaded?.call(meals, searchedMeals, addNewMeal, isRefreshing);
+    return loaded?.call(
+        meals, searchedMeals, oldEdited, editMode, isRefreshing);
   }
 
   @override
@@ -369,12 +386,12 @@ class _$LodedMeals implements LodedMeals {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isError)? init,
     TResult Function(List<Meal> meals, List<Meal> searchedMeals,
-            dynamic addNewMeal, bool isRefreshing)?
+            OldEditMealDto? oldEdited, bool editMode, bool isRefreshing)?
         loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(meals, searchedMeals, addNewMeal, isRefreshing);
+      return loaded(meals, searchedMeals, oldEdited, editMode, isRefreshing);
     }
     return orElse();
   }
@@ -415,12 +432,14 @@ abstract class LodedMeals implements MealMangeState {
   const factory LodedMeals(
       {required List<Meal> meals,
       required List<Meal> searchedMeals,
-      dynamic addNewMeal,
+      OldEditMealDto? oldEdited,
+      bool editMode,
       bool isRefreshing}) = _$LodedMeals;
 
   List<Meal> get meals;
   List<Meal> get searchedMeals;
-  dynamic get addNewMeal;
+  OldEditMealDto? get oldEdited;
+  bool get editMode;
   bool get isRefreshing;
   @JsonKey(ignore: true)
   $LodedMealsCopyWith<LodedMeals> get copyWith =>

@@ -51,8 +51,16 @@ class ResturantService {
     return Resturant.fromJson(res.data as Map<String, dynamic>);
   }
 
-  Future<void> changeActive(int id, bool val) async {
+  Future<void> changeActiveByAdmin(int id, bool val) async {
     await dio.post('/admin/resturant/$id/active/$val');
+  }
+
+    Future<void> changeActiveViaCurrent(bool val) async {
+    await dio.post('/resturantadmin/active/$val');
+  }
+
+    Future<void> changeMealActive(int id, bool val) async {
+    await dio.post('/resturantadmin/meal/$id/active/$val');
   }
 }
 

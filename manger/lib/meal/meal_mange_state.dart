@@ -9,6 +9,17 @@ class MealMangeState with _$MealMangeState {
   const factory MealMangeState.loaded(
       {required List<Meal> meals,
       required List<Meal> searchedMeals,
-      @Default(false) addNewMeal ,  @Default(false) bool isRefreshing }) = LodedMeals;
+      @Default(null) OldEditMealDto? oldEdited,
+      @Default(false) bool editMode ,  @Default(false) bool isRefreshing }) = LodedMeals;
 }
 
+
+
+class OldEditMealDto {
+  final Kitchen kitchen;
+  final SubCategory subCategory;
+  final MainCategory mainCategory;
+  final Meal old;
+  final int index;
+  OldEditMealDto(this.kitchen, this.subCategory, this.mainCategory, this.old,this.index);
+}

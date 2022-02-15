@@ -10,7 +10,7 @@ class Meal {
   final String img;
   final double price;
   final List<String> extra;
-  final bool isDisabled;
+  bool isDisabled;
   final int kitchenId;
   final int subCategoryId;
   

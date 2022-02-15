@@ -46,8 +46,7 @@ class ResturnatHomtController {
   }
 
   toggleEnable() async {
-    await resturantService.changeActive(
-        state.value!.id, state.value!.isDisabled);
+    await resturantService.changeActiveViaCurrent(!state.value!.isDisabled);
     initResturant();
   }
 
