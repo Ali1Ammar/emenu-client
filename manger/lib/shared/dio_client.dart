@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:manger/login/login_provider.dart';
 import 'package:manger/shared/network_error.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:shared/shared.dart';
 
-final baseUrl = 'http://localhost:3000';
 
 final dioProvicer = Provider((_) => Dio(BaseOptions(
       baseUrl: baseUrl,

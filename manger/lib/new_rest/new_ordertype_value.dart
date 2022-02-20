@@ -10,7 +10,7 @@ class NewOrderTypeValue {
   String? deliverMsg="تم اعداد طلبك وسيتم توصيله من الويتر حاليا";
   DeliverType? deliverType = DeliverType.employeerDeliverFood;
   PaymentType? paymentType = PaymentType.afterTakeOrder ;
-
+  bool selectCustomerSpot = true;//TODO create ui for this
   SelectKitchenVia selectKitchenVia = SelectKitchenVia.None;
   // NewOrderTypeValue(this.name, this.paymentMsg, this.deliverType, this.selectKitchenVia);
 

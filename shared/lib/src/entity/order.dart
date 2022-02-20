@@ -13,7 +13,7 @@ part "order.g.dart";
 class Order {
   final int id;
   final OrderStatus status;
-  final CustomerSpot customerSpot;
+  final CustomerSpot? customerSpot;
   final CustomerFeedBack? customerFeedBack;
   final OrderType type;
   final double price;

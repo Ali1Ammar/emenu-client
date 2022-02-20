@@ -30,10 +30,11 @@ class OrderCard extends StatelessWidget {
               label: "رقم الطلب",
               text: order.id.toString(),
             ),
-            LabledWidget(
-              label: "الطاولة",
-              text: order.customerSpot.identifier,
-            ),
+            if (order.customerSpot != null)
+              LabledWidget(
+                label: "الطاولة",
+                text: order.customerSpot!.identifier,
+              ),
             LabledWidget(
               label: "السعر",
               text: order.price.toString(),
@@ -62,25 +63,25 @@ class OrderCard extends StatelessWidget {
               children: [
                 if (onPayed != null)
                   ButtonIcon(
-                    icon:const fluent.Icon(Icons.payments),
-                    child:const Text("دفع"),
+                    icon: const fluent.Icon(Icons.payments),
+                    child: const Text("دفع"),
                     onPressed: onPayed!,
                   ),
                 if (onCancel != null)
                   ButtonIcon(
                     icon: const fluent.Icon(Icons.cancel),
-                    child:const Text("الغاء"),
+                    child: const Text("الغاء"),
                     onPressed: onCancel!,
                   ),
                 if (onDeliverd != null)
                   ButtonIcon(
-                    icon:const fluent.Icon(Icons.delivery_dining),
-                    child:const Text("توصيل"),
+                    icon: const fluent.Icon(Icons.delivery_dining),
+                    child: const Text("توصيل"),
                     onPressed: onDeliverd!,
                   ),
                 if (onDoneKitchen != null)
                   ButtonIcon(
-                    icon:const fluent.Icon(Icons.kitchen),
+                    icon: const fluent.Icon(Icons.kitchen),
                     child: const Text("انتهى طبخ"),
                     onPressed: onDoneKitchen!,
                   ),

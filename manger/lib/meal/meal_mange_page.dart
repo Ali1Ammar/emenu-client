@@ -4,8 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/meal/meal_mange_controller.dart';
 import 'package:manger/new_rest/meal/new_meal.dart';
 import 'package:manger/shared/widget/header.dart';
-import 'package:manger/shared/widget/loadind.dart';
+
 import 'package:manger/shared/widget/meal_card.dart';
+import 'package:shared/shared.dart';
 
 class MealMangePage extends ConsumerWidget {
   const MealMangePage({Key? key}) : super(key: key);

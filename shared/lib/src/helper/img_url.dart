@@ -1,4 +1,4 @@
-import 'package:manger/shared/dio_client.dart';
+import 'package:shared/src/helper/const.dart';
 
 String getImageUrl(String img) {
   if(img.startsWith("http")){return img;}

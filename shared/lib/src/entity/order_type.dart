@@ -14,6 +14,7 @@ class OrderType {
 
   final int resturantId;
   final SelectKitchenVia selectKitchenVia;
+  final bool selectCustomerSpot;
   OrderType(
       this.id,
       this.resturantId,
@@ -21,7 +22,7 @@ class OrderType {
       this.paymentMsg,
       this.deliverType,
       this.selectKitchenVia,
-      this.paymentType);
+      this.paymentType, this.selectCustomerSpot);
 
   factory OrderType.fromJson(Map<String, dynamic> json) =>
       _$OrderTypeFromJson(json);

@@ -9,7 +9,7 @@ part of 'order.dart';
 abstract class _$OrderCWProxy {
   Order customerFeedBack(CustomerFeedBack? customerFeedBack);
 
-  Order customerSpot(CustomerSpot customerSpot);
+  Order customerSpot(CustomerSpot? customerSpot);
 
   Order id(int id);
 
@@ -52,7 +52,7 @@ class _$OrderCWProxyImpl implements _$OrderCWProxy {
       this(customerFeedBack: customerFeedBack);
 
   @override
-  Order customerSpot(CustomerSpot customerSpot) =>
+  Order customerSpot(CustomerSpot? customerSpot) =>
       this(customerSpot: customerSpot);
 
   @override
@@ -96,11 +96,10 @@ class _$OrderCWProxyImpl implements _$OrderCWProxy {
           ? _value.customerFeedBack
           // ignore: cast_nullable_to_non_nullable
           : customerFeedBack as CustomerFeedBack?,
-      customerSpot:
-          customerSpot == const $CopyWithPlaceholder() || customerSpot == null
-              ? _value.customerSpot
-              // ignore: cast_nullable_to_non_nullable
-              : customerSpot as CustomerSpot,
+      customerSpot: customerSpot == const $CopyWithPlaceholder()
+          ? _value.customerSpot
+          // ignore: cast_nullable_to_non_nullable
+          : customerSpot as CustomerSpot?,
       id: id == const $CopyWithPlaceholder() || id == null
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
@@ -142,8 +141,9 @@ extension $OrderCopyWith on Order {
 Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       id: json['id'] as int,
       status: $enumDecode(_$OrderStatusEnumMap, json['status']),
-      customerSpot:
-          CustomerSpot.fromJson(json['customerSpot'] as Map<String, dynamic>),
+      customerSpot: json['customerSpot'] == null
+          ? null
+          : CustomerSpot.fromJson(json['customerSpot'] as Map<String, dynamic>),
       customerFeedBack: json['customerFeedBack'] == null
           ? null
           : CustomerFeedBack.fromJson(
@@ -159,7 +159,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'id': instance.id,
       'status': _$OrderStatusEnumMap[instance.status],
-      'customerSpot': instance.customerSpot.toJson(),
+      'customerSpot': instance.customerSpot?.toJson(),
       'customerFeedBack': instance.customerFeedBack?.toJson(),
       'type': instance.type.toJson(),
       'price': instance.price,

@@ -2,7 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:fluent_ui/fluent_ui.dart' as f;
 
 import 'package:flutter/material.dart';
-import 'package:manger/shared/img_url.dart';
 import 'package:shared/shared.dart';
 
 class MealCard extends StatelessWidget {

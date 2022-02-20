@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:customer/main/auto_router.dart';
+import 'package:customer/main/material_app.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  final s = await SharedPreferences.getInstance();
+  final _appRouter = AppRouter();
+
+  runApp(MainApp(
+    configDto: StartConfigDto(s, _appRouter),
+  ));
 }
 
+class StartConfigDto {
+  final SharedPreferences sharedPreferences;
+  final AppRouter router;
 
-class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
+  StartConfigDto(this.sharedPreferences, this.router);
 }

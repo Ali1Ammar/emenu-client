@@ -9,7 +9,7 @@ import 'package:manger/new_rest/meal/new_meal_value.dart';
 import 'package:manger/shared/dialog.dart';
 import 'package:manger/shared/widget/img_picker.dart';
 import 'package:manger/shared/widget/list_adder.dart';
-import 'package:manger/shared/widget/loadind.dart';
+
 import 'package:shared/shared.dart';
 
 class CreateMealWidget extends HookConsumerWidget {

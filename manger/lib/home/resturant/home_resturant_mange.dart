@@ -8,7 +8,6 @@ import 'package:manger/new_rest/new_category.dart';
 import 'package:manger/new_rest/new_kicthen.dart';
 import 'package:manger/new_rest/new_ordertype.dart';
 import 'package:manger/new_rest/new_spot.dart';
-import 'package:manger/shared/img_url.dart';
 import 'package:shared/shared.dart';
 
 class HomeResturantMangePage extends ConsumerWidget {

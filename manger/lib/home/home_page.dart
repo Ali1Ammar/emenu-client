@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluent_ui/fluent_ui.dart' as f;
-import 'package:manger/app_setting/setting_controller.dart';
 import 'package:manger/home/home_controller.dart';
 import 'package:manger/login/login_provider.dart';
 import 'package:manger/login/user.dart';
 import 'package:manger/login/login_service.dart';
-import 'package:manger/shared/widget/loadind.dart';
-import 'package:manger/shared/widget/resturant_card.dart';
+
+import 'package:shared/shared.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

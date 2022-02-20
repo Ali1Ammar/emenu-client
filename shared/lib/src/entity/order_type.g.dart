@@ -14,6 +14,7 @@ OrderType _$OrderTypeFromJson(Map<String, dynamic> json) => OrderType(
       $enumDecode(_$DeliverTypeEnumMap, json['deliverType']),
       $enumDecode(_$SelectKitchenViaEnumMap, json['selectKitchenVia']),
       $enumDecode(_$PaymentTypeEnumMap, json['paymentType']),
+      json['selectCustomerSpot'] as bool,
     );
 
 Map<String, dynamic> _$OrderTypeToJson(OrderType instance) => <String, dynamic>{
@@ -24,6 +25,7 @@ Map<String, dynamic> _$OrderTypeToJson(OrderType instance) => <String, dynamic>{
       'paymentType': _$PaymentTypeEnumMap[instance.paymentType],
       'resturantId': instance.resturantId,
       'selectKitchenVia': _$SelectKitchenViaEnumMap[instance.selectKitchenVia],
+      'selectCustomerSpot': instance.selectCustomerSpot,
     };
 
 const _$DeliverTypeEnumMap = {
