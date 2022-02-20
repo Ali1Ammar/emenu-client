@@ -1,3 +1,5 @@
+import 'package:customer/select_order/select_order_controller.dart';
+import 'package:customer/shared/context_helper.dart';
 import 'package:customer/widget/meal_card.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
@@ -20,14 +22,22 @@ class SelectMealWidget extends StatelessWidget {
             future: mealsFuture,
             builder: (context, snap) {
               if (snap.connectionState == ConnectionState.waiting) {
-                return const CenterLoading();
+                return Container(
+                    height: 300, width: 300, child: const CenterLoading());
               }
               if (snap.hasError) return Text(snap.error.toString());
 
               return Column(
                   children: snap.data!
-                      .map((e) => MealCard(
-                            meal: e,
+                      .map((e) => InkWell(
+                            onTap: () {
+                              context.riverpod
+                                  .read(selectOrderControllerProvider.notifier)
+                                  .selectMeal(e, subCategroy);
+                            },
+                            child: MealCard(
+                              meal: e,
+                            ),
                           ))
                       .toList());
             });

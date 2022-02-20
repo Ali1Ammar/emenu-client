@@ -18,9 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SelectOrderTearOff {
   const _$SelectOrderTearOff();
 
-  Select select(List<SelectFlow> flow) {
+  Select select(List<SelectFlow> flow, List<CreateItemFlow> orderItems) {
     return Select(
       flow,
+      orderItems,
     );
   }
 }
@@ -31,20 +32,25 @@ const $SelectOrder = _$SelectOrderTearOff();
 /// @nodoc
 mixin _$SelectOrder {
   List<SelectFlow> get flow => throw _privateConstructorUsedError;
+  List<CreateItemFlow> get orderItems => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<SelectFlow> flow) select,
+    required TResult Function(
+            List<SelectFlow> flow, List<CreateItemFlow> orderItems)
+        select,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<SelectFlow> flow)? select,
+    TResult Function(List<SelectFlow> flow, List<CreateItemFlow> orderItems)?
+        select,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<SelectFlow> flow)? select,
+    TResult Function(List<SelectFlow> flow, List<CreateItemFlow> orderItems)?
+        select,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +81,7 @@ abstract class $SelectOrderCopyWith<$Res> {
   factory $SelectOrderCopyWith(
           SelectOrder value, $Res Function(SelectOrder) then) =
       _$SelectOrderCopyWithImpl<$Res>;
-  $Res call({List<SelectFlow> flow});
+  $Res call({List<SelectFlow> flow, List<CreateItemFlow> orderItems});
 }
 
 /// @nodoc
@@ -89,12 +95,17 @@ class _$SelectOrderCopyWithImpl<$Res> implements $SelectOrderCopyWith<$Res> {
   @override
   $Res call({
     Object? flow = freezed,
+    Object? orderItems = freezed,
   }) {
     return _then(_value.copyWith(
       flow: flow == freezed
           ? _value.flow
           : flow // ignore: cast_nullable_to_non_nullable
               as List<SelectFlow>,
+      orderItems: orderItems == freezed
+          ? _value.orderItems
+          : orderItems // ignore: cast_nullable_to_non_nullable
+              as List<CreateItemFlow>,
     ));
   }
 }
@@ -104,7 +115,7 @@ abstract class $SelectCopyWith<$Res> implements $SelectOrderCopyWith<$Res> {
   factory $SelectCopyWith(Select value, $Res Function(Select) then) =
       _$SelectCopyWithImpl<$Res>;
   @override
-  $Res call({List<SelectFlow> flow});
+  $Res call({List<SelectFlow> flow, List<CreateItemFlow> orderItems});
 }
 
 /// @nodoc
@@ -119,12 +130,17 @@ class _$SelectCopyWithImpl<$Res> extends _$SelectOrderCopyWithImpl<$Res>
   @override
   $Res call({
     Object? flow = freezed,
+    Object? orderItems = freezed,
   }) {
     return _then(Select(
       flow == freezed
           ? _value.flow
           : flow // ignore: cast_nullable_to_non_nullable
               as List<SelectFlow>,
+      orderItems == freezed
+          ? _value.orderItems
+          : orderItems // ignore: cast_nullable_to_non_nullable
+              as List<CreateItemFlow>,
     ));
   }
 }
@@ -132,14 +148,16 @@ class _$SelectCopyWithImpl<$Res> extends _$SelectOrderCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Select implements Select {
-  const _$Select(this.flow);
+  const _$Select(this.flow, this.orderItems);
 
   @override
   final List<SelectFlow> flow;
+  @override
+  final List<CreateItemFlow> orderItems;
 
   @override
   String toString() {
-    return 'SelectOrder.select(flow: $flow)';
+    return 'SelectOrder.select(flow: $flow, orderItems: $orderItems)';
   }
 
   @override
@@ -147,12 +165,16 @@ class _$Select implements Select {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Select &&
-            const DeepCollectionEquality().equals(other.flow, flow));
+            const DeepCollectionEquality().equals(other.flow, flow) &&
+            const DeepCollectionEquality()
+                .equals(other.orderItems, orderItems));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(flow));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(flow),
+      const DeepCollectionEquality().hash(orderItems));
 
   @JsonKey(ignore: true)
   @override
@@ -162,27 +184,31 @@ class _$Select implements Select {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<SelectFlow> flow) select,
+    required TResult Function(
+            List<SelectFlow> flow, List<CreateItemFlow> orderItems)
+        select,
   }) {
-    return select(flow);
+    return select(flow, orderItems);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(List<SelectFlow> flow)? select,
+    TResult Function(List<SelectFlow> flow, List<CreateItemFlow> orderItems)?
+        select,
   }) {
-    return select?.call(flow);
+    return select?.call(flow, orderItems);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<SelectFlow> flow)? select,
+    TResult Function(List<SelectFlow> flow, List<CreateItemFlow> orderItems)?
+        select,
     required TResult orElse(),
   }) {
     if (select != null) {
-      return select(flow);
+      return select(flow, orderItems);
     }
     return orElse();
   }
@@ -217,10 +243,13 @@ class _$Select implements Select {
 }
 
 abstract class Select implements SelectOrder {
-  const factory Select(List<SelectFlow> flow) = _$Select;
+  const factory Select(List<SelectFlow> flow, List<CreateItemFlow> orderItems) =
+      _$Select;
 
   @override
   List<SelectFlow> get flow;
+  @override
+  List<CreateItemFlow> get orderItems;
   @override
   @JsonKey(ignore: true)
   $SelectCopyWith<Select> get copyWith => throw _privateConstructorUsedError;

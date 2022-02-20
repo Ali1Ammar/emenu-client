@@ -1,3 +1,4 @@
+import 'package:customer/entity/create_order.dart';
 import 'package:customer/entity/resturant_realtion.dart';
 import 'package:customer/select_order/select_order_state.dart';
 import 'package:customer/service/dio_service.dart';
@@ -29,12 +30,27 @@ class SelectOrderController extends StateNotifier<SelectOrder> {
   SelectOrderController(
     this.read,
     this.params,
-  ) : super(SelectOrder.select(List.of([const SelectFlow(null, null, null)])));
+  ) : super(SelectOrder.select(
+            List.of([const SelectFlow(null, null, null)]), []));
 
   selectMainCategory(MainCategory category) {
     state = state.copyWith(
         flow: state.flow
           ..add(state.flow.last.copyWith(mainCategory: category)));
+  }
+
+  selectMeal(Meal meal, SubCategory subCategory) {
+    state = state.copyWith(
+        flow: state.flow
+          ..add(
+              state.flow.last.copyWith(meal: meal, subCategory: subCategory)));
+  }
+
+  addItemOrder(Meal meal, int count, List<String> extra, String note) {
+    final last = state.flow.removeLast();
+    state = state.copyWith(
+        orderItems: state.orderItems
+          ..add(CreateItemFlow(count, last, note, extra)));
   }
 
   Future<bool> tryPop() async {

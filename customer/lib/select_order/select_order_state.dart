@@ -7,7 +7,7 @@ part 'select_order_state.freezed.dart';
 
 @freezed
 class SelectOrder with _$SelectOrder {
-  const factory SelectOrder.select(List<SelectFlow> flow ) = Select;
+  const factory SelectOrder.select(List<SelectFlow> flow , List<CreateItemFlow> orderItems ) = Select;
 
   // const factory SelectState.selectCategory( List<MainCategory> categorys) = SelectCategory;
 }
@@ -17,4 +17,16 @@ class SelectFlow with _$SelectFlow {
   const factory SelectFlow(  MainCategory? mainCategory,
   SubCategory? subCategory,
   Meal? meal) = _SelectFlow;
+}
+
+
+
+class CreateItemFlow {
+  final int count;
+  final SelectFlow flow;
+  final String nodes;
+  final List<String> selectedExtra;
+
+  CreateItemFlow(this.count, this.flow, this.nodes, this.selectedExtra);
+
 }

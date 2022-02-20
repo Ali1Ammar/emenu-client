@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shared/shared.dart';
 
 part 'create_order.g.dart';
 @JsonSerializable()
