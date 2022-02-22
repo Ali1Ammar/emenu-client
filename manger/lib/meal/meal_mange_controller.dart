@@ -2,7 +2,7 @@ import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/meal/meal_mange_state.dart';
 import 'package:manger/new_rest/meal/new_meal_value.dart';
 import 'package:manger/shared/dialog.dart';
-import 'package:manger/shared/logger.dart';
+import 'package:shared/src/helper/logger.dart';
 import 'package:manger/shared/service/add_to_rest_service.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
 import 'package:riverpod/riverpod.dart';

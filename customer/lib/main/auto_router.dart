@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:customer/entity/response_create_order.dart';
+import 'package:customer/order_track/order_track_page.dart';
 import 'package:customer/select_order/select_order_controller.dart';
 import 'package:customer/select_order/select_order_page.dart';
 import 'package:customer/select_resturnat/select_resturant_page.dart';
@@ -15,7 +17,8 @@ final autoRouteProvider =
   replaceInRouteName: 'Page,Route,Screen',
   routes: <AutoRoute>[
 AutoRoute(page: SelectResturantPage,initial: true),
-AutoRoute(page: SelectOrderPage)
+AutoRoute(page: SelectOrderPage),
+AutoRoute(page: OrderTrackPage)
 
 
   ],

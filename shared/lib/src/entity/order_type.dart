@@ -8,6 +8,9 @@ class OrderType {
   final int id;
   final String name;
   final String paymentMsg;
+    final String deliverMsg;
+
+  
   final DeliverType deliverType;
   final PaymentType paymentType;
 
@@ -20,6 +23,7 @@ class OrderType {
       this.resturantId,
       this.name,
       this.paymentMsg,
+      this.deliverMsg,
       this.deliverType,
       this.selectKitchenVia,
       this.paymentType, this.selectCustomerSpot);

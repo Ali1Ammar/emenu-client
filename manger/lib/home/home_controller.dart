@@ -5,7 +5,7 @@ import 'package:manger/login/user.dart';
 import 'package:manger/main/auto_router.dart';
 import 'package:manger/new_rest/new_rest_page.dart';
 import 'package:manger/shared/dialog.dart';
-import 'package:manger/shared/logger.dart';
+import 'package:shared/src/helper/logger.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
@@ -36,11 +36,10 @@ class HomeController extends StateNotifier<HomeState> {
 
         if (rests.length == 1 && rests.first.id == user.resturantId) {
           //admin has only one resturant linked wiht
-          final resturant = await resturantService.getLinkedResturant();
-          read(currentLinkedResturant.notifier).state =
-              AsyncValue.data(resturant);
-          return read(autoRouteProvider)
-              .replace(const HomeResturantMangePageRoute());
+          goToLinkedRest();
+        }
+        if (user.resturantId != null) {
+          return;
         }
 
         return read(autoRouteProvider)
@@ -50,17 +49,19 @@ class HomeController extends StateNotifier<HomeState> {
           state = const HomeState.emptyUser();
           return;
         }
-        final resturant = await resturantService.getLinkedResturant();
-        read(currentLinkedResturant.notifier).state =
-            AsyncValue.data(resturant);
-
-        state = HomeState.loadedUserResturant(resturant);
-        return read(autoRouteProvider)
-            .replace(const HomeResturantMangePageRoute());
+        goToLinkedRest();
       }
-    } catch (e,s) {
-      debugLog(e,s);
+    } catch (e, s) {
+      debugLog(e, s);
       showErrorDialogViaRead(e, read);
     }
+  }
+
+  goToLinkedRest() async {
+    final resturant = await resturantService.getLinkedResturant();
+    read(currentLinkedResturant.notifier).state = AsyncValue.data(resturant);
+
+    state = HomeState.loadedUserResturant(resturant);
+    return read(autoRouteProvider).replace(const HomeResturantMangePageRoute());
   }
 }

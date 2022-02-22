@@ -26,7 +26,7 @@ CreateOrderItemDto _$CreateOrderItemDtoFromJson(Map<String, dynamic> json) =>
     CreateOrderItemDto(
       json['count'] as int,
       json['mealId'] as int,
-      json['nodes'] as String,
+      json['notes'] as String,
       (json['selectedExtra'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
@@ -34,6 +34,6 @@ Map<String, dynamic> _$CreateOrderItemDtoToJson(CreateOrderItemDto instance) =>
     <String, dynamic>{
       'count': instance.count,
       'mealId': instance.mealId,
-      'nodes': instance.nodes,
+      'notes': instance.notes,
       'selectedExtra': instance.selectedExtra,
     };

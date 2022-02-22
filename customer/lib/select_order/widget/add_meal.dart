@@ -8,20 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shared/shared.dart';
 
-class OrderMealWidget extends HookWidget {
+class AddMealWidget extends HookWidget {
   final Meal meal;
   final MainCategory category;
   final SubCategory subCategory;
-  const OrderMealWidget(
+  const AddMealWidget(
       {Key? key,
       required this.meal,
       required this.category,
       required this.subCategory})
       : super(key: key);
-  factory OrderMealWidget.fromFlow(SelectFlow flow) => OrderMealWidget(
-      meal: flow.meal!,
-      category: flow.mainCategory!,
-      subCategory: flow.subCategory!);
+  factory AddMealWidget.fromFlow(AddMeal flow) => AddMealWidget(
+      meal: flow.meal,
+      category: flow.mainCategory,
+      subCategory: flow.subCategory);
   @override
   Widget build(BuildContext context) {
     final selectedExtra = useSetHook<String>();

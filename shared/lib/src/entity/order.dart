@@ -32,7 +32,8 @@ class OrderChange {
   final int id;
   final OrderStatus? status;
   final bool? isPayed;
-
+  @JsonKey(ignore: true)
+  DateTime date = DateTime.now();
   factory OrderChange.fromJson(Map<String, dynamic> json) =>
       _$OrderChangeFromJson(json);
 

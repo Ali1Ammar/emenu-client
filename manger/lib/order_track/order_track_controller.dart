@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:manger/order_track/order_track_state.dart';
 import 'package:manger/shared/service/order_service.dart';
 import 'package:manger/shared/service/socketio_service.dart';
-import 'package:manger/shared/logger.dart';
+import 'package:shared/src/helper/logger.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
@@ -41,19 +41,18 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
             state = OrderTrackState.loaded(orders: event);
           },
           loaded: (_) => state = _.copyWith(orders: _.orders..addAll(event)));
-
-      subscriptionChange = streams.item2.listen((event) {
-        state.mapOrNull(loaded: (_) {
-          final orderIndex =
-              _.orders.indexWhere((element) => element.id == event.id);
-          if (orderIndex != -1) {
-            final oldOrder = _.orders[orderIndex];
-            final newOrder =
-                oldOrder.copyWith(isPayed: event.isPayed, status: event.status);
-            _.orders[orderIndex] = newOrder;
-            state = _.copyWith(orders: _.orders);
-          }
-        });
+    });
+    subscriptionChange = streams.item2.listen((event) {
+      state.mapOrNull(loaded: (_) {
+        final orderIndex =
+            _.orders.indexWhere((element) => element.id == event.id);
+        if (orderIndex != -1) {
+          final oldOrder = _.orders[orderIndex];
+          final newOrder =
+              oldOrder.copyWith(isPayed: event.isPayed, status: event.status);
+          _.orders[orderIndex] = newOrder;
+          state = _.copyWith(orders: _.orders);
+        }
       });
     });
   }

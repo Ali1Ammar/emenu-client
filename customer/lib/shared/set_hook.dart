@@ -27,6 +27,16 @@ class _SetHookState<T> extends HookState<_SetHookState<T>, _SetHook<T>> {
     });
   }
 
+    toggle(T val) {
+    setState(() {
+     if( contains(val) ){
+       remove(val);
+     } else {
+       add(val);
+     }
+    });
+  }
+
   remove(T val) {
     setState(() {
       set.remove(val);

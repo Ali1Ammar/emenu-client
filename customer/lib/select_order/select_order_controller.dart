@@ -1,7 +1,6 @@
-import 'package:customer/entity/create_order.dart';
 import 'package:customer/entity/resturant_realtion.dart';
+import 'package:customer/select_order/select_meal/select_meal_controller.dart';
 import 'package:customer/select_order/select_order_state.dart';
-import 'package:customer/service/dio_service.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
@@ -10,8 +9,8 @@ final selectParam =
 
 final selectOrderControllerProvider =
     StateNotifierProvider<SelectOrderController, SelectOrder>((_) {
-  return SelectOrderController(_.read, _.watch(selectParam));
-}, dependencies: [selectParam, dioService]);
+  return SelectOrderController(_.watch(selectParam), _.refresh);
+}, dependencies: [selectParam]);
 
 class SelectOrderParam {
   final RealtionResturantCustomer realtionResturantCustomer;
@@ -23,31 +22,31 @@ class SelectOrderParam {
 }
 
 class SelectOrderController extends StateNotifier<SelectOrder> {
-  final Reader read;
   final SelectOrderParam params;
-  DioService get service => read(dioService);
-  final Map<SubCategory, Future<List<Meal>>> subCategoryToMeal = {};
-  SelectOrderController(
-    this.read,
-    this.params,
-  ) : super(SelectOrder.select(
-            List.of([const SelectFlow(null, null, null)]), []));
+  State Function<State>(ProviderBase<State>) refresh;
+
+  SelectOrderController(this.params, this.refresh)
+      : super(SelectOrder.select(
+            List.of([const SelectFlow.selectCategory()]), []));
 
   selectMainCategory(MainCategory category) {
-    state = state.copyWith(
-        flow: state.flow
-          ..add(state.flow.last.copyWith(mainCategory: category)));
+    _addToFlow(SelectFlow.selectMeal(category));
   }
 
-  selectMeal(Meal meal, SubCategory subCategory) {
-    state = state.copyWith(
-        flow: state.flow
-          ..add(
-              state.flow.last.copyWith(meal: meal, subCategory: subCategory)));
+  selectMeal(Meal meal, SubCategory subCategory, MainCategory mainCategory) {
+    _addToFlow(SelectFlow.addMeal(mainCategory, subCategory, meal));
+  }
+
+  pressOrderCart() {
+    _addToFlow(const SelectFlow.orderList());
+  }
+
+  void _addToFlow(SelectFlow flow) {
+    state = state.copyWith(flow: state.flow..add(flow));
   }
 
   addItemOrder(Meal meal, int count, List<String> extra, String note) {
-    final last = state.flow.removeLast();
+    final last = state.flow.removeLast() as AddMeal;
     state = state.copyWith(
         orderItems: state.orderItems
           ..add(CreateItemFlow(count, last, note, extra)));
@@ -55,13 +54,14 @@ class SelectOrderController extends StateNotifier<SelectOrder> {
 
   Future<bool> tryPop() async {
     if (state.flow.length > 1) {
-      state = state.copyWith(flow: state.flow..removeLast());
+      final deleted = state.flow.removeLast();
+      if (deleted is SelectMeal) {
+        refresh(subCategoryMealsMapController);
+      }
+      state = state.copyWith();
+      // ref
       return false;
     }
     return true;
   }
-
-  Future<List<Meal>> getMealViaSubCategory(SubCategory subCategory) =>
-      subCategoryToMeal.putIfAbsent(
-          subCategory, () => service.getMeal(subCategory.id));
 }

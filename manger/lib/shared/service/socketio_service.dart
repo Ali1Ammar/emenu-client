@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:manger/login/login_provider.dart';
-import 'package:manger/shared/dio_client.dart';
-import 'package:manger/shared/logger.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -24,24 +22,6 @@ final socketIo = Provider((_) {
   )..onConnect((data) {
       log("Conntected $data");
     });
-
-  // for (var element in [
-  //   'connect',
-  //   'connect_error',
-  //   'connect_timeout',
-  //   'connecting',
-  //   'disconnect',
-  //   'error',
-  //   'reconnect',
-  //   'reconnect_attempt',
-  //   'reconnect_failed',
-  //   'reconnect_error',
-  //   'reconnecting',
-  //   'ping',
-  //   'pong'
-  // ]) {
-  //   socket.on(element, (data) => log("logevent $element $data"));
-  // }
 
   socket.connect();
   _.onDispose(() {

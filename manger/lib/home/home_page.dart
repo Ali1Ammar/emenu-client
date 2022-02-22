@@ -5,6 +5,7 @@ import 'package:manger/home/home_controller.dart';
 import 'package:manger/login/login_provider.dart';
 import 'package:manger/login/user.dart';
 import 'package:manger/login/login_service.dart';
+import 'package:manger/shared/context_helper.dart';
 
 import 'package:shared/shared.dart';
 
@@ -62,7 +63,13 @@ class _HomePageState extends State<HomePage> {
         if (user.isSystemAdmin)
           f.FilledButton(child: Text("ادارة النظام"), onPressed: () {}),
         if (user.resturantId != null)
-          f.FilledButton(child: Text("ادارة المطعم الخاص بي"), onPressed: () {})
+          f.FilledButton(
+              child: Text("ادارة المطعم الخاص بي"),
+              onPressed: () {
+                context.riverpod
+                    .read(homeControllerProvider.notifier)
+                    .goToLinkedRest();
+              })
       ],
     );
   }

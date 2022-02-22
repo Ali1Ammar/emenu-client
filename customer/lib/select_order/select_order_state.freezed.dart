@@ -259,13 +259,27 @@ abstract class Select implements SelectOrder {
 class _$SelectFlowTearOff {
   const _$SelectFlowTearOff();
 
-  _SelectFlow call(
-      MainCategory? mainCategory, SubCategory? subCategory, Meal? meal) {
-    return _SelectFlow(
+  SelectCategoty selectCategory() {
+    return const SelectCategoty();
+  }
+
+  SelectMeal selectMeal(MainCategory mainCategory) {
+    return SelectMeal(
+      mainCategory,
+    );
+  }
+
+  AddMeal addMeal(
+      MainCategory mainCategory, SubCategory subCategory, Meal meal) {
+    return AddMeal(
       mainCategory,
       subCategory,
       meal,
     );
+  }
+
+  OrderList orderList() {
+    return const OrderList();
   }
 }
 
@@ -274,12 +288,61 @@ const $SelectFlow = _$SelectFlowTearOff();
 
 /// @nodoc
 mixin _$SelectFlow {
-  MainCategory? get mainCategory => throw _privateConstructorUsedError;
-  SubCategory? get subCategory => throw _privateConstructorUsedError;
-  Meal? get meal => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $SelectFlowCopyWith<SelectFlow> get copyWith =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectCategory,
+    required TResult Function(MainCategory mainCategory) selectMeal,
+    required TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)
+        addMeal,
+    required TResult Function() orderList,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectCategoty value) selectCategory,
+    required TResult Function(SelectMeal value) selectMeal,
+    required TResult Function(AddMeal value) addMeal,
+    required TResult Function(OrderList value) orderList,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -288,7 +351,6 @@ abstract class $SelectFlowCopyWith<$Res> {
   factory $SelectFlowCopyWith(
           SelectFlow value, $Res Function(SelectFlow) then) =
       _$SelectFlowCopyWithImpl<$Res>;
-  $Res call({MainCategory? mainCategory, SubCategory? subCategory, Meal? meal});
 }
 
 /// @nodoc
@@ -298,94 +360,342 @@ class _$SelectFlowCopyWithImpl<$Res> implements $SelectFlowCopyWith<$Res> {
   final SelectFlow _value;
   // ignore: unused_field
   final $Res Function(SelectFlow) _then;
-
-  @override
-  $Res call({
-    Object? mainCategory = freezed,
-    Object? subCategory = freezed,
-    Object? meal = freezed,
-  }) {
-    return _then(_value.copyWith(
-      mainCategory: mainCategory == freezed
-          ? _value.mainCategory
-          : mainCategory // ignore: cast_nullable_to_non_nullable
-              as MainCategory?,
-      subCategory: subCategory == freezed
-          ? _value.subCategory
-          : subCategory // ignore: cast_nullable_to_non_nullable
-              as SubCategory?,
-      meal: meal == freezed
-          ? _value.meal
-          : meal // ignore: cast_nullable_to_non_nullable
-              as Meal?,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class _$SelectFlowCopyWith<$Res> implements $SelectFlowCopyWith<$Res> {
-  factory _$SelectFlowCopyWith(
-          _SelectFlow value, $Res Function(_SelectFlow) then) =
-      __$SelectFlowCopyWithImpl<$Res>;
-  @override
-  $Res call({MainCategory? mainCategory, SubCategory? subCategory, Meal? meal});
+abstract class $SelectCategotyCopyWith<$Res> {
+  factory $SelectCategotyCopyWith(
+          SelectCategoty value, $Res Function(SelectCategoty) then) =
+      _$SelectCategotyCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$SelectFlowCopyWithImpl<$Res> extends _$SelectFlowCopyWithImpl<$Res>
-    implements _$SelectFlowCopyWith<$Res> {
-  __$SelectFlowCopyWithImpl(
-      _SelectFlow _value, $Res Function(_SelectFlow) _then)
-      : super(_value, (v) => _then(v as _SelectFlow));
+class _$SelectCategotyCopyWithImpl<$Res> extends _$SelectFlowCopyWithImpl<$Res>
+    implements $SelectCategotyCopyWith<$Res> {
+  _$SelectCategotyCopyWithImpl(
+      SelectCategoty _value, $Res Function(SelectCategoty) _then)
+      : super(_value, (v) => _then(v as SelectCategoty));
 
   @override
-  _SelectFlow get _value => super._value as _SelectFlow;
-
-  @override
-  $Res call({
-    Object? mainCategory = freezed,
-    Object? subCategory = freezed,
-    Object? meal = freezed,
-  }) {
-    return _then(_SelectFlow(
-      mainCategory == freezed
-          ? _value.mainCategory
-          : mainCategory // ignore: cast_nullable_to_non_nullable
-              as MainCategory?,
-      subCategory == freezed
-          ? _value.subCategory
-          : subCategory // ignore: cast_nullable_to_non_nullable
-              as SubCategory?,
-      meal == freezed
-          ? _value.meal
-          : meal // ignore: cast_nullable_to_non_nullable
-              as Meal?,
-    ));
-  }
+  SelectCategoty get _value => super._value as SelectCategoty;
 }
 
 /// @nodoc
 
-class _$_SelectFlow implements _SelectFlow {
-  const _$_SelectFlow(this.mainCategory, this.subCategory, this.meal);
-
-  @override
-  final MainCategory? mainCategory;
-  @override
-  final SubCategory? subCategory;
-  @override
-  final Meal? meal;
+class _$SelectCategoty implements SelectCategoty {
+  const _$SelectCategoty();
 
   @override
   String toString() {
-    return 'SelectFlow(mainCategory: $mainCategory, subCategory: $subCategory, meal: $meal)';
+    return 'SelectFlow.selectCategory()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is SelectCategoty);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectCategory,
+    required TResult Function(MainCategory mainCategory) selectMeal,
+    required TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)
+        addMeal,
+    required TResult Function() orderList,
+  }) {
+    return selectCategory();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+  }) {
+    return selectCategory?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+    required TResult orElse(),
+  }) {
+    if (selectCategory != null) {
+      return selectCategory();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectCategoty value) selectCategory,
+    required TResult Function(SelectMeal value) selectMeal,
+    required TResult Function(AddMeal value) addMeal,
+    required TResult Function(OrderList value) orderList,
+  }) {
+    return selectCategory(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+  }) {
+    return selectCategory?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+    required TResult orElse(),
+  }) {
+    if (selectCategory != null) {
+      return selectCategory(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SelectCategoty implements SelectFlow {
+  const factory SelectCategoty() = _$SelectCategoty;
+}
+
+/// @nodoc
+abstract class $SelectMealCopyWith<$Res> {
+  factory $SelectMealCopyWith(
+          SelectMeal value, $Res Function(SelectMeal) then) =
+      _$SelectMealCopyWithImpl<$Res>;
+  $Res call({MainCategory mainCategory});
+}
+
+/// @nodoc
+class _$SelectMealCopyWithImpl<$Res> extends _$SelectFlowCopyWithImpl<$Res>
+    implements $SelectMealCopyWith<$Res> {
+  _$SelectMealCopyWithImpl(SelectMeal _value, $Res Function(SelectMeal) _then)
+      : super(_value, (v) => _then(v as SelectMeal));
+
+  @override
+  SelectMeal get _value => super._value as SelectMeal;
+
+  @override
+  $Res call({
+    Object? mainCategory = freezed,
+  }) {
+    return _then(SelectMeal(
+      mainCategory == freezed
+          ? _value.mainCategory
+          : mainCategory // ignore: cast_nullable_to_non_nullable
+              as MainCategory,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SelectMeal implements SelectMeal {
+  const _$SelectMeal(this.mainCategory);
+
+  @override
+  final MainCategory mainCategory;
+
+  @override
+  String toString() {
+    return 'SelectFlow.selectMeal(mainCategory: $mainCategory)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SelectFlow &&
+            other is SelectMeal &&
+            const DeepCollectionEquality()
+                .equals(other.mainCategory, mainCategory));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(mainCategory));
+
+  @JsonKey(ignore: true)
+  @override
+  $SelectMealCopyWith<SelectMeal> get copyWith =>
+      _$SelectMealCopyWithImpl<SelectMeal>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectCategory,
+    required TResult Function(MainCategory mainCategory) selectMeal,
+    required TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)
+        addMeal,
+    required TResult Function() orderList,
+  }) {
+    return selectMeal(mainCategory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+  }) {
+    return selectMeal?.call(mainCategory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+    required TResult orElse(),
+  }) {
+    if (selectMeal != null) {
+      return selectMeal(mainCategory);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectCategoty value) selectCategory,
+    required TResult Function(SelectMeal value) selectMeal,
+    required TResult Function(AddMeal value) addMeal,
+    required TResult Function(OrderList value) orderList,
+  }) {
+    return selectMeal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+  }) {
+    return selectMeal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+    required TResult orElse(),
+  }) {
+    if (selectMeal != null) {
+      return selectMeal(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SelectMeal implements SelectFlow {
+  const factory SelectMeal(MainCategory mainCategory) = _$SelectMeal;
+
+  MainCategory get mainCategory;
+  @JsonKey(ignore: true)
+  $SelectMealCopyWith<SelectMeal> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AddMealCopyWith<$Res> {
+  factory $AddMealCopyWith(AddMeal value, $Res Function(AddMeal) then) =
+      _$AddMealCopyWithImpl<$Res>;
+  $Res call({MainCategory mainCategory, SubCategory subCategory, Meal meal});
+}
+
+/// @nodoc
+class _$AddMealCopyWithImpl<$Res> extends _$SelectFlowCopyWithImpl<$Res>
+    implements $AddMealCopyWith<$Res> {
+  _$AddMealCopyWithImpl(AddMeal _value, $Res Function(AddMeal) _then)
+      : super(_value, (v) => _then(v as AddMeal));
+
+  @override
+  AddMeal get _value => super._value as AddMeal;
+
+  @override
+  $Res call({
+    Object? mainCategory = freezed,
+    Object? subCategory = freezed,
+    Object? meal = freezed,
+  }) {
+    return _then(AddMeal(
+      mainCategory == freezed
+          ? _value.mainCategory
+          : mainCategory // ignore: cast_nullable_to_non_nullable
+              as MainCategory,
+      subCategory == freezed
+          ? _value.subCategory
+          : subCategory // ignore: cast_nullable_to_non_nullable
+              as SubCategory,
+      meal == freezed
+          ? _value.meal
+          : meal // ignore: cast_nullable_to_non_nullable
+              as Meal,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddMeal implements AddMeal {
+  const _$AddMeal(this.mainCategory, this.subCategory, this.meal);
+
+  @override
+  final MainCategory mainCategory;
+  @override
+  final SubCategory subCategory;
+  @override
+  final Meal meal;
+
+  @override
+  String toString() {
+    return 'SelectFlow.addMeal(mainCategory: $mainCategory, subCategory: $subCategory, meal: $meal)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AddMeal &&
             const DeepCollectionEquality()
                 .equals(other.mainCategory, mainCategory) &&
             const DeepCollectionEquality()
@@ -402,23 +712,218 @@ class _$_SelectFlow implements _SelectFlow {
 
   @JsonKey(ignore: true)
   @override
-  _$SelectFlowCopyWith<_SelectFlow> get copyWith =>
-      __$SelectFlowCopyWithImpl<_SelectFlow>(this, _$identity);
+  $AddMealCopyWith<AddMeal> get copyWith =>
+      _$AddMealCopyWithImpl<AddMeal>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectCategory,
+    required TResult Function(MainCategory mainCategory) selectMeal,
+    required TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)
+        addMeal,
+    required TResult Function() orderList,
+  }) {
+    return addMeal(mainCategory, subCategory, meal);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+  }) {
+    return addMeal?.call(mainCategory, subCategory, meal);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+    required TResult orElse(),
+  }) {
+    if (addMeal != null) {
+      return addMeal(mainCategory, subCategory, meal);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectCategoty value) selectCategory,
+    required TResult Function(SelectMeal value) selectMeal,
+    required TResult Function(AddMeal value) addMeal,
+    required TResult Function(OrderList value) orderList,
+  }) {
+    return addMeal(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+  }) {
+    return addMeal?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+    required TResult orElse(),
+  }) {
+    if (addMeal != null) {
+      return addMeal(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _SelectFlow implements SelectFlow {
-  const factory _SelectFlow(
-          MainCategory? mainCategory, SubCategory? subCategory, Meal? meal) =
-      _$_SelectFlow;
+abstract class AddMeal implements SelectFlow {
+  const factory AddMeal(
+          MainCategory mainCategory, SubCategory subCategory, Meal meal) =
+      _$AddMeal;
+
+  MainCategory get mainCategory;
+  SubCategory get subCategory;
+  Meal get meal;
+  @JsonKey(ignore: true)
+  $AddMealCopyWith<AddMeal> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrderListCopyWith<$Res> {
+  factory $OrderListCopyWith(OrderList value, $Res Function(OrderList) then) =
+      _$OrderListCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$OrderListCopyWithImpl<$Res> extends _$SelectFlowCopyWithImpl<$Res>
+    implements $OrderListCopyWith<$Res> {
+  _$OrderListCopyWithImpl(OrderList _value, $Res Function(OrderList) _then)
+      : super(_value, (v) => _then(v as OrderList));
 
   @override
-  MainCategory? get mainCategory;
+  OrderList get _value => super._value as OrderList;
+}
+
+/// @nodoc
+
+class _$OrderList implements OrderList {
+  const _$OrderList();
+
   @override
-  SubCategory? get subCategory;
+  String toString() {
+    return 'SelectFlow.orderList()';
+  }
+
   @override
-  Meal? get meal;
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is OrderList);
+  }
+
   @override
-  @JsonKey(ignore: true)
-  _$SelectFlowCopyWith<_SelectFlow> get copyWith =>
-      throw _privateConstructorUsedError;
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() selectCategory,
+    required TResult Function(MainCategory mainCategory) selectMeal,
+    required TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)
+        addMeal,
+    required TResult Function() orderList,
+  }) {
+    return orderList();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+  }) {
+    return orderList?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? selectCategory,
+    TResult Function(MainCategory mainCategory)? selectMeal,
+    TResult Function(
+            MainCategory mainCategory, SubCategory subCategory, Meal meal)?
+        addMeal,
+    TResult Function()? orderList,
+    required TResult orElse(),
+  }) {
+    if (orderList != null) {
+      return orderList();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SelectCategoty value) selectCategory,
+    required TResult Function(SelectMeal value) selectMeal,
+    required TResult Function(AddMeal value) addMeal,
+    required TResult Function(OrderList value) orderList,
+  }) {
+    return orderList(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+  }) {
+    return orderList?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SelectCategoty value)? selectCategory,
+    TResult Function(SelectMeal value)? selectMeal,
+    TResult Function(AddMeal value)? addMeal,
+    TResult Function(OrderList value)? orderList,
+    required TResult orElse(),
+  }) {
+    if (orderList != null) {
+      return orderList(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OrderList implements SelectFlow {
+  const factory OrderList() = _$OrderList;
 }

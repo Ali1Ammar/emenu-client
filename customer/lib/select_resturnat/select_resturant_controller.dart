@@ -16,20 +16,23 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
 
   init() async {
     final rest = await read(dioService).getResturants();
+    state = SelectResturantState.loadResturants(rest);
+
     if (rest.length == 1) {
       selectResturnat(rest.first);
-    } else {
-      state = SelectResturantState.loadResturants(rest);
     }
   }
 
   selectResturnat(Resturant item) async {
     state = SelectResturantState.loadingOrderType(item);
     final restRealtion = await read(dioService).getResutrnatRelation(item.id);
-    if (restRealtion.orderType.length == 1) {
-      selectOrderType(restRealtion.orderType.first);
-    }
     state = SelectResturantState.loadSelectedResturant(restRealtion);
+
+    if (restRealtion.orderType.length == 1) {
+      read(autoRouteProvider).replace(SelectOrderPageRoute(
+          param: SelectOrderParam(
+              restRealtion, restRealtion.orderType.first, null)));
+    }
   }
 
   selectOrderType(OrderType orderType) async {

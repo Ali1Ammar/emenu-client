@@ -25,6 +25,7 @@ class MainApp extends StatelessWidget {
         return MaterialApp.router(
             routeInformationParser: configDto.router.defaultRouteParser(),
             themeMode: setting.mode,
+            debugShowCheckedModeBanner: false,
             theme: ThemeData(),
             locale: Locale("ar", 'iq'),
             builder: (_, c) => Theme(

@@ -1,11 +1,11 @@
+import 'package:customer/select_order/order/order_page.dart';
+import 'package:customer/select_order/select_meal/select_meal.dart';
 import 'package:customer/select_order/select_order_controller.dart';
-import 'package:customer/select_order/widget/order_meal.dart';
+import 'package:customer/select_order/select_order_state.dart';
+import 'package:customer/select_order/widget/add_meal.dart';
 import 'package:customer/select_order/widget/select_main_category.dart';
-import 'package:customer/select_order/widget/select_meal.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:shared/shared.dart';
 
 class SelectOrderPage extends StatelessWidget {
   final SelectOrderParam param;
@@ -23,21 +23,40 @@ class SelectOrderPage extends StatelessWidget {
           onWillPop: cont.tryPop,
           child: Scaffold(
             appBar: AppBar(
-              title: Text("اختيار الطلب"),
+              title: const Text("اختيار الطلب"),
+              leading: const BackButton(),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      if (state.flow.last is OrderList) {
+                        cont.tryPop();
+                      } else {
+                        cont.pressOrderCart();
+                      }
+                    },
+                    icon: Stack(
+                      children: [
+                        Text(state.orderItems.length.toString()),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(Icons.shopping_cart),
+                        ),
+                      ],
+                    ))
+              ],
             ),
             body: state.map<Widget>(select: (data) {
-              if (data.flow.last.mainCategory == null) {
-                return SelectMainCategoryWidget(
-                    mainCategorys:
-                        param.realtionResturantCustomer.mainCategory);
-              }
+              return data.flow.last.map<Widget>(
+                  selectCategory: (_) => SelectMainCategoryWidget(
+                      mainCategorys:
+                          param.realtionResturantCustomer.mainCategory),
+                  selectMeal: (_) => SelectMealWidget(
+                        mainCategory: _.mainCategory,
+                      ),
+                  addMeal: (_) => AddMealWidget.fromFlow(_),
+                  orderList: (_) =>
+                      OrderListWidget(orderItems: data.orderItems));
 
-              if (data.flow.last.meal == null) {
-                return SelectMealWidget(
-                    mainCategory: data.flow.last.mainCategory!,
-                    getMealsFuture: cont.getMealViaSubCategory);
-              }
-              return OrderMealWidget.fromFlow(data.flow.last);
               // return Text("error");
             }),
           ),

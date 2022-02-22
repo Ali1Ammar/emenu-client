@@ -26,13 +26,21 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
           routeData: routeData,
           child: SelectOrderPage(key: args.key, param: args.param));
+    },
+    OrderTrackPageRoute.name: (routeData) {
+      final args = routeData.argsAs<OrderTrackPageRouteArgs>();
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: OrderTrackPage(
+              key: args.key, responseCreateOrder: args.responseCreateOrder));
     }
   };
 
   @override
   List<RouteConfig> get routes => [
         RouteConfig(SelectResturantPageRoute.name, path: '/'),
-        RouteConfig(SelectOrderPageRoute.name, path: '/select-order-page')
+        RouteConfig(SelectOrderPageRoute.name, path: '/select-order-page'),
+        RouteConfig(OrderTrackPageRoute.name, path: '/order-track-page')
       ];
 }
 
@@ -66,5 +74,31 @@ class SelectOrderPageRouteArgs {
   @override
   String toString() {
     return 'SelectOrderPageRouteArgs{key: $key, param: $param}';
+  }
+}
+
+/// generated route for
+/// [OrderTrackPage]
+class OrderTrackPageRoute extends PageRouteInfo<OrderTrackPageRouteArgs> {
+  OrderTrackPageRoute(
+      {Key? key, required ResponseCreateOrder responseCreateOrder})
+      : super(OrderTrackPageRoute.name,
+            path: '/order-track-page',
+            args: OrderTrackPageRouteArgs(
+                key: key, responseCreateOrder: responseCreateOrder));
+
+  static const String name = 'OrderTrackPageRoute';
+}
+
+class OrderTrackPageRouteArgs {
+  const OrderTrackPageRouteArgs({this.key, required this.responseCreateOrder});
+
+  final Key? key;
+
+  final ResponseCreateOrder responseCreateOrder;
+
+  @override
+  String toString() {
+    return 'OrderTrackPageRouteArgs{key: $key, responseCreateOrder: $responseCreateOrder}';
   }
 }

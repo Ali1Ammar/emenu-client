@@ -12,6 +12,7 @@ class HomeSystemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int length = resturants.length + 1 ;
     return ScaffoldPage(
       header: const PageHeader(
         commandBar: SizedBox(
@@ -26,7 +27,7 @@ class HomeSystemPage extends StatelessWidget {
       content: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 300),
-          itemCount: resturants.length + 1,
+          itemCount: resturants.length + 1 ,
           itemBuilder: (context, i) {
             if (i == 0) {
               return FilledButton(

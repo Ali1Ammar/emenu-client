@@ -1,5 +1,6 @@
 import 'package:customer/select_order/select_order_controller.dart';
 import 'package:customer/shared/context_helper.dart';
+import 'package:customer/widget/category_card.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
@@ -17,15 +18,7 @@ crossAxisCount: 2,
           
           context.riverpod.read(selectOrderControllerProvider.notifier).selectMainCategory(e) ;
         },
-        child: Card(
-          child: Column(
-            children: [
-              Flexible(child: Image.network(getImageUrl(e.img))),
-              Text(e.title),
-              Text(e.desc)
-            ],
-          ) ,
-        ),
+        child: CategoryCard(mainCategory: e,)
       )).toList() ,
     );
   }
