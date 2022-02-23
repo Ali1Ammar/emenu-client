@@ -28,6 +28,7 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
     final loaded = (state as LoadResturants);
     if(loaded.fuzzySearch==null){
    state = loaded.copyWith(
+     resturnatSearch: loaded.resturnats  ,
         fuzzySearch: Fuzzy(loaded.resturnats, options: FuzzyOptions(
           keys: [
             WeightedKey(
