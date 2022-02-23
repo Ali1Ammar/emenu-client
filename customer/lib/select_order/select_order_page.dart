@@ -23,7 +23,11 @@ class SelectOrderPage extends StatelessWidget {
           onWillPop: cont.tryPop,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text("اختيار الطلب"),
+              title: Text(state.flow.last.map<String>(
+                  selectCategory: (_) => "اختيار تصنيف",
+                  selectMeal: (_) => "اختر الوجبة",
+                  addMeal: (_) => "طلب الوجبة",
+                  orderList: (_) => "طلباتك")),
               leading: const BackButton(),
               actions: [
                 IconButton(

@@ -22,9 +22,12 @@ class _$SelectResturantStateTearOff {
     return const LoadingInit();
   }
 
-  LoadResturants loadResturants(List<Resturant> resturnats) {
+  LoadResturants loadResturants(List<Resturant> resturnats,
+      Fuzzy<Resturant>? fuzzySearch, List<Resturant> resturnatSearch) {
     return LoadResturants(
       resturnats,
+      fuzzySearch,
+      resturnatSearch,
     );
   }
 
@@ -50,7 +53,9 @@ mixin _$SelectResturantState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingInit,
-    required TResult Function(List<Resturant> resturnats) loadResturants,
+    required TResult Function(List<Resturant> resturnats,
+            Fuzzy<Resturant>? fuzzySearch, List<Resturant> resturnatSearch)
+        loadResturants,
     required TResult Function(Resturant resturant) loadingOrderType,
     required TResult Function(RealtionResturantCustomer resturant)
         loadSelectedResturant,
@@ -59,7 +64,9 @@ mixin _$SelectResturantState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
@@ -68,7 +75,9 @@ mixin _$SelectResturantState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
@@ -162,7 +171,9 @@ class _$LoadingInit implements LoadingInit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingInit,
-    required TResult Function(List<Resturant> resturnats) loadResturants,
+    required TResult Function(List<Resturant> resturnats,
+            Fuzzy<Resturant>? fuzzySearch, List<Resturant> resturnatSearch)
+        loadResturants,
     required TResult Function(Resturant resturant) loadingOrderType,
     required TResult Function(RealtionResturantCustomer resturant)
         loadSelectedResturant,
@@ -174,7 +185,9 @@ class _$LoadingInit implements LoadingInit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
@@ -186,7 +199,9 @@ class _$LoadingInit implements LoadingInit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
@@ -246,7 +261,10 @@ abstract class $LoadResturantsCopyWith<$Res> {
   factory $LoadResturantsCopyWith(
           LoadResturants value, $Res Function(LoadResturants) then) =
       _$LoadResturantsCopyWithImpl<$Res>;
-  $Res call({List<Resturant> resturnats});
+  $Res call(
+      {List<Resturant> resturnats,
+      Fuzzy<Resturant>? fuzzySearch,
+      List<Resturant> resturnatSearch});
 }
 
 /// @nodoc
@@ -263,11 +281,21 @@ class _$LoadResturantsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? resturnats = freezed,
+    Object? fuzzySearch = freezed,
+    Object? resturnatSearch = freezed,
   }) {
     return _then(LoadResturants(
       resturnats == freezed
           ? _value.resturnats
           : resturnats // ignore: cast_nullable_to_non_nullable
+              as List<Resturant>,
+      fuzzySearch == freezed
+          ? _value.fuzzySearch
+          : fuzzySearch // ignore: cast_nullable_to_non_nullable
+              as Fuzzy<Resturant>?,
+      resturnatSearch == freezed
+          ? _value.resturnatSearch
+          : resturnatSearch // ignore: cast_nullable_to_non_nullable
               as List<Resturant>,
     ));
   }
@@ -276,14 +304,19 @@ class _$LoadResturantsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadResturants implements LoadResturants {
-  const _$LoadResturants(this.resturnats);
+  const _$LoadResturants(
+      this.resturnats, this.fuzzySearch, this.resturnatSearch);
 
   @override
   final List<Resturant> resturnats;
+  @override
+  final Fuzzy<Resturant>? fuzzySearch;
+  @override
+  final List<Resturant> resturnatSearch;
 
   @override
   String toString() {
-    return 'SelectResturantState.loadResturants(resturnats: $resturnats)';
+    return 'SelectResturantState.loadResturants(resturnats: $resturnats, fuzzySearch: $fuzzySearch, resturnatSearch: $resturnatSearch)';
   }
 
   @override
@@ -292,12 +325,19 @@ class _$LoadResturants implements LoadResturants {
         (other.runtimeType == runtimeType &&
             other is LoadResturants &&
             const DeepCollectionEquality()
-                .equals(other.resturnats, resturnats));
+                .equals(other.resturnats, resturnats) &&
+            const DeepCollectionEquality()
+                .equals(other.fuzzySearch, fuzzySearch) &&
+            const DeepCollectionEquality()
+                .equals(other.resturnatSearch, resturnatSearch));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(resturnats));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(resturnats),
+      const DeepCollectionEquality().hash(fuzzySearch),
+      const DeepCollectionEquality().hash(resturnatSearch));
 
   @JsonKey(ignore: true)
   @override
@@ -308,38 +348,44 @@ class _$LoadResturants implements LoadResturants {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingInit,
-    required TResult Function(List<Resturant> resturnats) loadResturants,
+    required TResult Function(List<Resturant> resturnats,
+            Fuzzy<Resturant>? fuzzySearch, List<Resturant> resturnatSearch)
+        loadResturants,
     required TResult Function(Resturant resturant) loadingOrderType,
     required TResult Function(RealtionResturantCustomer resturant)
         loadSelectedResturant,
   }) {
-    return loadResturants(resturnats);
+    return loadResturants(resturnats, fuzzySearch, resturnatSearch);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
   }) {
-    return loadResturants?.call(resturnats);
+    return loadResturants?.call(resturnats, fuzzySearch, resturnatSearch);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
     required TResult orElse(),
   }) {
     if (loadResturants != null) {
-      return loadResturants(resturnats);
+      return loadResturants(resturnats, fuzzySearch, resturnatSearch);
     }
     return orElse();
   }
@@ -384,9 +430,14 @@ class _$LoadResturants implements LoadResturants {
 }
 
 abstract class LoadResturants implements SelectResturantState {
-  const factory LoadResturants(List<Resturant> resturnats) = _$LoadResturants;
+  const factory LoadResturants(
+      List<Resturant> resturnats,
+      Fuzzy<Resturant>? fuzzySearch,
+      List<Resturant> resturnatSearch) = _$LoadResturants;
 
   List<Resturant> get resturnats;
+  Fuzzy<Resturant>? get fuzzySearch;
+  List<Resturant> get resturnatSearch;
   @JsonKey(ignore: true)
   $LoadResturantsCopyWith<LoadResturants> get copyWith =>
       throw _privateConstructorUsedError;
@@ -458,7 +509,9 @@ class _$LoadingOrder implements LoadingOrder {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingInit,
-    required TResult Function(List<Resturant> resturnats) loadResturants,
+    required TResult Function(List<Resturant> resturnats,
+            Fuzzy<Resturant>? fuzzySearch, List<Resturant> resturnatSearch)
+        loadResturants,
     required TResult Function(Resturant resturant) loadingOrderType,
     required TResult Function(RealtionResturantCustomer resturant)
         loadSelectedResturant,
@@ -470,7 +523,9 @@ class _$LoadingOrder implements LoadingOrder {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
@@ -482,7 +537,9 @@ class _$LoadingOrder implements LoadingOrder {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
@@ -609,7 +666,9 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingInit,
-    required TResult Function(List<Resturant> resturnats) loadResturants,
+    required TResult Function(List<Resturant> resturnats,
+            Fuzzy<Resturant>? fuzzySearch, List<Resturant> resturnatSearch)
+        loadResturants,
     required TResult Function(Resturant resturant) loadingOrderType,
     required TResult Function(RealtionResturantCustomer resturant)
         loadSelectedResturant,
@@ -621,7 +680,9 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,
@@ -633,7 +694,9 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingInit,
-    TResult Function(List<Resturant> resturnats)? loadResturants,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
     TResult Function(Resturant resturant)? loadingOrderType,
     TResult Function(RealtionResturantCustomer resturant)?
         loadSelectedResturant,

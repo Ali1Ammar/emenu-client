@@ -1,4 +1,6 @@
 import 'package:customer/select_resturnat/select_resturant_controller.dart';
+import 'package:customer/select_resturnat/select_resturant_state.dart';
+import 'package:customer/widget/fade_widget.dart';
 import 'package:customer/widget/resturant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,22 +13,53 @@ class SelectResturantPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(selectRestController);
     final cont = ref.watch(selectRestController.notifier);
-
+    //TODO add search
     return WillPopScope(
       onWillPop: cont.tryPop,
       child: Scaffold(
           appBar: AppBar(
             title: const Text("اختيار مطعم"),
             leading: const BackButton(),
+            actions: [
+              if (state is LoadResturants)
+                IconButton(
+                    onPressed: () {
+                      cont.toggleSearch();
+                    },
+                    icon: const Icon(Icons.search))
+            ],
           ),
           body: state.map<Widget>(
               loadingInit: (_) => const CenterLoading(),
               loadResturants: (loaded) {
                 if (loaded.resturnats.isEmpty) return const EmptyWidget();
+                final isSearchEnable = loaded.fuzzySearch != null;
+                final rest = (isSearchEnable
+                          ? loaded.resturnatSearch
+                          : loaded.resturnats);
                 return ListView.builder(
-                    itemCount: loaded.resturnats.length,
-                    itemBuilder: (context, i) {
-                      final item = loaded.resturnats[i];
+                    itemCount:rest.length + 1,
+                    itemBuilder: (context, _i) {
+                      if (_i == 0) {
+                        return FadeWidget(
+                          isFade: !isSearchEnable,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextField(
+                              onChanged: (val) {
+                                cont.search(val);
+                              },
+                              decoration: const InputDecoration(
+                                  labelText: "اسم المطعم",
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(30.0)))),
+                            ),
+                          ),
+                        );
+                      }
+                      final i = _i - 1;
+                      final item = rest[i];
                       return InkWell(
                           onTap: () {
                             cont.selectResturnat(item);

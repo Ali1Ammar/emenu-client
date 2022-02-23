@@ -324,6 +324,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  fuzzy:
+    dependency: "direct main"
+    description:
+      name: fuzzy
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0-nullsafety.0"
   glob:
     dependency: transitive
     description:
@@ -408,6 +415,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.4"
+  latinize:
+    dependency: transitive
+    description:
+      name: latinize
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0-nullsafety.0"
   lints:
     dependency: transitive
     description:
