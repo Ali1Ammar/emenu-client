@@ -59,6 +59,7 @@ class AddMealWidget extends HookWidget {
               minValue: 1,
               maxValue: 999,
               minDigit: 3,
+              iconColor: Theme.of(context).buttonTheme.colorScheme?.onPrimary,
               textPadding: const EdgeInsets.symmetric(horizontal: 4),
               step: 1,
               onChanged: (val) {
@@ -72,8 +73,8 @@ class AddMealWidget extends HookWidget {
                   onPressed: () {
                     context.riverpod
                         .read(selectOrderControllerProvider.notifier)
-                        .addItemOrder(
-                            meal, count.value, selectedExtra.set.toList(),notes.text);
+                        .addItemOrder(meal, count.value,
+                            selectedExtra.set.toList(), notes.text);
                   },
                   child: const SizedBox(
                       width: double.maxFinite,
