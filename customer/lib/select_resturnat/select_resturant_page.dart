@@ -1,3 +1,4 @@
+import 'package:customer/app_setting/setting_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_state.dart';
 import 'package:customer/widget/fade_widget.dart';
@@ -13,7 +14,7 @@ class SelectResturantPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(selectRestController);
     final cont = ref.watch(selectRestController.notifier);
-    //TODO add search
+    final isDark = Theme.of(context).brightness==Brightness.dark;
     return WillPopScope(
       onWillPop: cont.tryPop,
       child: Scaffold(
@@ -26,7 +27,11 @@ class SelectResturantPage extends HookConsumerWidget {
                     onPressed: () {
                       cont.toggleSearch();
                     },
-                    icon: const Icon(Icons.search))
+                    icon: const Icon(Icons.search)),
+              IconButton(onPressed: (){
+                  ref.read(settingProvider.notifier).toggle();
+              }, icon: Icon(!isDark ? Icons.brightness_7_sharp : Icons.brightness_2) )
+              
             ],
           ),
           body: state.map<Widget>(
@@ -35,10 +40,10 @@ class SelectResturantPage extends HookConsumerWidget {
                 if (loaded.resturnats.isEmpty) return const EmptyWidget();
                 final isSearchEnable = loaded.fuzzySearch != null;
                 final rest = (isSearchEnable
-                          ? loaded.resturnatSearch
-                          : loaded.resturnats);
+                    ? loaded.resturnatSearch
+                    : loaded.resturnats);
                 return ListView.builder(
-                    itemCount:rest.length + 1,
+                    itemCount: rest.length + 1,
                     itemBuilder: (context, _i) {
                       if (_i == 0) {
                         return FadeWidget(

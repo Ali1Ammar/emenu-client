@@ -24,18 +24,15 @@ class MainApp extends StatelessWidget {
         final setting = ref.watch(settingProvider);
         return MaterialApp.router(
             routeInformationParser: configDto.router.defaultRouteParser(),
-            themeMode: setting.mode,
+            themeMode:  setting.mode,
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(),
-            locale: Locale("ar", 'iq'),
-            builder: (_, c) => Theme(
-                  data: ThemeData.dark(), 
-                  child: Directionality(
-                      textDirection: TextDirection.rtl, child: c!),
-                ),
+            theme: ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple) ) ,
             darkTheme: ThemeData(brightness: Brightness.dark),
+            locale: Locale("ar", 'iq'),
+            builder: (_, c) => Directionality(
+                textDirection: TextDirection.rtl, child: c!),
             routerDelegate: configDto.router.delegate(),
-            color: Colors.purple );
+            color: Colors.deepPurple );
       }),
     );
   }
