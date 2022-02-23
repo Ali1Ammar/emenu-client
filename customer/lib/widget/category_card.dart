@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
@@ -19,11 +20,11 @@ class CategoryCard extends StatelessWidget {
           )),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(mainCategory.title, style: Theme.of(context).textTheme.titleLarge ,),
+            child: AutoSizeText(mainCategory.title, style: Theme.of(context).textTheme.titleLarge ,maxLines: 1),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(mainCategory.desc, style: Theme.of(context).textTheme.bodyMedium ,),
+            child: AutoSizeText(mainCategory.desc, style: Theme.of(context).textTheme.bodyMedium ,maxLines: 2,),
           )
         ],
       ),

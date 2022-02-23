@@ -40,7 +40,8 @@ class OrderTrackPage extends HookConsumerWidget {
             ),
             AspectRatio(
                 aspectRatio: 1,
-                child: SvgPicture.asset(generateSvgName(state.currentStatus))),
+                child: SvgPicture.asset(
+                    "assets/svg/${generateSvgName(state.currentStatus)}")),
             if (state.currentStatus == OrderStatus.WaitPayment)
               Center(
                   child: Padding(
@@ -52,9 +53,8 @@ class OrderTrackPage extends HookConsumerWidget {
                   child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(state.order.type.deliverMsg, style: style))),
-            if (state.currentStatus == OrderStatus.Done ||
-                (state.currentStatus == OrderStatus.DoneByKitchen &&
-                    state.isPayed))
+            if ((state.currentStatus == OrderStatus.DeliveredByKitchen &&
+                state.isPayed))
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

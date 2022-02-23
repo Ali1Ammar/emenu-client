@@ -1,85 +1,54 @@
 import 'package:customer/select_order/select_meal/select_meal_controller.dart';
-import 'package:customer/select_order/select_order_controller.dart';
-import 'package:customer/shared/context_helper.dart';
-import 'package:customer/widget/meal_card.dart';
+import 'package:customer/select_order/select_meal/select_meal_subcateogry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:hooks_state_notifier/hooks_state_notifier.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:shared/shared.dart';
 
-class SelectMealWidget extends ConsumerWidget {
+class SelectMealWidget extends HookConsumerWidget {
   final MainCategory mainCategory;
   const SelectMealWidget({Key? key, required this.mainCategory})
       : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final subCategoryMeals = ref.watch(subCategoryMealsMapController);
-    return ListView(
-      children: mainCategory.children.map<Widget>((subCategroy) {
-        return HookConsumer(
-          builder: (context, ref, _) {
-            final cont = subCategoryMeals.getController(subCategroy);
-            final state = useStateNotifier(cont);
-            return state.map<Widget>(loadingMeal: (_) {
-              return const SizedBox(
-                  height: 300, width: 300, child: CenterLoading());
-            }, loaded: (loaded) {
-              if (loaded.meals.isEmpty) return const SizedBox();
+    final itemScrollController = useMemoized(() => ItemScrollController());
+    final itemPositionsListener =
+        useMemoized(() => ItemPositionsListener.create());
 
-              final isExp = loaded.isChecked;
-              return Column(children: [
-                const Divider(),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        subCategroy.title,
-                        style: Theme.of(context).textTheme.headline6,
+    ref.watch(subCategoryMealsMapController);
+    return ScrollablePositionedList.builder(
+      itemCount: mainCategory.children.length + 1,
+      itemScrollController: itemScrollController,
+      itemPositionsListener: itemPositionsListener,
+      itemBuilder: (context, _index) {
+        if (_index == 0) {
+          return SizedBox(
+            height: 40,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                for (var i = 0; i < mainCategory.children.length; i++)
+                  Center(
+                    child: InkWell(
+                      onTap: () {
+                        itemScrollController.jumpTo(index: i + 1);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(mainCategory.children[i].title),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            cont.toggle();
-                          },
-                          icon: Icon(
-                              isExp ? Icons.expand_more : Icons.expand_less))
-                    ],
-                  ),
-                ),
-                AnimatedCrossFade(
-                  firstChild: Container(height: 0.0),
-                  secondChild: Column(
-                    children: loaded.meals
-                        .map((e) => InkWell(
-                              onTap: () {
-                                context.riverpod
-                                    .read(
-                                        selectOrderControllerProvider.notifier)
-                                    .selectMeal(e, subCategroy, mainCategory);
-                              },
-                              child: MealCard(
-                                meal: e,
-                              ),
-                            ))
-                        .toList(),
-                  ),
-                  firstCurve:
-                      const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
-                  secondCurve:
-                      const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
-                  sizeCurve: Curves.fastOutSlowIn,
-                  crossFadeState: isExp
-                      ? CrossFadeState.showSecond
-                      : CrossFadeState.showFirst,
-                  duration: const Duration(milliseconds: 400),
-                ),
-              ]);
-            });
-          },
-        );
-      }).toList(),
+                    ),
+                  )
+              ],
+            ),
+          );
+        }
+        final index = _index - 1;
+        final subCategroy = mainCategory.children[index];
+        return SelectMealSubCategory(subCategory: subCategroy,);
+      },
     );
   }
 }

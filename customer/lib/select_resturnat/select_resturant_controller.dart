@@ -13,7 +13,7 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
   final Reader read;
   SelectResturantController(this.read)
       : super(const SelectResturantState.loadingInit());
-
+  SelectResturantState? loadedHistory;
   init() async {
     final rest = await read(dioService).getResturants();
     state = SelectResturantState.loadResturants(rest);
@@ -24,12 +24,12 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
   }
 
   selectResturnat(Resturant item) async {
+    loadedHistory = state;
     state = SelectResturantState.loadingOrderType(item);
     final restRealtion = await read(dioService).getResutrnatRelation(item.id);
     state = SelectResturantState.loadSelectedResturant(restRealtion);
-
     if (restRealtion.orderType.length == 1) {
-      read(autoRouteProvider).replace(SelectOrderPageRoute(
+      read(autoRouteProvider).push(SelectOrderPageRoute(
           param: SelectOrderParam(
               restRealtion, restRealtion.orderType.first, null)));
     }
@@ -40,5 +40,14 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
       read(autoRouteProvider).push(
           SelectOrderPageRoute(param: SelectOrderParam(rest, orderType, null)));
     });
+  }
+
+  Future<bool> tryPop() async {
+    if (loadedHistory != null) {
+      state = loadedHistory!;
+      loadedHistory = null;
+      return false;
+    }
+    return true;
   }
 }

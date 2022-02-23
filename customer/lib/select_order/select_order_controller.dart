@@ -33,8 +33,15 @@ class SelectOrderController extends StateNotifier<SelectOrder> {
     _addToFlow(SelectFlow.selectMeal(category));
   }
 
-  selectMeal(Meal meal, SubCategory subCategory, MainCategory mainCategory) {
-    _addToFlow(SelectFlow.addMeal(mainCategory, subCategory, meal));
+  selectMeal(
+    Meal meal,
+    SubCategory subCategory,
+  ) {
+    final mainCategory = state.flow.last.mapOrNull(
+        addMeal: (_) => _.mainCategory, selectMeal: (_) => _.mainCategory);
+    if (mainCategory != null) {
+      _addToFlow(SelectFlow.addMeal(mainCategory, subCategory, meal));
+    }
   }
 
   pressOrderCart() {

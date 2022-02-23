@@ -12,37 +12,50 @@ class SelectResturantPage extends HookConsumerWidget {
     final state = ref.watch(selectRestController);
     final cont = ref.watch(selectRestController.notifier);
 
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("اختيار مطعم"),
-        ),
-        body: state.map<Widget>(
-            loadingInit: (_) => const CenterLoading(),
-            loadResturants: (loaded) {
-              if( loaded.resturnats.isEmpty) return const EmptyWidget();
-              return ListView.builder(
-                  itemCount: loaded.resturnats.length,
-                  itemBuilder: (context, i) {
-                    final item = loaded.resturnats[i];
-                    return InkWell(
-                        onTap: () {
-                          cont.selectResturnat(item);
-                        },
-                        child: ResturantCard(resturant: item));
-                  });
-            },
-            loadingOrderType: (_) => const CenterLoading(),
-            loadSelectedResturant: (loaded) {
-              return ListView.builder(
-                  itemCount: loaded.resturant.orderType .length,
-                  itemBuilder: (context, i) {
-                    final item = loaded.resturant.orderType[i];
-                    return InkWell(
-                        onTap: () {
-                          cont.selectOrderType(item);
-                        },
-                        child: Text(item.name));
-                  });
-            }));
+    return WillPopScope(
+      onWillPop: cont.tryPop,
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text("اختيار مطعم"),
+            leading: const BackButton(),
+          ),
+          body: state.map<Widget>(
+              loadingInit: (_) => const CenterLoading(),
+              loadResturants: (loaded) {
+                if (loaded.resturnats.isEmpty) return const EmptyWidget();
+                return ListView.builder(
+                    itemCount: loaded.resturnats.length,
+                    itemBuilder: (context, i) {
+                      final item = loaded.resturnats[i];
+                      return InkWell(
+                          onTap: () {
+                            cont.selectResturnat(item);
+                          },
+                          child: ResturantCard(resturant: item));
+                    });
+              },
+              loadingOrderType: (_) => const CenterLoading(),
+              loadSelectedResturant: (loaded) {
+                return ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "اختر طريقة الطلب",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                    ...loaded.resturant.orderType.map((item) => ListTile(
+                          title: Text(
+                            item.name,
+                          ),
+                          onTap: () {
+                            cont.selectOrderType(item);
+                          },
+                        ))
+                  ],
+                );
+              })),
+    );
   }
 }
