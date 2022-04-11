@@ -1,10 +1,10 @@
 debugLog(e, s) {
-  print(e.toString());
-  print(s.toString());
+  log(e.toString());
+  log(s.toString());
 }
 
 log(e){
-  print(e);
+  log(e);
 }
 
 catchAndLogError(dynamic Function() call) async {

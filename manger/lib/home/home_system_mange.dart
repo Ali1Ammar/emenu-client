@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:manger/home/home_state.dart';
 import 'package:manger/main/auto_router.dart';
 import 'package:manger/shared/context_helper.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
@@ -12,7 +11,6 @@ class HomeSystemPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int length = resturants.length + 1 ;
     return ScaffoldPage(
       header: const PageHeader(
         commandBar: SizedBox(

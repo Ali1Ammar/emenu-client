@@ -4,7 +4,7 @@ Future showLoading(BuildContext context, [String title = "تحميل"]) {
   return showDialog(
       context: context,
       builder: (context) {
-        return Material(
+        return const Material(
           child: Center(
             child: CircularProgressIndicator(),
           ),

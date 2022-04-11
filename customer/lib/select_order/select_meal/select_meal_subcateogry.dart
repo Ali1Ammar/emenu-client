@@ -23,8 +23,8 @@ class SelectMealSubCategory extends HookConsumerWidget {
       return const SizedBox(height: 300, width: 300, child: CenterLoading());
     }, loaded: (loaded) {
       final isExp = loaded.isChecked;
-      final state =
-          isExp ? CrossFadeState.showSecond : CrossFadeState.showFirst;
+      // final state =
+      //     isExp ? CrossFadeState.showSecond : CrossFadeState.showFirst;
       return Column(children: [
         const Divider(),
         Padding(

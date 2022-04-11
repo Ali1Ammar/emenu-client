@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:manger/login/user.dart';
 import 'package:manger/new_rest/meal/new_meal_value.dart';
@@ -11,7 +9,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
 final addResturantServiceProvider =
-    Provider.autoDispose((_) => AddResturantService(_.watch(dioProvicer)));
+    Provider.autoDispose((_) => AddResturantService(_.watch(dioProvicerWithToken)));
 
 class AddResturantService {
   final Dio dio;

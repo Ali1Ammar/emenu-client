@@ -3,12 +3,12 @@
 
 // void main(List<String> args) {
 //   // final socket = io('http://localhost:3000');
-//   // print("done create");
-//   // socket.on('msgToClient', (message) => {print("reciverd " + message)});
-//   // print("done socket");
+//   // log("done create");
+//   // socket.on('msgToClient', (message) => {log("reciverd " + message)});
+//   // log("done socket");
 
 //   // socket.emit('msgToServer', 'dsds');
-//   // print("done emit");
+//   // log("done emit");
 
 //   IO.Socket socket = IO.io(
 //       'http://localhost:3000',
@@ -18,15 +18,16 @@
 //   socket.emit('msgToServer', 'dsds');
 
 //   socket.onConnect((_) {
-//     print('connect');
+//     log('connect');
 //     socket.emit('msgToServer', 'dsds');
 //   });
-//   socket.on('event', (data) => print(data));
-//   socket.on('msgToClient', (message) => {print("reciverd " + message)});
-//   socket.onDisconnect((_) => print('disconnect'));
-//   socket.on('fromServer', (_) => print(_));
+//   socket.on('event', (data) => log(data));
+//   socket.on('msgToClient', (message) => {log("reciverd " + message)});
+//   socket.onDisconnect((_) => log('disconnect'));
+//   socket.on('fromServer', (_) => log(_));
 // }
 
+import 'package:shared/shared.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 main() {
@@ -61,7 +62,7 @@ main() {
     'pong',
     "order"
   ]) {
-    socket.on(element, (data) => print("logevent $element $data"));
+    socket.on(element, (data) => log("logevent $element $data"));
   }
   socket.emit("CustomerOrder");
 }

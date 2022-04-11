@@ -7,15 +7,15 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageHeader(
-      commandBar: SizedBox(
+      commandBar: const SizedBox(
         width: 400,
-        child: TextBox(
+        child:  TextBox(
           maxLines: 1,
           suffix: Icon(FluentIcons.search),
         ),
       ),
       leading: IconButton(
-        icon: Icon(FluentIcons.back)  ,
+        icon: const Icon(FluentIcons.back)  ,
         onPressed: (){
         Navigator.pop(context);
       },) ,

@@ -56,7 +56,7 @@ extension OrderStatusExt on OrderStatus {
       case OrderStatus.WaitPayment:
         return "انتضار الدفع";
       case OrderStatus.WaitInKitchen:
-        return "انتضار في المطبخ";
+        return "جار اعداد طلبك";
 
       case OrderStatus.DoneByKitchen:
         return "اكمل المطبخ";

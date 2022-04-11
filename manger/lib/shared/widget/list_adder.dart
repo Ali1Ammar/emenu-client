@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:manger/shared/widget/button_icon.dart';
 
 class ListAddWidget extends StatefulWidget {
   final List<String>? initValues;
@@ -32,7 +31,7 @@ class ListAddWidgetState extends State<ListAddWidget> {
         ...list.map((cont) => TextBox(
               controller: cont,
               outsideSuffix: IconButton(
-                  icon: Icon(FluentIcons.remove),
+                  icon: const Icon(FluentIcons.remove),
                   onPressed: () {
                     setState(() {
                       list.remove(cont);
@@ -42,7 +41,7 @@ class ListAddWidgetState extends State<ListAddWidget> {
         Row(
           children: [
             IconButton(
-                icon: Icon(FluentIcons.add),
+                icon: const Icon(FluentIcons.add),
                 onPressed: () {
                   setState(() {
                     list.add(TextEditingController());

@@ -4,11 +4,8 @@ import 'package:manger/shared/network_error.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
-
-final dioProvicer = Provider((_) => Dio(BaseOptions(
-      baseUrl: baseUrl,
-    ))
-      ..interceptors.add(AddToken(_.read)));
+final dioProvicerWithToken =
+    Provider((_) => _.watch(dioProvicer)..interceptors.add(AddToken(_.read)));
 
 class AddToken extends Interceptor {
   final Reader read;
@@ -22,7 +19,7 @@ class AddToken extends Interceptor {
       }
     } else if (err.type == DioErrorType.response) {
       throw BadRequrest((err.response!.data as Map)['message'].toString());
-      // print(err.message);
+      // log(err.message);
     }
     handler.next(err);
   }

@@ -32,7 +32,7 @@ class SystemLoginPage extends ConsumerWidget {
             ),
             if (cont.showButton)
               fluent.FilledButton(
-                child: Text("تسجيل دخول"),
+                child: const Text("تسجيل دخول"),
                 onPressed: () {
                   cont.pressLogin();
                 },

@@ -4,7 +4,7 @@ import 'package:manger/shared/dio_client.dart';
 import 'package:riverpod/riverpod.dart';
 
 final loginServiceProvider =
-    Provider.autoDispose((_) => LoginService(_.watch(dioProvicer)));
+    Provider.autoDispose((_) => LoginService(_.watch(dioProvicerWithToken)));
 
 class LoginService {
   final Dio dio;

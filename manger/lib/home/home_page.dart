@@ -59,12 +59,12 @@ class _HomePageState extends State<HomePage> {
       children: [
         if (login.isLogedUsingDefualtValue)
           f.FilledButton(
-              child: Text("قم بتغيير كلمة سر الافتراضية"), onPressed: () {}),
+              child: const Text("قم بتغيير كلمة سر الافتراضية"), onPressed: () {}),
         if (user.isSystemAdmin)
-          f.FilledButton(child: Text("ادارة النظام"), onPressed: () {}),
+          f.FilledButton(child: const Text("ادارة النظام"), onPressed: () {}),
         if (user.resturantId != null)
           f.FilledButton(
-              child: Text("ادارة المطعم الخاص بي"),
+              child: const Text("ادارة المطعم الخاص بي"),
               onPressed: () {
                 context.riverpod
                     .read(homeControllerProvider.notifier)

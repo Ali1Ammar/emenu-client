@@ -1,5 +1,4 @@
 import 'package:manger/shared/dialog.dart';
-import 'package:shared/src/helper/logger.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';

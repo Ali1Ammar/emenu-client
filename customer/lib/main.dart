@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:customer/main/auto_router.dart';
 import 'package:customer/main/material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';

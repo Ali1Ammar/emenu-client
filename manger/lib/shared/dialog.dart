@@ -15,10 +15,10 @@ showErrorDialog(Object error, BuildContext context) {
     builder: (context) {
       return ContentDialog(
         content: Text(_error),
-        title: Text("خطا"),
+        title: const Text("خطا"),
         actions: [
           Button(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigator.pop(context);
               })

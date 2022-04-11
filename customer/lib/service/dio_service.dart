@@ -2,7 +2,6 @@ import 'package:customer/entity/create_feedback.dart';
 import 'package:customer/entity/create_order.dart';
 import 'package:customer/entity/response_create_order.dart';
 import 'package:customer/entity/resturant_realtion.dart';
-import 'package:customer/service/dio_client.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';

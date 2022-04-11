@@ -6,7 +6,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
 final resturantServiceProvider =
-    Provider.autoDispose((_) => ResturantService(_.watch(dioProvicer)));
+    Provider.autoDispose((_) => ResturantService(_.watch(dioProvicerWithToken)));
 
 class ResturantService {
   final Dio dio;

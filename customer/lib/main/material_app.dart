@@ -28,7 +28,7 @@ class MainApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple) ) ,
             darkTheme: ThemeData(brightness: Brightness.dark),
-            locale: Locale("ar", 'iq'),
+            locale: const Locale("ar", 'iq'),
             builder: (_, c) => Directionality(
                 textDirection: TextDirection.rtl, child: c!),
             routerDelegate: configDto.router.delegate(),

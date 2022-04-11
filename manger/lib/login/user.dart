@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part "user.g.dart";
@@ -22,9 +20,13 @@ class User {
 }
 
 enum UserPermissions {
+  // ignore: constant_identifier_names
   SystemAdmin,
+  // ignore: constant_identifier_names
   ResturantAdmin,
+  // ignore: constant_identifier_names
   Cacher,
+  // ignore: constant_identifier_names
   Kitchen,
 }
 

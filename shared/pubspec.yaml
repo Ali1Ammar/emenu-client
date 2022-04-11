@@ -13,7 +13,11 @@ dependencies:
   json_annotation:
   tuple: ^2.0.0
   copy_with_extension: ^4.0.0
-
+  dio:
+  riverpod: ^2.0.0-dev.0
+  hooks_riverpod: ^2.0.0-dev.0
+  flutter_hooks:
+  flutter_riverpod: ^2.0.0-dev.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

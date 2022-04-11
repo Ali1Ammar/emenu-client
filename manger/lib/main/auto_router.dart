@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:manger/home/home_page.dart';
 import 'package:manger/home/resturant/home_resturant_mange.dart';
-import 'package:manger/home/home_state.dart';
 import 'package:manger/home/home_system_mange.dart';
 import 'package:manger/order_track/order_track_controller.dart';
 import 'package:manger/order_track/order_track_page.dart';

@@ -43,12 +43,12 @@ class SocketIoService {
 
   Stream<OrderChange> lisienToOrderChange() {
     socket.emitWithAck('CustomerOrder', null, ack: (d) {
-      print("act $d");
+      log("act $d");
     });
     late final StreamController<OrderChange> controller;
     controller = StreamController<OrderChange>(onListen: () {
       socket.on("order-change", (data) {
-        print("order-change");
+        log("order-change");
 
         final order = OrderChange.fromJson(data);
         controller.add(order);

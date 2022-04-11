@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:manger/login/user.dart';
 
 part 'new_rest_value.g.dart';
 

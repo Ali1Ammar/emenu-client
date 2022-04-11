@@ -42,7 +42,8 @@ class HomeResturantMangePage extends ConsumerWidget {
               ),
               Text(
                 rest.name,
-                style: Theme.of(context).textTheme.headline3,
+                        style:TextStyle( fontSize:  Theme.of(context).textTheme.headline4?.fontSize ),
+
               ),
               const Expanded(child: SizedBox()),
               Column(
@@ -90,7 +91,7 @@ class HomeResturantMangePage extends ConsumerWidget {
             Expanded(
               child: GridView(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 6),
+                    crossAxisCount: 4),
                 children: [
                   if (rest.mainCategory.isNotEmpty && rest.kitchen.isNotEmpty)
                     FilledButton(
@@ -117,25 +118,25 @@ class HomeResturantMangePage extends ConsumerWidget {
                           })),
                     FilledButton(
                         child: centerTextButton("اعدادت المطابخ", context),
-                        onPressed: () {}),
+                        onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت طرق الطلب", context),
-                        onPressed: () {}),
+                        onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت المطعم", context),
-                        onPressed: () {}),
+                        onPressed:null),
                     FilledButton(
                         child: centerTextButton("اعدادت التصنيفات", context),
-                        onPressed: () {}),
+                        onPressed:null),
                     FilledButton(
                         child: centerTextButton("اعدادت الطاولات", context),
-                        onPressed: () {}),
+                        onPressed: null),
                     FilledButton(
                         child: centerTextButton("التقيمات", context),
-                        onPressed: () {}),
+                        onPressed: null),
                                             FilledButton(
                         child: centerTextButton("الاحصائيات", context),
-                        onPressed: () {}),
+                        onPressed:null),
                   ]
                 ]
                     .map((e) => Padding(
@@ -153,6 +154,6 @@ class HomeResturantMangePage extends ConsumerWidget {
   Widget centerTextButton(String txt, BuildContext context) => Center(
           child: Text(
         txt,
-        style: Theme.of(context).textTheme.headline6,
+        style:TextStyle( fontSize:  Theme.of(context).textTheme.headline6?.fontSize ),
       ));
 }

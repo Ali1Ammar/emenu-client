@@ -31,7 +31,7 @@ class MealCard extends StatelessWidget {
                 Button(
                     child: Text(item.isDisabled ? "تفعيل" : "ايقاف"),
                     onPressed: onToggleActivate),
-              if(onEdit!=null) f.IconButton(icon: Icon(FluentIcons.edit), onPressed:onEdit)
+              if(onEdit!=null) f.IconButton(icon: const Icon(FluentIcons.edit), onPressed:onEdit)
             ],
           )
         ],

@@ -4,7 +4,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
 final orderServiceProvider =
-    Provider.autoDispose((_) => OrderService(_.watch(dioProvicer)));
+    Provider.autoDispose((_) => OrderService(_.watch(dioProvicerWithToken)));
 
 class OrderService {
   final Dio dio;
