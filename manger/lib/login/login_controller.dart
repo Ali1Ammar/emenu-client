@@ -14,10 +14,10 @@ class LoginControllerr extends ChangeNotifier {
   final Reader read;
   final LoginService service;
   LoginControllerr(this.read, this.service){
-    //TODO Debuging only 
-    username="admin2";
-    password="admin";
-    pressLogin();
+    // //TODO Debuging only 
+    // username="admin2";
+    // password="admin";
+    // pressLogin();
   }
 
   String? _username;

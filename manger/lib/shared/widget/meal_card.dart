@@ -1,7 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:fluent_ui/fluent_ui.dart' as f;
 
-import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class MealCard extends StatelessWidget {
@@ -31,7 +29,7 @@ class MealCard extends StatelessWidget {
                 Button(
                     child: Text(item.isDisabled ? "تفعيل" : "ايقاف"),
                     onPressed: onToggleActivate),
-              if(onEdit!=null) f.IconButton(icon: const Icon(FluentIcons.edit), onPressed:onEdit)
+              if(onEdit!=null) IconButton(icon: const Icon(FluentIcons.edit), onPressed:onEdit)
             ],
           )
         ],

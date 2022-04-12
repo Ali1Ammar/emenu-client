@@ -15,3 +15,4 @@ export './src/helper/img_url.dart';
 export './src/helper/const.dart';
 export './src/helper/logger.dart';
 export './src/helper/dio_client.dart';
+export './src/widget/change_url_widget.dart';

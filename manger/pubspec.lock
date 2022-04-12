@@ -249,12 +249,10 @@ packages:
   fluent_ui:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "5b5c969c56533a6f58acc88481473a11151dfb4d"
-      url: "https://github.com/bdlukaa/fluent_ui.git"
-    source: git
-    version: "3.6.0"
+      name: fluent_ui
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.10.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -274,6 +272,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

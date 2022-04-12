@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/order_track/order_track_controller.dart';
@@ -42,7 +41,7 @@ class HomeResturantMangePage extends ConsumerWidget {
               ),
               Text(
                 rest.name,
-                        style:TextStyle( fontSize:  Theme.of(context).textTheme.headline4?.fontSize ),
+                        style:TextStyle( fontSize:  FluentTheme.of(context).typography.title?.fontSize ),
 
               ),
               const Expanded(child: SizedBox()),
@@ -63,7 +62,7 @@ class HomeResturantMangePage extends ConsumerWidget {
       ),
       content: Column(
         children: [
-          if (state.isRefreshing) const CircularProgressIndicator(),
+          if (state.isRefreshing) const ProgressRing(),
           if (state.isError) ...[
             Text(state.asError!.error.toString()),
             Button(
@@ -154,6 +153,6 @@ class HomeResturantMangePage extends ConsumerWidget {
   Widget centerTextButton(String txt, BuildContext context) => Center(
           child: Text(
         txt,
-        style:TextStyle( fontSize:  Theme.of(context).textTheme.headline6?.fontSize ),
+        style:TextStyle( fontSize: FluentTheme.of(context).typography.title?.fontSize ),
       ));
 }

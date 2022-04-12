@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class ResturantCard extends StatelessWidget {
@@ -20,7 +19,7 @@ class ResturantCard extends StatelessWidget {
               
             ),
           ),
-          Text(resturant.name , style: Theme.of(context).textTheme.headline5 ,),
+          Text(resturant.name , style: FluentTheme.of(context).typography.title  ,),
           Column(
             children: [
               Text(resturant.isDisabled ? "غير نشط" : "نشط"),

@@ -1,10 +1,12 @@
+// ignore_for_file: avoid_print
+
 debugLog(e, s) {
-  log(e.toString());
-  log(s.toString());
+  print(e.toString());
+  print(s.toString());
 }
 
 log(e){
-  log(e);
+  print(e);
 }
 
 catchAndLogError(dynamic Function() call) async {

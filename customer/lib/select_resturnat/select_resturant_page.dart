@@ -3,6 +3,7 @@ import 'package:customer/select_resturnat/select_resturant_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_state.dart';
 import 'package:customer/widget/fade_widget.dart';
 import 'package:customer/widget/resturant_card.dart';
+import 'package:customer/widget/url_change_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared/shared.dart';
@@ -30,7 +31,8 @@ class SelectResturantPage extends HookConsumerWidget {
                     icon: const Icon(Icons.search)),
               IconButton(onPressed: (){
                   ref.read(settingProvider.notifier).toggle();
-              }, icon: Icon(!isDark ? Icons.brightness_7_sharp : Icons.brightness_2) )
+              }, icon: Icon(!isDark ? Icons.brightness_7_sharp : Icons.brightness_2) ),
+              const ChangeUrlIconWidget()
               
             ],
           ),
