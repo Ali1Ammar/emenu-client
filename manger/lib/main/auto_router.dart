@@ -7,8 +7,9 @@ import 'package:manger/order_track/order_track_page.dart';
 import 'package:manger/login/system_login_page.dart';
 import 'package:manger/meal/meal_mange_page.dart';
 import 'package:manger/new_rest/new_rest_page.dart';
+import 'package:manger/user_feedback/feedback_page.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:shared/shared.dart';
 
 part 'auto_router.gr.dart';
@@ -28,12 +29,9 @@ final autoRouteProvider =
       page: HomeResturantMangePage,
     ),
     AutoRoute(page: NewResturantPage),
-        AutoRoute(page: MealMangePage),
-                AutoRoute(page: OrderTrackPage),
-
-        
-
-    
+    AutoRoute(page: MealMangePage),
+    AutoRoute(page: OrderTrackPage),
+    AutoRoute(page: CustomerFeedbackPage)
   ],
 )
 class AppRouter extends _$AppRouter {}

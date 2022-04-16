@@ -1,5 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart' as f;
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:manger/new_rest/new_rest_value.dart';
 import 'package:manger/shared/form_validator.dart';
 
@@ -20,7 +19,7 @@ class _AdminAccountInputState extends State<AdminAccountInput> {
         Tooltip(
           message:
               "كل حساب يمكن ان يربط مع مطعم واحد فقط , اذا كان لديك مطعم واحد لا مانع من ربط لكن اذا اردت اضافة مطاعم اخرى الافضل ان يكون لكل مطعم مدير",
-          child: f.Checkbox(
+          child:  Checkbox(
             checked: widget.resturantValue.linkWithLoggedAccount,
             onChanged: (v) {
               widget.resturantValue.linkWithLoggedAccount = v!;
@@ -41,21 +40,21 @@ class _AdminAccountInputState extends State<AdminAccountInput> {
     return Column(
       children: [
         row,
-        f.TextFormBox(
+         TextFormBox(
           header: "اسم المدير",
           validator: FormValidator.required,
           onChanged: (v) {
             item.name = v;
           },
         ),
-        f.TextFormBox(
+         TextFormBox(
           header: "اسم مستخدم باللغة انكليزية وبدون مسافات",
           validator: FormValidator.required, //TODO check if its used before
           onChanged: (v) {
             item.userName = v;
           },
         ),
-        f.TextFormBox(
+         TextFormBox(
           header: "كلمة السر",
           validator: FormValidator.password,
           onChanged: (v) {

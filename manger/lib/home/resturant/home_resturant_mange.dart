@@ -24,25 +24,27 @@ class HomeResturantMangePage extends ConsumerWidget {
         title: Row(
           children: [
             if (rest != null) ...[
-              SizedBox.square(dimension: 120,
+              SizedBox.square(
+                dimension: 120,
                 // aspectRatio: 1,
                 child: ClipOval(
                   child: Image.network(
                     getImageUrl(rest.img),
                     // height:120,
                     // width: 220,
-                    fit: BoxFit.fitHeight ,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
               ),
-             const Padding(
-                padding:  EdgeInsets.all(8.0),
-                child:  Text(" ادارة المطعم "),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(" ادارة المطعم "),
               ),
               Text(
                 rest.name,
-                        style:TextStyle( fontSize:  FluentTheme.of(context).typography.title?.fontSize ),
-
+                style: TextStyle(
+                    fontSize:
+                        FluentTheme.of(context).typography.title?.fontSize),
               ),
               const Expanded(child: SizedBox()),
               Column(
@@ -56,7 +58,7 @@ class HomeResturantMangePage extends ConsumerWidget {
                 ],
               )
             ] else
-             const Text(" ادارة المطعم ")
+              const Text(" ادارة المطعم ")
           ],
         ),
       ),
@@ -90,7 +92,7 @@ class HomeResturantMangePage extends ConsumerWidget {
             Expanded(
               child: GridView(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4),
+                    crossAxisCount: 5),
                 children: [
                   if (rest.mainCategory.isNotEmpty && rest.kitchen.isNotEmpty)
                     FilledButton(
@@ -123,19 +125,21 @@ class HomeResturantMangePage extends ConsumerWidget {
                         onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت المطعم", context),
-                        onPressed:null),
+                        onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت التصنيفات", context),
-                        onPressed:null),
+                        onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت الطاولات", context),
                         onPressed: null),
                     FilledButton(
                         child: centerTextButton("التقيمات", context),
-                        onPressed: null),
-                                            FilledButton(
+                        onPressed: (){
+                          ref.read(autoRouteProvider).push(const CustomerFeedbackPageRoute());
+                        }),
+                    FilledButton(
                         child: centerTextButton("الاحصائيات", context),
-                        onPressed:null),
+                        onPressed: null),
                   ]
                 ]
                     .map((e) => Padding(
@@ -153,6 +157,7 @@ class HomeResturantMangePage extends ConsumerWidget {
   Widget centerTextButton(String txt, BuildContext context) => Center(
           child: Text(
         txt,
-        style:TextStyle( fontSize: FluentTheme.of(context).typography.title?.fontSize ),
+        style: TextStyle(
+            fontSize: FluentTheme.of(context).typography.title?.fontSize),
       ));
 }

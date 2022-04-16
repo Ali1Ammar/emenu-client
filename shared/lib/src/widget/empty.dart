@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
+
+import 'package:flutter/widgets.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Card(
-      child: Text("لا يوجد بيانات حاليا") ,
-    );
+    return const Text("لا يوجد بيانات حاليا");
   }
 }

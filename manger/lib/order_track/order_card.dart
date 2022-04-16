@@ -1,5 +1,5 @@
-import 'package:fluent_ui/fluent_ui.dart' as fluent;
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart' ;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manger/shared/widget/button_icon.dart';
 import 'package:manger/shared/widget/labeled_widget.dart';
 import 'package:shared/shared.dart';
@@ -64,25 +64,25 @@ class OrderCard extends StatelessWidget {
                 children: [
                   if (onPayed != null)
                     ButtonIcon(
-                      icon: const fluent.Icon(Icons.payments),
+                      icon: const FaIcon( FontAwesomeIcons.moneyBill ),
                       child: const Text("دفع"),
                       onPressed: onPayed!,
                     ),
                   if (onCancel != null)
                     ButtonIcon(
-                      icon: const fluent.Icon(Icons.cancel),
+                      icon: const Icon(FluentIcons.cancel),
                       child: const Text("الغاء"),
                       onPressed: onCancel!,
                     ),
                   if (onDeliverd != null)
                     ButtonIcon(
-                      icon: const fluent.Icon(Icons.delivery_dining),
+                      icon:  const FaIcon( FontAwesomeIcons.motorcycle ),
                       child: const Text("توصيل"),
                       onPressed: onDeliverd!,
                     ),
                   if (onDoneKitchen != null)
                     ButtonIcon(
-                      icon: const fluent.Icon(Icons.kitchen),
+                      icon:  const FaIcon( FontAwesomeIcons.kitchenSet ),
                       child: const Text("انتهى طبخ"),
                       onPressed: onDoneKitchen!,
                     ),

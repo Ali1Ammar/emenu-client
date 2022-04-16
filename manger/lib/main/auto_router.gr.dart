@@ -48,6 +48,10 @@ class _$AppRouter extends RootStackRouter {
       return MaterialPageX<dynamic>(
           routeData: routeData,
           child: OrderTrackPage(key: args.key, orderTrack: args.orderTrack));
+    },
+    CustomerFeedbackPageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const CustomerFeedbackPage());
     }
   };
 
@@ -60,7 +64,9 @@ class _$AppRouter extends RootStackRouter {
             path: '/home-resturant-mange-page'),
         RouteConfig(NewResturantPageRoute.name, path: '/new-resturant-page'),
         RouteConfig(MealMangePageRoute.name, path: '/meal-mange-page'),
-        RouteConfig(OrderTrackPageRoute.name, path: '/order-track-page')
+        RouteConfig(OrderTrackPageRoute.name, path: '/order-track-page'),
+        RouteConfig(CustomerFeedbackPageRoute.name,
+            path: '/customer-feedback-page')
       ];
 }
 
@@ -154,4 +160,13 @@ class OrderTrackPageRouteArgs {
   String toString() {
     return 'OrderTrackPageRouteArgs{key: $key, orderTrack: $orderTrack}';
   }
+}
+
+/// generated route for
+/// [CustomerFeedbackPage]
+class CustomerFeedbackPageRoute extends PageRouteInfo<void> {
+  const CustomerFeedbackPageRoute()
+      : super(CustomerFeedbackPageRoute.name, path: '/customer-feedback-page');
+
+  static const String name = 'CustomerFeedbackPageRoute';
 }

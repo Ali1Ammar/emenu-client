@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/meal/meal_mange_controller.dart';
 import 'package:manger/new_rest/meal/new_meal.dart';
@@ -29,7 +28,7 @@ class MealMangePage extends ConsumerWidget {
                     const CenterLoading()
                   else
                     FilledButton(
-                      child: const Icon(Icons.arrow_back),
+                      child: const Icon(FluentIcons.arrow_tall_down_left),
                       onPressed: () {
                         ref
                             .read(mealMangerControllerProvider.notifier)

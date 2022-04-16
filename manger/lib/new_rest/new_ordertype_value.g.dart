@@ -15,6 +15,7 @@ NewOrderTypeValue _$NewOrderTypeValueFromJson(Map<String, dynamic> json) =>
           $enumDecodeNullable(_$DeliverTypeEnumMap, json['deliverType'])
       ..paymentType =
           $enumDecodeNullable(_$PaymentTypeEnumMap, json['paymentType'])
+      ..selectCustomerSpot = json['selectCustomerSpot'] as bool
       ..selectKitchenVia =
           $enumDecode(_$SelectKitchenViaEnumMap, json['selectKitchenVia']);
 
@@ -25,6 +26,7 @@ Map<String, dynamic> _$NewOrderTypeValueToJson(NewOrderTypeValue instance) =>
       'deliverMsg': instance.deliverMsg,
       'deliverType': _$DeliverTypeEnumMap[instance.deliverType],
       'paymentType': _$PaymentTypeEnumMap[instance.paymentType],
+      'selectCustomerSpot': instance.selectCustomerSpot,
       'selectKitchenVia': _$SelectKitchenViaEnumMap[instance.selectKitchenVia],
     };
 

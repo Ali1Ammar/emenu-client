@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluent_ui/fluent_ui.dart' as f;
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:manger/home/home_controller.dart';
 import 'package:manger/login/login_provider.dart';
 import 'package:manger/login/user.dart';
@@ -24,15 +23,15 @@ class _HomePageState extends State<HomePage> {
         final login = ref.watch(loginProvider)!;
         final homeCont = ref.watch(homeControllerProvider);
         final user = login.user;
-        return f.NavigationView(
-            appBar: const f.NavigationAppBar(),
-            pane: f.NavigationPane(),
-            content: f.NavigationBody.builder(
+        return NavigationView(
+            appBar: const NavigationAppBar(),
+            pane: NavigationPane(),
+            content: NavigationBody.builder(
                 itemCount: 1,
                 index: 1,
                 itemBuilder: (context, i) {
                   return homeCont.map<Widget>(
-                      loading: (value) => f.FilledButton(
+                      loading: (value) => FilledButton(
                           child: const CenterLoading(),
                           onPressed: () {
                             ref.read(homeControllerProvider.notifier).init();
@@ -58,12 +57,12 @@ class _HomePageState extends State<HomePage> {
     return ListView(
       children: [
         if (login.isLogedUsingDefualtValue)
-          f.FilledButton(
+          FilledButton(
               child: const Text("قم بتغيير كلمة سر الافتراضية"), onPressed: () {}),
         if (user.isSystemAdmin)
-          f.FilledButton(child: const Text("ادارة النظام"), onPressed: () {}),
+          FilledButton(child: const Text("ادارة النظام"), onPressed: () {}),
         if (user.resturantId != null)
-          f.FilledButton(
+          FilledButton(
               child: const Text("ادارة المطعم الخاص بي"),
               onPressed: () {
                 context.riverpod
