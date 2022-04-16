@@ -62,6 +62,16 @@ class ResturantService {
     Future<void> changeMealActive(int id, bool val) async {
     await dio.post('/resturantadmin/meal/$id/active/$val');
   }
+
+
+    Future<List<CustomerFeedBack>> getCustomerFeedback() async {
+    final res = await dio.get(
+      '/resturantadmin/feedback',
+    );
+    return (res.data as List)
+        .map((e) => CustomerFeedBack.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
 }
 
 class ReturnServiceDto {
