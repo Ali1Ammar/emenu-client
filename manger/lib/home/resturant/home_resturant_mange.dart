@@ -131,11 +131,17 @@ class HomeResturantMangePage extends ConsumerWidget {
                         onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت الطاولات", context),
-                        onPressed: null),
+                        onPressed: () {
+                          ref
+                              .read(autoRouteProvider)
+                              .push(const CustomerSpotPageRoute());
+                        }),
                     FilledButton(
                         child: centerTextButton("التقيمات", context),
-                        onPressed: (){
-                          ref.read(autoRouteProvider).push(const CustomerFeedbackPageRoute());
+                        onPressed: () {
+                          ref
+                              .read(autoRouteProvider)
+                              .push(const CustomerFeedbackPageRoute());
                         }),
                     FilledButton(
                         child: centerTextButton("الاحصائيات", context),

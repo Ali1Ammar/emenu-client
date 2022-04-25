@@ -52,6 +52,10 @@ class _$AppRouter extends RootStackRouter {
     CustomerFeedbackPageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const CustomerFeedbackPage());
+    },
+    CustomerSpotPageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const CustomerSpotPage());
     }
   };
 
@@ -66,7 +70,8 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(MealMangePageRoute.name, path: '/meal-mange-page'),
         RouteConfig(OrderTrackPageRoute.name, path: '/order-track-page'),
         RouteConfig(CustomerFeedbackPageRoute.name,
-            path: '/customer-feedback-page')
+            path: '/customer-feedback-page'),
+        RouteConfig(CustomerSpotPageRoute.name, path: '/customer-spot-page')
       ];
 }
 
@@ -169,4 +174,13 @@ class CustomerFeedbackPageRoute extends PageRouteInfo<void> {
       : super(CustomerFeedbackPageRoute.name, path: '/customer-feedback-page');
 
   static const String name = 'CustomerFeedbackPageRoute';
+}
+
+/// generated route for
+/// [CustomerSpotPage]
+class CustomerSpotPageRoute extends PageRouteInfo<void> {
+  const CustomerSpotPageRoute()
+      : super(CustomerSpotPageRoute.name, path: '/customer-spot-page');
+
+  static const String name = 'CustomerSpotPageRoute';
 }
