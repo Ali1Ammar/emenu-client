@@ -33,6 +33,6 @@ class CustomerFeedbackPage extends HookConsumerWidget {
       );
     }
     return ScaffoldPage(
-        header: const Header(title: "ادارة الوجبات"), content: content);
+        header: const Header(title: "التقيمات"), content: content);
   }
 }
