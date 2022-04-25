@@ -32,7 +32,7 @@ extension FeedBackTypeExt on FeedBackType {
       case FeedBackType.BadService:
         return "الخدمة سيئة";
       case FeedBackType.BadTiming:
-        return "تاخل في الطلب";
+        return "تاخر في الطلب";
     }
   }
 }
