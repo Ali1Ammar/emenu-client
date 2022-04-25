@@ -14,11 +14,14 @@ class Header extends StatelessWidget {
           suffix: Icon(FluentIcons.search),
         ),
       ),
-      leading: IconButton(
-        icon: const Icon(FluentIcons.back)  ,
-        onPressed: (){
-        Navigator.pop(context);
-      },) ,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 10),
+        child: IconButton(
+          icon: const Icon(FluentIcons.forward,size: 20)  ,
+          onPressed: (){
+          Navigator.pop(context);
+        },),
+      ) ,
       title: Text(title),
     );
   }
