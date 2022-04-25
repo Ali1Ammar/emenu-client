@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/customer_spot/customer_spot_card.dart';
 import 'package:manger/customer_spot/customer_spot_controller.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
+import 'package:manger/shared/open_file_manger.dart';
 import 'package:manger/shared/qr_code.dart';
 import 'package:manger/shared/widget/header.dart';
 import 'package:shared/shared.dart';
@@ -48,7 +49,11 @@ class CustomerSpotPage extends HookConsumerWidget {
                   data: (data) {
                     if (data == null) return null;
                     return Row(
-                      children: [Text(data)],
+                      children: [Button(
+                        onPressed: (){
+                          openFileManger(data);
+                        },
+                        child: Text(data))],
                     );
                   }) ??
               const SizedBox(),
