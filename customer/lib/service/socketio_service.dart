@@ -7,7 +7,7 @@ import 'package:socket_io_client/socket_io_client.dart';
 final socketIoServiceProvider =
     Provider.autoDispose.family<SocketIoService, String>((_, token) {
   final socket = io(
-    baseUrl,
+    _.watch(baseUrlProvider),
     {
       'transports': ['websocket'],
       'pingTimeout': 5000,
@@ -22,9 +22,8 @@ final socketIoServiceProvider =
       log("Conntected $data");
     });
   socket.connect();
-  socket.onDisconnect((data){
-          log("DiConntected $data");
-
+  socket.onDisconnect((data) {
+    log("DiConntected $data");
   });
   _.onDispose(() {
     socket.dispose();

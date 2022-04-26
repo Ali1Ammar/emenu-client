@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:customer/shared/context_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
@@ -16,7 +17,7 @@ class CategoryCard extends StatelessWidget {
             width: double.maxFinite ,
             child: AspectRatio(
               aspectRatio: 5/4 ,
-              child: Image.network(getImageUrl(mainCategory.img),fit: BoxFit.fitWidth ,)),
+              child: Image.network(getImageUrl(mainCategory.img, context.riverpod.read),fit: BoxFit.fitWidth ,)),
           )),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),

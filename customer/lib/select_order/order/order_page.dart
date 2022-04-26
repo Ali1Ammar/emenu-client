@@ -82,7 +82,7 @@ class OrderListWidget extends ConsumerWidget {
               title: Text(e.flow.meal.title),
               trailing: Text(
                   "${numberFormat.format(e.flow.meal.price)} * ${e.count}"),
-              leading: Image.network(getImageUrl(e.flow.meal.img),
+              leading: Image.network(getImageUrlContext(e.flow.meal.img,context),
                   width: 60, height: 60, fit: BoxFit.cover),
               children: [
                 Padding(

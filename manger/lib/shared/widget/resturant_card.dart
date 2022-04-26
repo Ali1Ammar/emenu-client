@@ -15,7 +15,7 @@ class ResturantCard extends StatelessWidget {
         children: [
           Flexible(
             child: Image.network(
-              getImageUrl(resturant.img),
+              getImageUrlContext(resturant.img,context),
               
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:customer/shared/context_helper.dart';
 import 'package:customer/shared/number_format.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
@@ -14,7 +15,7 @@ class MealCard extends StatelessWidget {
     var aspectRatio2 = AspectRatio(
         aspectRatio: 5 / 4,
         child: Image.network(
-          getImageUrl(meal.img),
+          getImageUrl(meal.img,context.riverpod.read),
           fit: BoxFit.cover,
         ));
 

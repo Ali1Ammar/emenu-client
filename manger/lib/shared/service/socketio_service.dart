@@ -8,7 +8,7 @@ import 'package:tuple/tuple.dart';
 
 final socketIo = Provider((_) {
   final socket = io(
-    baseUrl,
+    _.watch(baseUrlProvider),
     {
       'transports': ['websocket'],
       'pingTimeout': 5000,

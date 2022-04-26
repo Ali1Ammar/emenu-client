@@ -17,7 +17,7 @@ class MealCard extends StatelessWidget {
         children: [
           Expanded(
             child: Image.network(
-              getImageUrl(item.img),
+              getImageUrlContext(item.img,context),
             ),
           ),
           Text(item.title),

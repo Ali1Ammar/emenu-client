@@ -26,7 +26,8 @@ class OrderTrackPage extends ConsumerWidget {
             loaded: (state) => GridView.builder(
                 itemCount: state.orders.length,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 300),
+crossAxisSpacing: 18,
+                    maxCrossAxisExtent: 400  ),
                 itemBuilder: (context, i) {
                   final item = state.orders[i];
                   return OrderCard(

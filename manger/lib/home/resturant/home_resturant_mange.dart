@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:manger/app_setting/setting_controller.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/order_track/order_track_controller.dart';
 import 'package:manger/main/auto_router.dart';
@@ -7,6 +8,7 @@ import 'package:manger/new_rest/new_category.dart';
 import 'package:manger/new_rest/new_kicthen.dart';
 import 'package:manger/new_rest/new_ordertype.dart';
 import 'package:manger/new_rest/new_spot.dart';
+import 'package:manger/shared/context_helper.dart';
 import 'package:shared/shared.dart';
 
 class HomeResturantMangePage extends ConsumerWidget {
@@ -19,6 +21,8 @@ class HomeResturantMangePage extends ConsumerWidget {
     final rest = state.value;
     var shouldDisplayKitchen = rest?.orderType
         .any((element) => element.selectKitchenVia != SelectKitchenVia.None);
+    final isDark = FluentTheme.of(context).brightness == Brightness.dark;
+
     return ScaffoldPage(
       header: PageHeader(
         title: Row(
@@ -29,7 +33,7 @@ class HomeResturantMangePage extends ConsumerWidget {
                 // aspectRatio: 1,
                 child: ClipOval(
                   child: Image.network(
-                    getImageUrl(rest.img),
+                    getImageUrl(rest.img, context.riverpod.read),
                     // height:120,
                     // width: 220,
                     fit: BoxFit.fitHeight,
@@ -47,6 +51,16 @@ class HomeResturantMangePage extends ConsumerWidget {
                         FluentTheme.of(context).typography.title?.fontSize),
               ),
               const Expanded(child: SizedBox()),
+              IconButton(
+                  onPressed: () {
+                    ref.read(settingProvider.notifier).toggle();
+                  },
+                  icon: Icon(
+                    !isDark
+                        ? FluentIcons.brightness
+                        : FluentIcons.lower_brightness,
+                    size: 20,
+                  )),
               Column(
                 children: [
                   Text(rest.isDisabled ? "غير نشط" : "نشط"),
