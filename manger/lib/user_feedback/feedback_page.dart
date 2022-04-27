@@ -22,12 +22,15 @@ class CustomerFeedbackPage extends HookConsumerWidget {
       content = const CenterLoading();
     } else {
       content = GridView.builder(
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5 , mainAxisSpacing: 8,crossAxisSpacing: 8),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 300 ,),
         itemCount: dataSnap.data!.length,
         itemBuilder: (context, index) {
-          return CustomerFeedbackCard(
-            item: dataSnap.data![index],
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomerFeedbackCard(
+              item: dataSnap.data![index],
+            ),
           );
         },
       );

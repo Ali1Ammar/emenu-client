@@ -13,8 +13,8 @@ class CustomerFeedbackCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("ملاحضات الزبون ", style: bold),
             Padding(
@@ -30,8 +30,8 @@ class CustomerFeedbackCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
+              child: Wrap(
+                // mainAxisSize: MainAxisSize.max,
                 children: [
                   Text("التقييم  ", style: bold) ,
                   for (var i = 0; i < item.rate; i++)
@@ -39,10 +39,9 @@ class CustomerFeedbackCard extends StatelessWidget {
                   for (var i = 0; i < 5 - item.rate; i++)
                     const FaIcon(FontAwesomeIcons.star,
                         color: Color.fromARGB(255, 209, 203, 170)),
-                  Expanded(
-                      child: Align(
-                          alignment: AlignmentDirectional.centerEnd,
-                          child: Text("id ${item.orderId}")))
+                  Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Text("id ${item.orderId}"))
                 ],
               ),
             ),

@@ -48,38 +48,40 @@ class SystemLoginPage extends ConsumerWidget {
               width: 400,
               child: Directionality(
                 textDirection: TextDirection.ltr,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text("رجاء تسجيل دخول لبدء الاعداد"),
-                    ),
-                    fluent.TextBox(
-                      header: "اسم المتسخدم",
-                      onChanged: (v) {
-                        cont.username = v;
-                      },
-                    ),
-                    fluent.TextBox(
-                      header: "كلمة المرور",
-                      onChanged: (v) {
-                        cont.password = v;
-                      },
-                    ),
-                    if (cont.showButton)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
-                        child: fluent.FilledButton(
-                          child: const Text("تسجيل دخول"),
-                          onPressed: () {
-                            cont.pressLogin();
-                          },
-                        ),
-                      )
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text("رجاء تسجيل دخول لبدء الاعداد"),
+                      ),
+                      fluent.TextBox(
+                        header: "اسم المتسخدم",
+                        onChanged: (v) {
+                          cont.username = v;
+                        },
+                      ),
+                      fluent.TextBox(
+                        header: "كلمة المرور",
+                        onChanged: (v) {
+                          cont.password = v;
+                        },
+                      ),
+                      if (cont.showButton)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30.0),
+                          child: fluent.FilledButton(
+                            child: const Text("تسجيل دخول"),
+                            onPressed: () {
+                              cont.pressLogin();
+                            },
+                          ),
+                        )
+                    ],
+                  ),
                 ),
               ),
             ),
