@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,16 +24,19 @@ class MainApp extends StatelessWidget {
       child: Consumer(builder: (context, ref, _) {
         final setting = ref.watch(settingProvider);
         return MaterialApp.router(
+            useInheritedMediaQuery: true,
             routeInformationParser: configDto.router.defaultRouteParser(),
-            themeMode:  setting.mode,
+            themeMode: setting.mode,
             debugShowCheckedModeBanner: false,
-            theme: ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple) ) ,
+            theme: ThemeData.from(
+                colorScheme:
+                    ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
             darkTheme: ThemeData(brightness: Brightness.dark),
             locale: const Locale("ar", 'iq'),
             builder: (_, c) => Directionality(
-                textDirection: TextDirection.rtl, child: c!),
+                textDirection: TextDirection.rtl, child: DevicePreview.appBuilder(_,c) ),
             routerDelegate: configDto.router.delegate(),
-            color: Colors.deepPurple );
+            color: Colors.deepPurple);
       }),
     );
   }
