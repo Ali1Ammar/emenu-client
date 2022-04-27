@@ -8,6 +8,7 @@ part 'select_resturant_state.freezed.dart';
 
 @freezed
 class SelectResturantState with _$SelectResturantState {
+    const factory SelectResturantState.error(String error) = ErrorInit;
   const factory SelectResturantState.loadingInit() = LoadingInit;
   const factory SelectResturantState.loadResturants(List<Resturant> resturnats ,Fuzzy<Resturant>? fuzzySearch , List<Resturant> resturnatSearch   ) = LoadResturants;
   const factory SelectResturantState.loadingOrderType(Resturant resturant) = LoadingOrder;

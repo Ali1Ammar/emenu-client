@@ -15,7 +15,8 @@ class ResturantCard extends StatelessWidget {
         child: Column(
           children: [
             ClipOval(
-              child: Image.network(getImageUrl(resturant.img,context.riverpod.read)),
+              child: Image.network(
+                  getImageUrl(resturant.img, context.riverpod.read),height: 200, fit:  BoxFit.cover  , ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

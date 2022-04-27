@@ -15,7 +15,7 @@ class SelectResturantPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(selectRestController);
     final cont = ref.watch(selectRestController.notifier);
-    final isDark = Theme.of(context).brightness==Brightness.dark;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return WillPopScope(
       onWillPop: cont.tryPop,
       child: Scaffold(
@@ -29,14 +29,27 @@ class SelectResturantPage extends HookConsumerWidget {
                       cont.toggleSearch();
                     },
                     icon: const Icon(Icons.search)),
-              IconButton(onPressed: (){
-                  ref.read(settingProvider.notifier).toggle();
-              }, icon: Icon(!isDark ? Icons.brightness_7_sharp : Icons.brightness_2) ),
+              IconButton(
+                  onPressed: () {
+                    ref.read(settingProvider.notifier).toggle();
+                  },
+                  icon: Icon(
+                      !isDark ? Icons.brightness_7_sharp : Icons.brightness_2)),
               const ChangeUrlIconWidget()
-              
             ],
           ),
           body: state.map<Widget>(
+              error: (err) => Column(
+                    children: [
+                      Text(err.error),
+                      OutlinedButton(
+                        child: Text("اعادة المحاولة"),
+                        onPressed: () {
+                          cont.init();
+                        },
+                      )
+                    ],
+                  ),
               loadingInit: (_) => const CenterLoading(),
               loadResturants: (loaded) {
                 if (loaded.resturnats.isEmpty) return const EmptyWidget();
