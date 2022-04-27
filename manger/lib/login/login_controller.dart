@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/login/login_provider.dart';
@@ -13,10 +14,10 @@ final loginControllerProvider =
 class LoginControllerr extends ChangeNotifier {
   final Reader read;
   final LoginService service;
-  LoginControllerr(this.read, this.service){
-    // //TODO Debuging only 
-    username="admin2";
-    password="admin";
+  LoginControllerr(this.read, this.service) {
+    // //TODO Debuging only
+    username = "admin2";
+    password = "admin";
     pressLogin();
   }
 
@@ -40,7 +41,13 @@ class LoginControllerr extends ChangeNotifier {
       read(loginProvider.notifier).state = data;
       read(autoRouteProvider).replace(const HomePageRoute());
     } catch (e) {
-      showErrorDialogViaRead(e, read);
+      if (e is DioError && e.message == "check server connection") {
+        showErrorDialogViaRead(
+            "مشكلة في الاتصال في الشبكة الرجاء التاكد من الاتصال\n, الرجاء التاكد من تشغيل السيرفر وضبط الip من علامة التعديل في زاويه اعلاه",
+            read);
+      } else {
+        showErrorDialogViaRead(e, read);
+      }
     }
   }
 
