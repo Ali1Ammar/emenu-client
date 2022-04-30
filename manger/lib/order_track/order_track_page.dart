@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/order_track/order_card.dart';
 import 'package:manger/order_track/order_track_controller.dart';
 import 'package:manger/shared/widget/header.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:shared/shared.dart';
 
@@ -23,14 +24,12 @@ class OrderTrackPage extends ConsumerWidget {
         ),
         content: state.map(
             init: (_) => const CenterLoading(),
-            loaded: (state) => GridView.builder(
-                itemCount: state.orders.length,
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-crossAxisSpacing: 18,
-                    maxCrossAxisExtent: 400  ),
-                itemBuilder: (context, i) {
-                  final item = state.orders[i];
-                  return OrderCard(
+            loaded: (state) {
+              Widget buildCard(context, i) {
+                final item = state.orders[i];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: OrderCard(
                     order: item,
                     onPayed: () {
                       cont.clickPay(item);
@@ -45,7 +44,14 @@ crossAxisSpacing: 18,
                     onDoneKitchen: () {
                       cont.clickChangeStatus(item, OrderStatus.DoneByKitchen);
                     },
-                  );
-                })));
+                  ),
+                );
+              }
+              return MasonryGridView.builder(
+                  gridDelegate: const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 700),
+                  itemCount: state.orders.length,
+                  itemBuilder: buildCard);
+            }));
   }
 }

@@ -9,6 +9,7 @@ import 'package:manger/new_rest/new_kicthen.dart';
 import 'package:manger/new_rest/new_ordertype.dart';
 import 'package:manger/new_rest/new_spot.dart';
 import 'package:manger/shared/context_helper.dart';
+import 'package:manger/shared/grid_view_custom.dart';
 import 'package:shared/shared.dart';
 
 class HomeResturantMangePage extends ConsumerWidget {
@@ -30,12 +31,9 @@ class HomeResturantMangePage extends ConsumerWidget {
             if (rest != null) ...[
               SizedBox.square(
                 dimension: 120,
-                // aspectRatio: 1,
                 child: ClipOval(
                   child: Image.network(
                     getImageUrl(rest.img, context.riverpod.read),
-                    // height:120,
-                    // width: 220,
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -104,9 +102,7 @@ class HomeResturantMangePage extends ConsumerWidget {
                 )),
           if (rest != null)
             Expanded(
-              child: GridView(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5),
+              child: GridViewCustom(
                 children: [
                   if (rest.mainCategory.isNotEmpty && rest.kitchen.isNotEmpty)
                     FilledButton(
@@ -161,12 +157,7 @@ class HomeResturantMangePage extends ConsumerWidget {
                         child: centerTextButton("الاحصائيات", context),
                         onPressed: null),
                   ]
-                ]
-                    .map((e) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: e,
-                        ))
-                    .toList(),
+                ].map((e) => e).toList(),
               ),
             )
         ],

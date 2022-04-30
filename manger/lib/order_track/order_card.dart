@@ -1,5 +1,6 @@
-import 'package:fluent_ui/fluent_ui.dart' ;
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:manger/shared/auto_checkbox.dart';
 import 'package:manger/shared/widget/button_icon.dart';
 import 'package:manger/shared/widget/labeled_widget.dart';
 import 'package:shared/shared.dart';
@@ -21,10 +22,63 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+    return Acrylic(
+      child: LayoutBuilder(builder: (context, box) {
+        return Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.start,
+          runAlignment: WrapAlignment.start,
+          children: [
+            SizedBox(width: box.maxWidth, child: labelDataWidget()),
+            ...[...order.orderItems, ...order.orderItems, ...order.orderItems]
+                .map((e) => SizedBox(
+                      width: box.maxWidth / 2,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: buildMealCard(e, context),
+                      ),
+                    ))
+          ],
+        );
+      }),
+    );
+  }
+
+  Acrylic buildMealCard(OrderItem e, BuildContext context) {
+    return Acrylic(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(e.meal.title,
+              style: FluentTheme.of(context).typography.subtitle),
+          Row(
+            children: [
+              LabledWidget(
+                label: "العدد",
+                text: e.count.toString(),
+              ),
+              const Expanded(child: SizedBox()),
+              const AutoCheckbox()
+            ],
+          ),
+          if (e.notes != null)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                e.notes!,
+                style: FluentTheme.of(context).typography.bodyLarge,
+              ),
+            ),
+          const Divider()
+        ],
+      ),
+    );
+  }
+
+  Widget labelDataWidget() {
+    return Row(
+      children: [
+        Flexible(
           child: Column(
             children: [
               LabledWidget(
@@ -41,57 +95,45 @@ class OrderCard extends StatelessWidget {
                 text: order.price.toString(),
               ),
               LabledWidget(
-                label: "حالة الطلب",
+                label: "حالة",
                 text: order.status.toArabic,
               ),
-              ...order.orderItems.map((e) => Card(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(e.count.toString()),
-                            Text(e.meal.title)
-                          ],
-                        ),
-                        Text(e.notes ?? ""),
-                      ],
-                    ),
-                  )),
-              Wrap(
-                spacing: 5,
-                runSpacing: 5,
-                children: [
-                  if (onPayed != null)
-                    ButtonIcon(
-                      icon: const FaIcon( FontAwesomeIcons.moneyBill ),
-                      child: const Text("دفع"),
-                      onPressed: onPayed!,
-                    ),
-                  if (onCancel != null)
-                    ButtonIcon(
-                      icon: const Icon(FluentIcons.cancel),
-                      child: const Text("الغاء"),
-                      onPressed: onCancel!,
-                    ),
-                  if (onDeliverd != null)
-                    ButtonIcon(
-                      icon:  const FaIcon( FontAwesomeIcons.motorcycle ),
-                      child: const Text("توصيل"),
-                      onPressed: onDeliverd!,
-                    ),
-                  if (onDoneKitchen != null)
-                    ButtonIcon(
-                      icon:  const FaIcon( FontAwesomeIcons.kitchenSet ),
-                      child: const Text("انتهى طبخ"),
-                      onPressed: onDoneKitchen!,
-                    ),
-                ],
-              )
             ],
           ),
         ),
-      ),
+        Flexible(
+          child: Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            children: [
+              if (onPayed != null)
+                ButtonIcon(
+                  icon: const FaIcon(FontAwesomeIcons.moneyBill),
+                  child: const Text("دفع"),
+                  onPressed: onPayed!,
+                ),
+              if (onCancel != null)
+                ButtonIcon(
+                  icon: const Icon(FluentIcons.cancel),
+                  child: const Text("الغاء"),
+                  onPressed: onCancel!,
+                ),
+              if (onDeliverd != null)
+                ButtonIcon(
+                  icon: const FaIcon(FontAwesomeIcons.motorcycle),
+                  child: const Text("توصيل"),
+                  onPressed: onDeliverd!,
+                ),
+              if (onDoneKitchen != null)
+                ButtonIcon(
+                  icon: const FaIcon(FontAwesomeIcons.kitchenSet),
+                  child: const Text("انتهى طبخ"),
+                  onPressed: onDoneKitchen!,
+                ),
+            ],
+          ),
+        )
+      ],
     );
   }
 }

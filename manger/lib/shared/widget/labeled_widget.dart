@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 
 class LabledWidget extends StatelessWidget {
   final String label;
@@ -7,12 +7,14 @@ class LabledWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        final style = FluentTheme.of(context).typography.subtitle;
+
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Row(
         children: [
-          Text("$label: "),
-          Text(text)
+          Text("$label: " , style: style ),
+          Text(text, style: style)
         ],
       ),
     );

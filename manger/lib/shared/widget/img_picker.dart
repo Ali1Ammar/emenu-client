@@ -17,19 +17,34 @@ class _ImagePickerState extends State<ImagePicker> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Button(
-            onPressed: () async {
-              pickerResult = await FilePicker.platform
-                  .pickFiles(allowMultiple: false, type: FileType.image);
-              widget.onPicker(pickerResult);
-              setState(() {});
-            },
-            child: const Text("رفع صوره")),
+        Column(
+          children: [
+            if (pickerResult != null)
+              IconButton(
+                  icon: const Icon(FluentIcons.cancel),
+                  onPressed: () {
+                    setState(() {
+                      pickerResult = null;
+                    });
+                  }),
+            Button(
+                onPressed: () async {
+                  pickerResult = await FilePicker.platform
+                      .pickFiles(allowMultiple: false, type: FileType.image);
+                  widget.onPicker(pickerResult);
+                  setState(() {});
+                },
+                child: const Text("رفع صوره")),
+          ],
+        ),
         if (pickerResult != null)
-          Image.file(
-            File(pickerResult!.files.first.path!),
-            height: 120,
-            width: 120,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.file(
+              File(pickerResult!.files.first.path!),
+              height: 120,
+              width: 120,
+            ),
           ),
       ],
     );
