@@ -5,7 +5,7 @@ import 'package:manger/shared/widget/button_icon.dart';
 import 'package:manger/shared/widget/labeled_widget.dart';
 import 'package:shared/shared.dart';
 
-class OrderCard extends StatelessWidget {
+class OrderCard extends StatefulWidget {
   final Order order;
   final VoidCallback? onDoneKitchen;
   final VoidCallback? onPayed;
@@ -21,27 +21,101 @@ class OrderCard extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: LayoutBuilder(builder: (context, box) {
-        return Wrap(
-          alignment: WrapAlignment.start,
-          crossAxisAlignment: WrapCrossAlignment.start,
-          runAlignment: WrapAlignment.start,
-          children: [
-            SizedBox(width: box.maxWidth, child: labelDataWidget()),
-            ...[...order.orderItems, ...order.orderItems, ...order.orderItems]
-                .map((e) => SizedBox(
-                      width: box.maxWidth / 2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: buildMealCard(e, context),
-                      ),
-                    ))
-          ],
-        );
-      }),
+  State<OrderCard> createState() => _OrderCardState();
+}
+
+class _OrderCardState extends State<OrderCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  Animation<Color?>? animation;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      reverseDuration: const Duration(milliseconds: 100),
+      vsync: this,
     );
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      animation = ColorTween(
+        begin: FluentTheme.of(context).cardColor,
+        end: FluentTheme.of(context).cardColor.withOpacity(0.2),
+      ).animate(_controller)
+        ..addListener(() {
+          setState(() {});
+        });
+    });
+  }
+
+  @override
+  void didUpdateWidget(OrderCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.order.status != widget.order.status) {
+      _controller.forward().then((value) {
+        _controller.reverse();
+      });
+    }
+  }
+
+  @override
+  dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    
+    return Card(
+      backgroundColor: animation?.value,
+      child: OrderCardBase(
+        order: widget.order,
+        onCancel: widget.onCancel,
+        onDeliverd: widget.onDeliverd,
+        onDoneKitchen: widget.onDoneKitchen,
+        onPayed: widget.onPayed,
+      ),
+    );
+  }
+}
+
+class OrderCardBase extends StatelessWidget {
+  final Order order;
+  final VoidCallback? onDoneKitchen;
+  final VoidCallback? onPayed;
+  final VoidCallback? onCancel;
+  final VoidCallback? onDeliverd;
+  const OrderCardBase(
+      {Key? key,
+      required this.order,
+      this.onDoneKitchen,
+      this.onPayed,
+      this.onCancel,
+      this.onDeliverd})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (context, box) {
+      return Wrap(
+        alignment: WrapAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.start,
+        runAlignment: WrapAlignment.start,
+        children: [
+          SizedBox(width: box.maxWidth, child: labelDataWidget()),
+          ...[...order.orderItems, ...order.orderItems, ...order.orderItems]
+              .map((e) => SizedBox(
+                    width: box.maxWidth / 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: buildMealCard(e, context),
+                    ),
+                  ))
+        ],
+      );
+    });
   }
 
   Acrylic buildMealCard(OrderItem e, BuildContext context) {
@@ -103,22 +177,21 @@ class OrderCard extends StatelessWidget {
         ),
         Flexible(
           child: Align(
-            alignment: Alignment.center ,
+            alignment: Alignment.center,
             child: Wrap(
               spacing: 5,
               runSpacing: 5,
-              alignment: WrapAlignment.center ,
-              crossAxisAlignment: WrapCrossAlignment.center ,
-              runAlignment: WrapAlignment.center ,
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              runAlignment: WrapAlignment.center,
               children: <Widget?>[
                 button(
                   icon: FontAwesomeIcons.moneyBill,
                   text: "دفع",
                   onPressed: onPayed,
                 ),
-          
                 button(
-                  icon: FontAwesomeIcons.utensils ,
+                  icon: FontAwesomeIcons.utensils,
                   text: "ايصال للزبون",
                   onPressed: onDeliverd,
                 ),
@@ -127,7 +200,7 @@ class OrderCard extends StatelessWidget {
                   text: "انتهى طبخ",
                   onPressed: onDoneKitchen,
                 ),
-                              button(
+                button(
                   icon: FontAwesomeIcons.xmark,
                   text: "الغاء",
                   onPressed: onCancel,

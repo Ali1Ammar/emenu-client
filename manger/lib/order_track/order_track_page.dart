@@ -30,6 +30,7 @@ class OrderTrackPage extends ConsumerWidget {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: OrderCard(
+                    key: ValueKey(item.id),
                     order: item,
                     onPayed: () {
                       cont.clickPay(item);
