@@ -47,9 +47,11 @@ class OrderTrackPage extends ConsumerWidget {
                   ),
                 );
               }
+
               return MasonryGridView.builder(
-                  gridDelegate: const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 700),
+                  gridDelegate:
+                      const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 700),
                   itemCount: state.orders.length,
                   itemBuilder: buildCard);
             }));

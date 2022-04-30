@@ -22,7 +22,7 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Acrylic(
+    return Card(
       child: LayoutBuilder(builder: (context, box) {
         return Wrap(
           alignment: WrapAlignment.start,
@@ -102,38 +102,59 @@ class OrderCard extends StatelessWidget {
           ),
         ),
         Flexible(
-          child: Wrap(
-            spacing: 5,
-            runSpacing: 5,
-            children: [
-              if (onPayed != null)
-                ButtonIcon(
-                  icon: const FaIcon(FontAwesomeIcons.moneyBill),
-                  child: const Text("دفع"),
-                  onPressed: onPayed!,
+          child: Align(
+            alignment: Alignment.center ,
+            child: Wrap(
+              spacing: 5,
+              runSpacing: 5,
+              alignment: WrapAlignment.center ,
+              crossAxisAlignment: WrapCrossAlignment.center ,
+              runAlignment: WrapAlignment.center ,
+              children: <Widget?>[
+                button(
+                  icon: FontAwesomeIcons.moneyBill,
+                  text: "دفع",
+                  onPressed: onPayed,
                 ),
-              if (onCancel != null)
-                ButtonIcon(
-                  icon: const Icon(FluentIcons.cancel),
-                  child: const Text("الغاء"),
-                  onPressed: onCancel!,
+          
+                button(
+                  icon: FontAwesomeIcons.utensils ,
+                  text: "ايصال للزبون",
+                  onPressed: onDeliverd,
                 ),
-              if (onDeliverd != null)
-                ButtonIcon(
-                  icon: const FaIcon(FontAwesomeIcons.motorcycle),
-                  child: const Text("توصيل"),
-                  onPressed: onDeliverd!,
+                button(
+                  icon: FontAwesomeIcons.circleCheck,
+                  text: "انتهى طبخ",
+                  onPressed: onDoneKitchen,
                 ),
-              if (onDoneKitchen != null)
-                ButtonIcon(
-                  icon: const FaIcon(FontAwesomeIcons.kitchenSet),
-                  child: const Text("انتهى طبخ"),
-                  onPressed: onDoneKitchen!,
+                              button(
+                  icon: FontAwesomeIcons.xmark,
+                  text: "الغاء",
+                  onPressed: onCancel,
                 ),
-            ],
+              ].where((element) => element != null).map((e) => e!).toList(),
+            ),
           ),
         )
       ],
     );
+  }
+
+  Widget? button(
+      {required String text,
+      required IconData icon,
+      required VoidCallback? onPressed}) {
+    if (onPressed != null) {
+      return ButtonIcon(
+        icon: FaIcon(icon),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(text),
+        ),
+        onPressed: onPressed,
+      );
+    } else {
+      return null;
+    }
   }
 }
