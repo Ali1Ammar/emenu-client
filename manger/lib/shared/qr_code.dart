@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/widgets.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qr_svg_generator/qr_svg_generator.dart';
 import 'package:riverpod/riverpod.dart';
@@ -9,12 +7,17 @@ import 'package:riverpod/riverpod.dart';
 final qrCodeServiceProvider = Provider.autoDispose((_) => QrCodeService());
 
 class QrCodeService {
-  String generateLink(String path, String key, String value) {
-    return "qr.r.c/$path?k$key=$value";
+  String generateLinkByData(String path, Map<String, dynamic> data) {
+    return Uri.http("qr.r.c", path, data).toString();
   }
 
-  String generateCustomerSpotLink(String id) {
-    return generateLink("spot", "id", id);
+  String generateFullLinkToOrder(
+      String resturantId, String orderTypeId, String spotId) {
+    return generateLinkByData("link", {
+      "resturantId": resturantId,
+      "orderTypeId": orderTypeId,
+      "spotId": spotId
+    });
   }
 
   String convertToSvg(String data, String title) {
