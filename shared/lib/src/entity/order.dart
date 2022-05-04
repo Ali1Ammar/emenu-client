@@ -22,8 +22,15 @@ class Order {
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
 
-  Order({ required this.id,required this.status,required this.customerSpot,required this.customerFeedBack,
-     required this.type,required this.price, required this.isPayed,required this.orderItems});
+  Order(
+      {required this.id,
+      required this.status,
+      required this.customerSpot,
+      required this.customerFeedBack,
+      required this.type,
+      required this.price,
+      required this.isPayed,
+      required this.orderItems});
   Map<String, dynamic> toJson() => _$OrderToJson(this);
 }
 
@@ -56,19 +63,20 @@ extension OrderStatusExt on OrderStatus {
       case OrderStatus.WaitPayment:
         return "انتضار الدفع";
       case OrderStatus.WaitInKitchen:
-        return "جار اعداد طلبك";
+        return "جار طبح الطلب";
 
       case OrderStatus.DoneByKitchen:
-        return "اكمل المطبخ";
+        return "اكتمل الطبح";
 
       case OrderStatus.DeliveredByKitchen:
-        return "تم توصيل";
+        return "تم توصيل للزبون";
 
       case OrderStatus.Canceled:
-        return "ملغات";
+        return "ملغي";
 
       case OrderStatus.Done:
-        return "انتهت";
+        return "انتهى";
     }
   }
 }
+

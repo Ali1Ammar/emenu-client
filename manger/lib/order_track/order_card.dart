@@ -67,7 +67,6 @@ class _OrderCardState extends State<OrderCard>
 
   @override
   Widget build(BuildContext context) {
-    
     return Card(
       backgroundColor: animation?.value,
       child: OrderCardBase(
@@ -151,9 +150,11 @@ class OrderCardBase extends StatelessWidget {
 
   Widget labelDataWidget() {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Flexible(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               LabledWidget(
                 label: "رقم الطلب",
@@ -165,23 +166,19 @@ class OrderCardBase extends StatelessWidget {
                   text: order.customerSpot!.identifier,
                 ),
               LabledWidget(
-                label: "السعر",
-                text: order.price.toString(),
-              ),
-              LabledWidget(
-                label: "حالة",
-                text: order.status.toArabic,
+                label: "هل تم الدفع",
+                text: order.isPayed ? "نعم" : "لا",
               ),
             ],
           ),
         ),
         Flexible(
           child: Align(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             child: Wrap(
               spacing: 5,
               runSpacing: 5,
-              alignment: WrapAlignment.center,
+              alignment: WrapAlignment.start,
               crossAxisAlignment: WrapCrossAlignment.center,
               runAlignment: WrapAlignment.center,
               children: <Widget?>[
@@ -197,13 +194,21 @@ class OrderCardBase extends StatelessWidget {
                 ),
                 button(
                   icon: FontAwesomeIcons.circleCheck,
-                  text: "انتهى طبخ",
+                  text: "تم الطبخ",
                   onPressed: onDoneKitchen,
                 ),
                 button(
                   icon: FontAwesomeIcons.xmark,
                   text: "الغاء",
                   onPressed: onCancel,
+                ),
+                LabledWidget(
+                  label: "السعر",
+                  text: order.price.toString(),
+                ),
+                LabledWidget(
+                  label: "حالة",
+                  text: order.status.toArabic,
                 ),
               ].where((element) => element != null).map((e) => e!).toList(),
             ),

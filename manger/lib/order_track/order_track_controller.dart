@@ -60,6 +60,15 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
     await read(orderServiceProvider).statusUpdate(order.id, status);
   }
 
+  clickDeliverd(Order order) async {
+    //TODO change the button at ui
+    await read(orderServiceProvider).statusUpdate(
+        order.id,
+        order.type.paymentType == PaymentType.beforeTakeOrder
+            ? OrderStatus.DeliveredByKitchen
+            : OrderStatus.Done);
+  }
+
   clickPay(Order order) async {
     //TODO change the button at ui
     await read(orderServiceProvider).payed(order.id);

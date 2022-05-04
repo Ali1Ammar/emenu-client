@@ -7,6 +7,14 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:shared/shared.dart';
 
+//TODO
+/*
+ * make only one buttom apperase (next button)
+ * make speical ui for each type (cachier , waiter , chef);
+ * remove cacel and done order
+ * make cache for done and remove 
+ */
+
 class OrderTrackPage extends ConsumerWidget {
   final OrderTrack orderTrack;
   const OrderTrackPage({Key? key, required this.orderTrack}) : super(key: key);
@@ -27,24 +35,35 @@ class OrderTrackPage extends ConsumerWidget {
             loaded: (state) {
               Widget buildCard(context, i) {
                 final item = state.orders[i];
+                // final nextStatus = item.nextStatus();
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: OrderCard(
                     key: ValueKey(item.id),
                     order: item,
-                    onPayed: () {
-                      cont.clickPay(item);
-                    },
-                    onCancel: () {
-                      cont.clickChangeStatus(item, OrderStatus.Canceled);
-                    },
-                    onDeliverd: () {
-                      cont.clickChangeStatus(
-                          item, OrderStatus.DeliveredByKitchen);
-                    },
-                    onDoneKitchen: () {
-                      cont.clickChangeStatus(item, OrderStatus.DoneByKitchen);
-                    },
+                    onPayed: item.isPayed
+                        ? null
+                        : () {
+                            cont.clickPay(item);
+                          },
+                    onCancel: item.status == OrderStatus.Done
+                        ? null
+                        : () {
+                            cont.clickChangeStatus(item, OrderStatus.Canceled);
+                          },
+                    onDeliverd: item.status == OrderStatus.DoneByKitchen
+                        ? () {
+                            cont.clickDeliverd(
+                                item,
+                                );
+                          }
+                        : null,
+                    onDoneKitchen: item.status == OrderStatus.WaitInKitchen
+                        ? () {
+                            cont.clickChangeStatus(
+                                item, OrderStatus.DoneByKitchen);
+                          }
+                        : null,
                   ),
                 );
               }
