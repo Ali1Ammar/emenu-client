@@ -15,7 +15,7 @@ Future<void> main() async {
   final _appRouter = AppRouter();
 
   runApp(DevicePreview(
-    enabled: !kReleaseMode || !Platform.isAndroid || !Platform.isIOS,
+    enabled:  ( !Platform.isAndroid || !Platform.isIOS),
         tools: [
         ...DevicePreview.defaultTools,
         DevicePreviewScreenshot(
