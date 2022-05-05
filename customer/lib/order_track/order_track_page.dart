@@ -47,13 +47,14 @@ class OrderTrackPage extends HookConsumerWidget {
                   child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(state.order.type.paymentMsg, style: style),
-              )),
-            if (state.currentStatus == OrderStatus.DoneByKitchen)
+              ))
+            else if (state.currentStatus == OrderStatus.DoneByKitchen)
               Center(
                   child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(state.order.type.deliverMsg, style: style))),
-            if ((state.currentStatus == OrderStatus.DeliveredByKitchen &&
+                      child: Text(state.order.type.deliverMsg, style: style)))
+            else if (((state.currentStatus == OrderStatus.DeliveredByKitchen ||
+                    state.currentStatus == OrderStatus.Done) &&
                 state.isPayed))
               Card(
                 child: Padding(
@@ -61,32 +62,45 @@ class OrderTrackPage extends HookConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextField(
-                        controller: noteCont,
-                        decoration: const InputDecoration(
-                            labelText: "ما رئيك في المطعم",
-                            border: OutlineInputBorder()),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: RatingStars(
-                          editable: true,
-                          rating: rate,
+                      if (state.feedBack == null ||
+                          state.feedBack!.hasError) ...[
+                        TextField(
+                          controller: noteCont,
+                          decoration: const InputDecoration(
+                              labelText: "ما رئيك في المطعم",
+                              border: OutlineInputBorder()),
                         ),
-                      ),
-                      const Text("هل واجهتك احدى مشاكل الاتية : "),
-                      ...FeedBackType.values.map((e) => CheckboxListTile(
-                          title: Text(e.toAr),
-                          value: set.contains(e),
-                          onChanged: (val) {
-                            set.toggle(e);
-                          })),
-                      ElevatedButton(
-                          onPressed: () {
-                            cont.sentReview(set.set.toList(),
-                                rate.value.toInt(), noteCont.text);
-                          },
-                          child: const Center(child: Text("ارسال التقييم")))
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RatingStars(
+                            editable: true,
+                            rating: rate,
+                          ),
+                        ),
+                        const Text("هل واجهتك احدى مشاكل الاتية : "),
+                        ...FeedBackType.values.map((e) => CheckboxListTile(
+                            title: Text(e.toAr),
+                            value: set.contains(e),
+                            onChanged: (val) {
+                              set.toggle(e);
+                            })),
+                        if (state.feedBack?.hasError ?? false)
+                          Text(state.feedBack!.error.toString()),
+                        ElevatedButton(
+                            onPressed: () {
+                              cont.sentReview(set.set.toList(),
+                                  rate.value.toInt(), noteCont.text);
+                            },
+                            child: const Center(child: Text("ارسال التقييم"))),
+                        OutlinedButton(
+                            onPressed: () {
+                              cont.skipReview();
+                            },
+                            child: const Center(child: Text("تخطي")))
+                      ] else if (state.feedBack!.isLoading)
+                        const CenterLoading()
+                      else if (state.feedBack!.hasValue)
+                        const Text("تم التقييم بنجاح , شكرا على زيارتكم مطعمنا")
                     ],
                   ),
                 ),

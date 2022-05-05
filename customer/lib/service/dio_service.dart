@@ -34,18 +34,24 @@ class DioService {
   }
 
   Future<ResponseCreateOrder> order(CreateOrderDto order) async {
-    return await dio
-        .post("/order", data: order.toJson())
-        .then((value) {
-          return ResponseCreateOrder.fromJson(value.data);
-        });
+    return await dio.post("/order", data: order.toJson()).then((value) {
+      return ResponseCreateOrder.fromJson(value.data);
+    });
   }
 
-  Future<CustomerFeedBack> sentReview(CreateFeedback createFeedback) async {
+  Future<CustomerFeedBack?> sentReview(
+      CreateFeedback? createFeedback, String token) async {
     return await dio
-        .post("/done", data: createFeedback.toJson())
+        .post("/order/done",
+            data: createFeedback?.toJson(),
+            options: Options(headers: {
+              'Authorization': 'Bearer $token',
+            }))
         .then((value) {
-          return CustomerFeedBack.fromJson(value.data);
-        });
+      if (value.data == "") {
+        return null;
+      }
+      return CustomerFeedBack.fromJson(value.data);
+    });
   }
 }
