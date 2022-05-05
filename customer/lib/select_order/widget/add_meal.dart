@@ -1,7 +1,6 @@
 import 'package:customer/select_order/select_order_controller.dart';
 import 'package:customer/select_order/select_order_state.dart';
 import 'package:customer/shared/context_helper.dart';
-import 'package:customer/shared/set_hook.dart';
 import 'package:customer/widget/meal_card.dart';
 import 'package:customer/widget/number_picker.dart';
 import 'package:flutter/material.dart';
