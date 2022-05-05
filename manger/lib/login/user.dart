@@ -28,6 +28,8 @@ enum UserPermissions {
   Cacher,
   // ignore: constant_identifier_names
   Kitchen,
+    // ignore: constant_identifier_names
+  Waiter
 }
 
 extension UserPermissionsExt on UserPermissions {
@@ -41,6 +43,8 @@ extension UserPermissionsExt on UserPermissions {
         return "كاشير";
       case UserPermissions.Kitchen:
         return "مسؤول مطبخ";
+      case UserPermissions.Waiter:
+        return "نادل";
     }
   }
 }
