@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:manger/login/login_provider.dart';
-import 'package:manger/login/system_login_page.dart';
 import 'package:manger/main/auto_router.dart';
 import 'package:manger/shared/context_helper.dart';
 import 'package:manger/shared/service/resturnat_service.dart';

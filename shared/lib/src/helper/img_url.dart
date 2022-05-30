@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod/riverpod.dart';
-import 'package:shared/src/helper/const.dart';
 import 'package:shared/src/helper/dio_client.dart';
 
 String getImageUrl(String img,Reader read) {

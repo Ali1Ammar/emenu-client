@@ -32,7 +32,7 @@ class GridViewCustom extends StatelessWidget {
     return GridView(
       children: children
           .map((e) => Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: e,
               ))
           .toList(),

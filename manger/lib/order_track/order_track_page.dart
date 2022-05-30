@@ -53,7 +53,6 @@ class OrderTrackPage extends HookConsumerWidget {
                   selectedQueryStatus.value.contains(element.status))
               .toList());
     }, [selectedQueryStatus.value, state]);
-                    print(selectedQueryStatus.value);
 
     return ScaffoldPage(
         header: Header(
@@ -65,11 +64,12 @@ class OrderTrackPage extends HookConsumerWidget {
                 selectedQueryStatus.value = selected;
               },
               buttonBuilder: (context, openr) => Button(
-                child:Icon(FluentIcons.filter ),
+                child: const Icon(FluentIcons.filter),
                 onPressed: openr,
               ),
               items: queryStatusByPermissons
-                  .map((e) => FluentCheckBoxItem<OrderStatus>(Text(e.toArabic), false, e))
+                  .map((e) => FluentCheckBoxItem<OrderStatus>(
+                      Text(e.toArabic), false, e))
                   .toList(),
             )
           ],
