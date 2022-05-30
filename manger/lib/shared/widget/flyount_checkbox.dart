@@ -3,13 +3,17 @@ import 'package:fluent_ui/fluent_ui.dart';
 class FluentCheckBox<T> extends StatefulWidget {
   final List<FluentCheckBoxItem<T>> items;
   final ValueChanged<List<T>> onChangedSelected;
-  final Widget Function(BuildContext context, VoidCallback opener) buttonBuilder;
+  final Widget Function(BuildContext context, VoidCallback opener)
+      buttonBuilder;
   const FluentCheckBox(
-      {Key? key, required this.items, required this.onChangedSelected,required this.buttonBuilder})
+      {Key? key,
+      required this.items,
+      required this.onChangedSelected,
+      required this.buttonBuilder})
       : super(key: key);
 
   @override
-  State<FluentCheckBox> createState() => _FluentCheckBoxState();
+  State<FluentCheckBox<T>> createState() => _FluentCheckBoxState<T>();
 }
 
 class _FluentCheckBoxState<T> extends State<FluentCheckBox<T>> {
@@ -23,11 +27,6 @@ class _FluentCheckBoxState<T> extends State<FluentCheckBox<T>> {
       }
     }
 
-    flyoutController.addListener(() {
-      if(flyoutController.isClosed){
-        widget.onChangedSelected(checkedSet.toList());
-      }
-    });
 
     super.initState();
   }
@@ -42,6 +41,9 @@ class _FluentCheckBoxState<T> extends State<FluentCheckBox<T>> {
   Widget build(BuildContext context) {
     return Flyout(
       controller: flyoutController,
+      onClose: () {
+        widget.onChangedSelected(checkedSet.toList());
+      },
       content: (context) {
         return StatefulBuilder(
           builder: ((context, setState) => FlyoutContent(
@@ -67,7 +69,7 @@ class _FluentCheckBoxState<T> extends State<FluentCheckBox<T>> {
               ))),
         );
       },
-      child: widget.buttonBuilder(context,flyoutController.open),
+      child: widget.buttonBuilder(context, flyoutController.open),
     );
   }
 }

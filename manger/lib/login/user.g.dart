@@ -28,4 +28,5 @@ const _$UserPermissionsEnumMap = {
   UserPermissions.ResturantAdmin: 'ResturantAdmin',
   UserPermissions.Cacher: 'Cacher',
   UserPermissions.Kitchen: 'Kitchen',
+  UserPermissions.Waiter: 'Waiter',
 };

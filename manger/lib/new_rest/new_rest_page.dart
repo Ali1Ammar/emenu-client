@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/login/login_controller.dart';
@@ -10,6 +11,7 @@ import 'package:manger/new_rest/widget/admin_account.dart';
 import 'package:manger/shared/dialog.dart';
 import 'package:manger/shared/form_validator.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
+import 'package:manger/shared/widget/header.dart';
 import 'package:manger/shared/widget/img_picker.dart';
 
 class NewResturantPage extends HookConsumerWidget {
@@ -23,9 +25,11 @@ class NewResturantPage extends HookConsumerWidget {
     final newRestVal = useState(NewResturantValue());
 
     return ScaffoldPage(
-      header: const PageHeader(
-        title: Text("انشاء مطعم جديد"),
+      header:
+   const   Header(
+        title: "انشاء مطعم جديد",
       ),
+
       content: Form(
         key: formKey,
         child: ListView(

@@ -5,3 +5,5 @@ mangerr is for restrant manger
 shared is for shared code between both
 all written in dart and flutter 
 backend is on emenu-backend
+
+flutter packages pub run build_runner build

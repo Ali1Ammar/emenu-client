@@ -1,6 +1,7 @@
 import 'package:customer/app_setting/setting_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_state.dart';
+import 'package:customer/service/mdns.dart';
 import 'package:customer/widget/fade_widget.dart';
 import 'package:customer/widget/resturant_card.dart';
 import 'package:customer/widget/url_change_widget.dart';
@@ -35,6 +36,11 @@ class SelectResturantPage extends HookConsumerWidget {
                   },
                   icon: Icon(
                       !isDark ? Icons.brightness_7_sharp : Icons.brightness_2)),
+              IconButton(
+                  onPressed: () {
+                    mDnsQueryIp();
+                  },
+                  icon: Icon(Icons.dns)),
               const ChangeUrlIconWidget()
             ],
           ),

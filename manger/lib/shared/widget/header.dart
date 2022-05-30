@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:manger/shared/widget/back_button.dart';
 
 class Header extends StatelessWidget {
   final String title;
@@ -12,24 +13,16 @@ class Header extends StatelessWidget {
       commandBar: Row(
         children: [
           ...icons,
-          const SizedBox(
-            width: 400,
-            child: TextBox(
-              maxLines: 1,
-              suffix: Icon(FluentIcons.search),
-            ),
-          ),
+          // const SizedBox(
+          //   width: 400,
+          //   child: TextBox(
+          //     maxLines: 1,
+          //     suffix: Icon(FluentIcons.search),
+          //   ),
+          // ),
         ],
       ),
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: IconButton(
-          icon: const Icon(FluentIcons.forward, size: 20),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      leading: const FluentBackButton(),
       title: Text(title),
     );
   }

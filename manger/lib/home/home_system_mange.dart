@@ -1,10 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:manger/login/login_provider.dart';
+import 'package:manger/login/system_login_page.dart';
 import 'package:manger/main/auto_router.dart';
 import 'package:manger/shared/context_helper.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
+import 'package:manger/shared/widget/header.dart';
 import 'package:manger/shared/widget/resturant_card.dart';
 import 'package:shared/shared.dart';
 
+//TODO complete this page , add edit resturant by admin , add other admin function
 class HomeSystemPage extends StatelessWidget {
   final List<Resturant> resturants;
   const HomeSystemPage({Key? key, required this.resturants}) : super(key: key);
@@ -12,20 +17,21 @@ class HomeSystemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-      header: const PageHeader(
-        commandBar: SizedBox(
-          width: 400,
-          child: TextBox(
-            maxLines: 1,
-            suffix: Icon(FluentIcons.search),
-          ),
-        ),
-        title: Text("ادارة نظام"),
+      header: Header(
+        title: "ادارة نظام",
+        icons: [
+          IconButton(
+              icon: const Icon(FontAwesomeIcons.arrowRightFromBracket),
+              onPressed: () {
+                context.riverpod.refresh(loginProvider);
+                context.riverpod.read(autoRouteProvider).push( const SystemLoginPageRoute() );
+              })
+        ],
       ),
       content: GridView.builder(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 300),
-          itemCount: resturants.length + 1 ,
+          itemCount: resturants.length + 1,
           itemBuilder: (context, i) {
             if (i == 0) {
               return FilledButton(

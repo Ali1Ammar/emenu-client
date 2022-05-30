@@ -23,7 +23,7 @@ dependencies:
   auto_size_text:
   json_annotation:
   socket_io_client: ^2.0.0-beta.4-nullsafety.0
-  auto_route: ^3.2.1
+  auto_route: ^4.0.1
   dio:
   form_field_validator: ^1.1.0
   file_picker: ^4.3.2
@@ -36,6 +36,7 @@ dependencies:
 
   device_preview: ^1.0.0
   device_preview_screenshot: ^1.0.0  
+  multicast_dns: ^0.3.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

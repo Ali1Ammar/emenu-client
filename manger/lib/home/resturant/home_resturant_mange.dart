@@ -127,15 +127,15 @@ class HomeResturantMangePage extends ConsumerWidget {
                                 OrderTrackPageRoute(
                                     orderTrack: OrderTrack.kitchen(e)));
                           })),
-                    FilledButton(
-                        child: centerTextButton("اعدادت المطابخ", context),
-                        onPressed: null),
+                    // FilledButton(
+                    //     child: centerTextButton("اعدادت المطابخ", context),
+                    //     onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت طرق الطلب", context),
                         onPressed: null),
-                    FilledButton(
-                        child: centerTextButton("اعدادت المطعم", context),
-                        onPressed: null),
+                    // FilledButton(
+                    //     child: centerTextButton("اعدادت المطعم", context),
+                    //     onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت التصنيفات", context),
                         onPressed: null),
@@ -153,9 +153,9 @@ class HomeResturantMangePage extends ConsumerWidget {
                               .read(autoRouteProvider)
                               .push(const CustomerFeedbackPageRoute());
                         }),
-                    FilledButton(
-                        child: centerTextButton("الاحصائيات", context),
-                        onPressed: null),
+                    // FilledButton(
+                    //     child: centerTextButton("الاحصائيات", context),
+                    //     onPressed: null),
                   ]
                 ].map((e) => e).toList(),
               ),
