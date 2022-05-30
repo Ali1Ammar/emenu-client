@@ -37,7 +37,7 @@ class _OrderCardState extends State<OrderCard>
       vsync: this,
     );
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       animation = ColorTween(
         begin: FluentTheme.of(context).cardColor,
         end: FluentTheme.of(context).cardColor.withOpacity(0.2),

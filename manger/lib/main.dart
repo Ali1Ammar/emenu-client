@@ -10,10 +10,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final s = await SharedPreferences.getInstance();
   final _appRouter = AppRouter();
-  if (Platform.isAndroid || Platform.isIOS)
+  if (Platform.isAndroid || Platform.isIOS) {
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
     ]);
+  }
   runApp(MainApp(
     configDto: StartConfigDto(s, _appRouter),
   ));
