@@ -30,12 +30,16 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
         selectResturnat(rest.first);
       }
     } catch (e) {
-      if (e is DioError) {
-        state = const SelectResturantState.error(
-            "مشكلة في الاتصال في الشبكة الرجاء التاكد من الاتصال\n, الرجاء التاكد من تشغيل السيرفر وضبط الip من علامة التعديل في زاويه اعلاه");
-      } else {
-        state = SelectResturantState.error(e.toString());
-      }
+      handleError(e);
+    }
+  }
+
+  void handleError(Object e) {
+    if (e is DioError) {
+      state = const SelectResturantState.error(
+          "مشكلة في الاتصال في الشبكة الرجاء التاكد من الاتصال\n, الرجاء التاكد من تشغيل السيرفر وضبط الip من علامة التعديل في زاويه اعلاه");
+    } else {
+      state = SelectResturantState.error(e.toString());
     }
   }
 
@@ -83,13 +87,18 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
     if (loadedHistory != null) {
       state = loadedHistory!;
       loadedHistory = null;
-      return false;
+    } else {
+      state = const SelectResturantState.waitCustomerSelect();
     }
-    return true;
+    return false;
   }
 
   void loadDataViaCustomerSpotId(int id) async {
-    final data = await read(dioService).getDataViaSpotId(id);
-    read(autoRouteProvider).push(SelectOrderPageRoute(param: data));
+    try {
+      final data = await read(dioService).getDataViaSpotId(id);
+      read(autoRouteProvider).push(SelectOrderPageRoute(param: data));
+    } catch (e) {
+      handleError(e);
+    }
   }
 }

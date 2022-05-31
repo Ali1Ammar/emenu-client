@@ -12,7 +12,7 @@ Future<void> main() async {
   final _appRouter = AppRouter();
 
   runApp(DevicePreview(
-    enabled:  ( !Platform.isAndroid || !Platform.isIOS),
+    enabled:   !Platform.isAndroid ,
         tools: [
         ...DevicePreview.defaultTools,
         DevicePreviewScreenshot(

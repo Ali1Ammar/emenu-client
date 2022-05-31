@@ -37,6 +37,7 @@ dependencies:
   device_preview: ^1.0.0
   device_preview_screenshot: ^1.0.0  
   multicast_dns: ^0.3.2
+  qr_code_scanner: ^1.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

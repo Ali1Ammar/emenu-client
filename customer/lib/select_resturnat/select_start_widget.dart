@@ -1,5 +1,8 @@
 import 'package:customer/widget/big_button.dart';
+import 'package:customer/widget/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shared/shared.dart';
 
 class SelectStartWidget extends StatelessWidget {
@@ -25,19 +28,70 @@ class SelectStartWidget extends StatelessWidget {
         ),
         BigButton(
             onPressed: () {
-              final url = Uri.parse(
-                  "http://qr.r.c/link?resturantId=1&orderTypeId=1&spotId=2");
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return QRScannerWidget(
+                  onReadQrCode: (String qrCode) {
+                    Navigator.pop(context);
+                    final url = Uri.parse(qrCode);
 
-              onCompleteGetSpotId(QrCodeData.fromUri(url).spotId);
+                    onCompleteGetSpotId(QrCodeData.fromUri(url).spotId);
+                  },
+                );
+              }));
             },
             child: const Text("قراءة الكود QRCODE")),
         BigButton(
             onPressed: () {
-              onCompleteGetSpotId(1);
+              showDialog(
+                  context: context,
+                  builder: (_) =>
+                      GetNumberDialog(onComplete: onCompleteGetSpotId));
             },
             child: const Text("ادحال رقم طاولة")),
         BigButton(onPressed: onManualEnter, child: const Text("ادخال يدوي")),
       ],
     );
+  }
+}
+
+class GetNumberDialog extends HookWidget {
+  const GetNumberDialog({
+    Key? key,
+    required this.onComplete,
+  }) : super(key: key);
+
+  final void Function(int number) onComplete;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = useTextEditingController();
+
+    return AlertDialog(
+        title: const Text("قم بإدخال رقم المكان الخاص بك"),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          keyboardType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("إلغاء"),
+          ),
+          TextButton(
+            onPressed: () {
+              if (controller.text.isNotEmpty) {
+                onComplete(int.tryParse(controller.text)!);
+              }
+              Navigator.pop(context);
+            },
+            child: const Text("تأكيد"),
+          ),
+        ]);
   }
 }
