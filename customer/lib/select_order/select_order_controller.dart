@@ -1,28 +1,21 @@
-import 'package:customer/entity/resturant_realtion.dart';
+import 'package:customer/entity/order_select_data.dart';
 import 'package:customer/select_order/select_meal/select_meal_controller.dart';
 import 'package:customer/select_order/select_order_state.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
 final selectParam =
-    Provider<SelectOrderParam>((_) => throw UnimplementedError());
+    Provider<OrderSelectData>((_) => throw UnimplementedError());
 
 final selectOrderControllerProvider =
     StateNotifierProvider<SelectOrderController, SelectOrder>((_) {
   return SelectOrderController(_.watch(selectParam), _.refresh);
 }, dependencies: [selectParam]);
 
-class SelectOrderParam {
-  final RealtionResturantCustomer realtionResturantCustomer;
-  final OrderType orderType;
-  final CustomerSpot? customerSpot;
 
-  SelectOrderParam(
-      this.realtionResturantCustomer, this.orderType, this.customerSpot);
-}
 
 class SelectOrderController extends StateNotifier<SelectOrder> {
-  final SelectOrderParam params;
+  final OrderSelectData params;
   State Function<State>(ProviderBase<State>) refresh;
 
   SelectOrderController(this.params, this.refresh)

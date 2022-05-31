@@ -18,6 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SelectResturantStateTearOff {
   const _$SelectResturantStateTearOff();
 
+  WaitCustomerSelect waitCustomerSelect() {
+    return const WaitCustomerSelect();
+  }
+
   ErrorInit error(String error) {
     return ErrorInit(
       error,
@@ -58,6 +62,7 @@ const $SelectResturantState = _$SelectResturantStateTearOff();
 mixin _$SelectResturantState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() waitCustomerSelect,
     required TResult Function(String error) error,
     required TResult Function() loadingInit,
     required TResult Function(List<Resturant> resturnats,
@@ -70,6 +75,7 @@ mixin _$SelectResturantState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -82,6 +88,7 @@ mixin _$SelectResturantState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -95,6 +102,7 @@ mixin _$SelectResturantState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(WaitCustomerSelect value) waitCustomerSelect,
     required TResult Function(ErrorInit value) error,
     required TResult Function(LoadingInit value) loadingInit,
     required TResult Function(LoadResturants value) loadResturants,
@@ -105,6 +113,7 @@ mixin _$SelectResturantState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -114,6 +123,7 @@ mixin _$SelectResturantState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -139,6 +149,145 @@ class _$SelectResturantStateCopyWithImpl<$Res>
   final SelectResturantState _value;
   // ignore: unused_field
   final $Res Function(SelectResturantState) _then;
+}
+
+/// @nodoc
+abstract class $WaitCustomerSelectCopyWith<$Res> {
+  factory $WaitCustomerSelectCopyWith(
+          WaitCustomerSelect value, $Res Function(WaitCustomerSelect) then) =
+      _$WaitCustomerSelectCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$WaitCustomerSelectCopyWithImpl<$Res>
+    extends _$SelectResturantStateCopyWithImpl<$Res>
+    implements $WaitCustomerSelectCopyWith<$Res> {
+  _$WaitCustomerSelectCopyWithImpl(
+      WaitCustomerSelect _value, $Res Function(WaitCustomerSelect) _then)
+      : super(_value, (v) => _then(v as WaitCustomerSelect));
+
+  @override
+  WaitCustomerSelect get _value => super._value as WaitCustomerSelect;
+}
+
+/// @nodoc
+
+class _$WaitCustomerSelect implements WaitCustomerSelect {
+  const _$WaitCustomerSelect();
+
+  @override
+  String toString() {
+    return 'SelectResturantState.waitCustomerSelect()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is WaitCustomerSelect);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() waitCustomerSelect,
+    required TResult Function(String error) error,
+    required TResult Function() loadingInit,
+    required TResult Function(List<Resturant> resturnats,
+            Fuzzy<Resturant>? fuzzySearch, List<Resturant> resturnatSearch)
+        loadResturants,
+    required TResult Function(Resturant resturant) loadingOrderType,
+    required TResult Function(RealtionResturantCustomer resturant)
+        loadSelectedResturant,
+  }) {
+    return waitCustomerSelect();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
+    TResult Function(String error)? error,
+    TResult Function()? loadingInit,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
+    TResult Function(Resturant resturant)? loadingOrderType,
+    TResult Function(RealtionResturantCustomer resturant)?
+        loadSelectedResturant,
+  }) {
+    return waitCustomerSelect?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
+    TResult Function(String error)? error,
+    TResult Function()? loadingInit,
+    TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
+            List<Resturant> resturnatSearch)?
+        loadResturants,
+    TResult Function(Resturant resturant)? loadingOrderType,
+    TResult Function(RealtionResturantCustomer resturant)?
+        loadSelectedResturant,
+    required TResult orElse(),
+  }) {
+    if (waitCustomerSelect != null) {
+      return waitCustomerSelect();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(WaitCustomerSelect value) waitCustomerSelect,
+    required TResult Function(ErrorInit value) error,
+    required TResult Function(LoadingInit value) loadingInit,
+    required TResult Function(LoadResturants value) loadResturants,
+    required TResult Function(LoadingOrder value) loadingOrderType,
+    required TResult Function(LoadSelectedResturant value)
+        loadSelectedResturant,
+  }) {
+    return waitCustomerSelect(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
+    TResult Function(ErrorInit value)? error,
+    TResult Function(LoadingInit value)? loadingInit,
+    TResult Function(LoadResturants value)? loadResturants,
+    TResult Function(LoadingOrder value)? loadingOrderType,
+    TResult Function(LoadSelectedResturant value)? loadSelectedResturant,
+  }) {
+    return waitCustomerSelect?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
+    TResult Function(ErrorInit value)? error,
+    TResult Function(LoadingInit value)? loadingInit,
+    TResult Function(LoadResturants value)? loadResturants,
+    TResult Function(LoadingOrder value)? loadingOrderType,
+    TResult Function(LoadSelectedResturant value)? loadSelectedResturant,
+    required TResult orElse(),
+  }) {
+    if (waitCustomerSelect != null) {
+      return waitCustomerSelect(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class WaitCustomerSelect implements SelectResturantState {
+  const factory WaitCustomerSelect() = _$WaitCustomerSelect;
 }
 
 /// @nodoc
@@ -204,6 +353,7 @@ class _$ErrorInit implements ErrorInit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() waitCustomerSelect,
     required TResult Function(String error) error,
     required TResult Function() loadingInit,
     required TResult Function(List<Resturant> resturnats,
@@ -219,6 +369,7 @@ class _$ErrorInit implements ErrorInit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -234,6 +385,7 @@ class _$ErrorInit implements ErrorInit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -253,6 +405,7 @@ class _$ErrorInit implements ErrorInit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(WaitCustomerSelect value) waitCustomerSelect,
     required TResult Function(ErrorInit value) error,
     required TResult Function(LoadingInit value) loadingInit,
     required TResult Function(LoadResturants value) loadResturants,
@@ -266,6 +419,7 @@ class _$ErrorInit implements ErrorInit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -278,6 +432,7 @@ class _$ErrorInit implements ErrorInit {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -342,6 +497,7 @@ class _$LoadingInit implements LoadingInit {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() waitCustomerSelect,
     required TResult Function(String error) error,
     required TResult Function() loadingInit,
     required TResult Function(List<Resturant> resturnats,
@@ -357,6 +513,7 @@ class _$LoadingInit implements LoadingInit {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -372,6 +529,7 @@ class _$LoadingInit implements LoadingInit {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -391,6 +549,7 @@ class _$LoadingInit implements LoadingInit {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(WaitCustomerSelect value) waitCustomerSelect,
     required TResult Function(ErrorInit value) error,
     required TResult Function(LoadingInit value) loadingInit,
     required TResult Function(LoadResturants value) loadResturants,
@@ -404,6 +563,7 @@ class _$LoadingInit implements LoadingInit {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -416,6 +576,7 @@ class _$LoadingInit implements LoadingInit {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -525,6 +686,7 @@ class _$LoadResturants implements LoadResturants {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() waitCustomerSelect,
     required TResult Function(String error) error,
     required TResult Function() loadingInit,
     required TResult Function(List<Resturant> resturnats,
@@ -540,6 +702,7 @@ class _$LoadResturants implements LoadResturants {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -555,6 +718,7 @@ class _$LoadResturants implements LoadResturants {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -574,6 +738,7 @@ class _$LoadResturants implements LoadResturants {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(WaitCustomerSelect value) waitCustomerSelect,
     required TResult Function(ErrorInit value) error,
     required TResult Function(LoadingInit value) loadingInit,
     required TResult Function(LoadResturants value) loadResturants,
@@ -587,6 +752,7 @@ class _$LoadResturants implements LoadResturants {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -599,6 +765,7 @@ class _$LoadResturants implements LoadResturants {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -692,6 +859,7 @@ class _$LoadingOrder implements LoadingOrder {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() waitCustomerSelect,
     required TResult Function(String error) error,
     required TResult Function() loadingInit,
     required TResult Function(List<Resturant> resturnats,
@@ -707,6 +875,7 @@ class _$LoadingOrder implements LoadingOrder {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -722,6 +891,7 @@ class _$LoadingOrder implements LoadingOrder {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -741,6 +911,7 @@ class _$LoadingOrder implements LoadingOrder {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(WaitCustomerSelect value) waitCustomerSelect,
     required TResult Function(ErrorInit value) error,
     required TResult Function(LoadingInit value) loadingInit,
     required TResult Function(LoadResturants value) loadResturants,
@@ -754,6 +925,7 @@ class _$LoadingOrder implements LoadingOrder {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -766,6 +938,7 @@ class _$LoadingOrder implements LoadingOrder {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -855,6 +1028,7 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() waitCustomerSelect,
     required TResult Function(String error) error,
     required TResult Function() loadingInit,
     required TResult Function(List<Resturant> resturnats,
@@ -870,6 +1044,7 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -885,6 +1060,7 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? waitCustomerSelect,
     TResult Function(String error)? error,
     TResult Function()? loadingInit,
     TResult Function(List<Resturant> resturnats, Fuzzy<Resturant>? fuzzySearch,
@@ -904,6 +1080,7 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(WaitCustomerSelect value) waitCustomerSelect,
     required TResult Function(ErrorInit value) error,
     required TResult Function(LoadingInit value) loadingInit,
     required TResult Function(LoadResturants value) loadResturants,
@@ -917,6 +1094,7 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,
@@ -929,6 +1107,7 @@ class _$LoadSelectedResturant implements LoadSelectedResturant {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(WaitCustomerSelect value)? waitCustomerSelect,
     TResult Function(ErrorInit value)? error,
     TResult Function(LoadingInit value)? loadingInit,
     TResult Function(LoadResturants value)? loadResturants,

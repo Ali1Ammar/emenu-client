@@ -33,3 +33,27 @@ Map<String, dynamic> _$RealtionResturantCustomerToJson(
       'orderType': instance.orderType.map((e) => e.toJson()).toList(),
       'mainCategory': instance.mainCategory.map((e) => e.toJson()).toList(),
     };
+
+RealtionResturantViaSpot _$RealtionResturantViaSpotFromJson(
+        Map<String, dynamic> json) =>
+    RealtionResturantViaSpot(
+      json['id'] as int,
+      json['name'] as String,
+      json['isDisabled'] as bool,
+      json['location'] as String,
+      json['img'] as String,
+      (json['mainCategory'] as List<dynamic>)
+          .map((e) => MainCategory.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$RealtionResturantViaSpotToJson(
+        RealtionResturantViaSpot instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'isDisabled': instance.isDisabled,
+      'location': instance.location,
+      'img': instance.img,
+      'mainCategory': instance.mainCategory.map((e) => e.toJson()).toList(),
+    };

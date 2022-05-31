@@ -1,3 +1,4 @@
+import 'package:customer/entity/order_select_data.dart';
 import 'package:customer/select_order/order/order_page.dart';
 import 'package:customer/select_order/select_meal/select_meal.dart';
 import 'package:customer/select_order/select_order_controller.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SelectOrderPage extends StatelessWidget {
-  final SelectOrderParam param;
+  final OrderSelectData param;
   const SelectOrderPage({Key? key, required this.param}) : super(key: key);
 
   @override
@@ -53,7 +54,7 @@ class SelectOrderPage extends StatelessWidget {
               return data.flow.last.map<Widget>(
                   selectCategory: (_) => SelectMainCategoryWidget(
                       mainCategorys:
-                          param.realtionResturantCustomer.mainCategory),
+                          param.resturant.mainCategory),
                   selectMeal: (_) => SelectMealWidget(
                         mainCategory: _.mainCategory,
                       ),

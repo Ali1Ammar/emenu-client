@@ -3,21 +3,13 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qr_svg_generator/qr_svg_generator.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:shared/shared.dart';
 
 final qrCodeServiceProvider = Provider.autoDispose((_) => QrCodeService());
 
 class QrCodeService {
-  String generateLinkByData(String path, Map<String, dynamic> data) {
-    return Uri.http("qr.r.c", path, data).toString();
-  }
-
-  String generateFullLinkToOrder(
-      String resturantId, String orderTypeId, String spotId) {
-    return generateLinkByData("link", {
-      "resturantId": resturantId,
-      "orderTypeId": orderTypeId,
-      "spotId": spotId
-    });
+  String generateFullLinkToOrder(int spotId) {
+    return QrCodeData(spotId).toUri().toString();
   }
 
   String convertToSvg(String data, String title) {

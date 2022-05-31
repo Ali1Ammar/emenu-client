@@ -17,3 +17,5 @@ export './src/helper/logger.dart';
 export './src/helper/dio_client.dart';
 export './src/widget/change_url_widget.dart';
 export './src/helper/set_hook.dart';
+export './src/helper/const.dart';
+export './src/entity/qrcode.dart';

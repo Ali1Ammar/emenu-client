@@ -43,7 +43,7 @@ class OrderController extends StateNotifier<OrderState> {
               .map<CreateOrderItemDto>(
                   (e) => CreateOrderItemDto.fromCreateItemFlow(e))
               .toList(),
-          param.customerSpot?.id,
+          param.spot?.id,
           param.orderType.id));
       read(autoRouteProvider)
           .push(OrderTrackPageRoute(responseCreateOrder: orderResp));

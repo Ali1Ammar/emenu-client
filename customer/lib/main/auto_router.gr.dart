@@ -56,7 +56,7 @@ class SelectResturantPageRoute extends PageRouteInfo<void> {
 /// generated route for
 /// [SelectOrderPage]
 class SelectOrderPageRoute extends PageRouteInfo<SelectOrderPageRouteArgs> {
-  SelectOrderPageRoute({Key? key, required SelectOrderParam param})
+  SelectOrderPageRoute({Key? key, required OrderSelectData param})
       : super(SelectOrderPageRoute.name,
             path: '/select-order-page',
             args: SelectOrderPageRouteArgs(key: key, param: param));
@@ -69,7 +69,7 @@ class SelectOrderPageRouteArgs {
 
   final Key? key;
 
-  final SelectOrderParam param;
+  final OrderSelectData param;
 
   @override
   String toString() {

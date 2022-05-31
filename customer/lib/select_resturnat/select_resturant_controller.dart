@@ -1,5 +1,5 @@
+import 'package:customer/entity/order_select_data.dart';
 import 'package:customer/main/auto_router.dart';
-import 'package:customer/select_order/select_order_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_state.dart';
 import 'package:customer/service/dio_service.dart';
 import 'package:dio/dio.dart';
@@ -9,14 +9,19 @@ import 'package:shared/shared.dart';
 
 final selectRestController =
     StateNotifierProvider<SelectResturantController, SelectResturantState>(
-        (_) => SelectResturantController(_.read)..init());
+        (_) => SelectResturantController(_.read));
 
 class SelectResturantController extends StateNotifier<SelectResturantState> {
   final Reader read;
   SelectResturantController(this.read)
-      : super(const SelectResturantState.loadingInit());
+      : super(const SelectResturantState.waitCustomerSelect());
   SelectResturantState? loadedHistory;
-  init() async {
+
+  reinit() {
+    state = const SelectResturantState.waitCustomerSelect();
+  }
+
+  loadResturants() async {
     try {
       final rest = await read(dioService).getResturants();
       state = SelectResturantState.loadResturants(rest, null, []);
@@ -62,7 +67,7 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
     state = SelectResturantState.loadSelectedResturant(restRealtion);
     if (restRealtion.orderType.length == 1) {
       read(autoRouteProvider).push(SelectOrderPageRoute(
-          param: SelectOrderParam(
+          param: OrderSelectData(
               restRealtion, restRealtion.orderType.first, null)));
     }
   }
@@ -70,7 +75,7 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
   selectOrderType(OrderType orderType) async {
     state.whenOrNull(loadSelectedResturant: (rest) {
       read(autoRouteProvider).push(
-          SelectOrderPageRoute(param: SelectOrderParam(rest, orderType, null)));
+          SelectOrderPageRoute(param: OrderSelectData(rest, orderType, null)));
     });
   }
 
@@ -81,5 +86,10 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
       return false;
     }
     return true;
+  }
+
+  void loadDataViaCustomerSpotId(int id) async {
+    final data = await read(dioService).getDataViaSpotId(id);
+    read(autoRouteProvider).push(SelectOrderPageRoute(param: data));
   }
 }

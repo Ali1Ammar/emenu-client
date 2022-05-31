@@ -1,6 +1,7 @@
 import 'package:customer/app_setting/setting_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_controller.dart';
 import 'package:customer/select_resturnat/select_resturant_state.dart';
+import 'package:customer/select_resturnat/select_start_widget.dart';
 import 'package:customer/widget/fade_widget.dart';
 import 'package:customer/widget/resturant_card.dart';
 import 'package:customer/widget/url_change_widget.dart';
@@ -20,7 +21,7 @@ class SelectResturantPage extends HookConsumerWidget {
       onWillPop: cont.tryPop,
       child: Scaffold(
           appBar: AppBar(
-            title: const Text("اختيار مطعم"),
+            title: const Text("اهلا وسهلا"),
             leading: const BackButton(),
             actions: [
               if (state is LoadResturants)
@@ -50,11 +51,21 @@ class SelectResturantPage extends HookConsumerWidget {
                       OutlinedButton(
                         child: const Text("اعادة المحاولة"),
                         onPressed: () {
-                          cont.init();
+                          cont.reinit();
                         },
                       )
                     ],
                   ),
+              waitCustomerSelect: (_) {
+                return SelectStartWidget(
+                  onCompleteGetSpotId: (customerSpotId) {
+                    cont.loadDataViaCustomerSpotId(customerSpotId);
+                  },
+                  onManualEnter: () {
+                    cont.loadResturants();
+                  },
+                );
+              },
               loadingInit: (_) => const CenterLoading(),
               loadResturants: (loaded) {
                 if (loaded.resturnats.isEmpty) return const EmptyWidget();

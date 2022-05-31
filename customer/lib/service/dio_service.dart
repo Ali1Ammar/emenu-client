@@ -1,5 +1,6 @@
 import 'package:customer/entity/create_feedback.dart';
 import 'package:customer/entity/create_order.dart';
+import 'package:customer/entity/order_select_data.dart';
 import 'package:customer/entity/response_create_order.dart';
 import 'package:customer/entity/resturant_realtion.dart';
 import 'package:dio/dio.dart';
@@ -27,6 +28,15 @@ class DioService {
         .get("/resturant/$resturantId")
         .then((value) => RealtionResturantCustomer.fromJson(value.data));
   }
+
+    Future<OrderSelectData> getDataViaSpotId(
+      int spotId) async {
+    return dio
+        .get("/resturant/spot/$spotId")
+        .then((value) => OrderSelectData.fromJson(value.data));
+  }
+
+  
 
   Future<List<Meal>> getMeal(int subCategory) async {
     return dio.get('/resturant/meal/$subCategory').then(

@@ -37,8 +37,7 @@ class CustomerSpotController extends StateNotifier<CustomerSpotState> {
       state = CustomerSpotState.init(_.toString());
     }, data: (data) {
       String generateQrForSpot(CustomerSpot spot) {
-        return qrCodeService.generateFullLinkToOrder(data.value.id.toString(),
-            spot.orderTypeId.toString(), spot.id.toString());
+        return qrCodeService.generateFullLinkToOrder( spot.id);
       }
 
       final items = data.value.customerSpot
