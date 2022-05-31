@@ -6,14 +6,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:shared/shared.dart';
 
 class SelectStartWidget extends StatelessWidget {
-  // final void Function(QrCodeData qrCode) onReadQrCode;
+  final void Function(String qrCode) onReadQrCode;
   final void Function(int customerSpotCode) onCompleteGetSpotId;
   final void Function() onManualEnter;
 
   const SelectStartWidget(
       {Key? key,
       required this.onCompleteGetSpotId,
-      required this.onManualEnter})
+      required this.onManualEnter, required this.onReadQrCode})
       : super(key: key);
 
   @override
@@ -32,9 +32,7 @@ class SelectStartWidget extends StatelessWidget {
                 return QRScannerWidget(
                   onReadQrCode: (String qrCode) {
                     Navigator.pop(context);
-                    final url = Uri.parse(qrCode);
-
-                    onCompleteGetSpotId(QrCodeData.fromUri(url).spotId);
+                    onReadQrCode(qrCode);
                   },
                 );
               }));

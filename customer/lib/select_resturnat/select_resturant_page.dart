@@ -61,6 +61,9 @@ class SelectResturantPage extends HookConsumerWidget {
                   onCompleteGetSpotId: (customerSpotId) {
                     cont.loadDataViaCustomerSpotId(customerSpotId);
                   },
+                  onReadQrCode: (qrCode){
+                    cont.readQrCode(qrCode);
+                  },
                   onManualEnter: () {
                     cont.loadResturants();
                   },

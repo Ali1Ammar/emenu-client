@@ -101,4 +101,16 @@ class SelectResturantController extends StateNotifier<SelectResturantState> {
       handleError(e);
     }
   }
+
+  void readQrCode(String qrCode) {
+    try {
+      final url = Uri.parse(qrCode);
+      final data = QrCodeData.fromUri(url).spotId;
+
+      loadDataViaCustomerSpotId(data);
+    } catch (e) {
+      state = const SelectResturantState.error(
+          "خطا في الQRCODE الرجاء استخدام كود صحيح");
+    }
+  }
 }
