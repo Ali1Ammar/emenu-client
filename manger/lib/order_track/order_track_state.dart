@@ -7,8 +7,8 @@ part 'order_track_state.freezed.dart';
 @freezed
 class OrderTrackState with _$OrderTrackState {
   const factory OrderTrackState.init(OrderTrack input) = OrderTrackStateLoading;
-  const factory OrderTrackState.loaded({required List<Order> orders}) =
-      OrderTrackStateLoaded;
+  const factory OrderTrackState.loaded(
+      {required List<Order> allOrders,
+      required List<Order> filteredOrder,
+      required List<OrderStatus> selectedQueryStatus}) = OrderTrackStateLoaded;
 }
-
-

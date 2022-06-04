@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_preview_screenshot/device_preview_screenshot.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:manger/main/auto_router.dart';
@@ -15,8 +16,17 @@ Future<void> main() async {
       DeviceOrientation.landscapeLeft,
     ]);
   }
-  runApp(MainApp(
-    configDto: StartConfigDto(s, _appRouter),
+  runApp(DevicePreview(
+    enabled:   !Platform.isAndroid ,
+        tools: [
+        ...DevicePreview.defaultTools,
+        DevicePreviewScreenshot(
+          onScreenshot: screenshotAsFiles(Directory("${Directory.current.path}/screenshot") ),
+        ),
+    ],
+    builder: (context) => MainApp(
+      configDto: StartConfigDto(s, _appRouter),
+    ),
   ));
 }
 

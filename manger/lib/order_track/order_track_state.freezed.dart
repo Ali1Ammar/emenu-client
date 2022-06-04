@@ -24,9 +24,14 @@ class _$OrderTrackStateTearOff {
     );
   }
 
-  OrderTrackStateLoaded loaded({required List<Order> orders}) {
+  OrderTrackStateLoaded loaded(
+      {required List<Order> allOrders,
+      required List<Order> filteredOrder,
+      required List<OrderStatus> selectedQueryStatus}) {
     return OrderTrackStateLoaded(
-      orders: orders,
+      allOrders: allOrders,
+      filteredOrder: filteredOrder,
+      selectedQueryStatus: selectedQueryStatus,
     );
   }
 }
@@ -39,19 +44,25 @@ mixin _$OrderTrackState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(OrderTrack input) init,
-    required TResult Function(List<Order> orders) loaded,
+    required TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(OrderTrack input)? init,
-    TResult Function(List<Order> orders)? loaded,
+    TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderTrack input)? init,
-    TResult Function(List<Order> orders)? loaded,
+    TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -160,7 +171,9 @@ class _$OrderTrackStateLoading implements OrderTrackStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(OrderTrack input) init,
-    required TResult Function(List<Order> orders) loaded,
+    required TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)
+        loaded,
   }) {
     return init(input);
   }
@@ -169,7 +182,9 @@ class _$OrderTrackStateLoading implements OrderTrackStateLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(OrderTrack input)? init,
-    TResult Function(List<Order> orders)? loaded,
+    TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)?
+        loaded,
   }) {
     return init?.call(input);
   }
@@ -178,7 +193,9 @@ class _$OrderTrackStateLoading implements OrderTrackStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderTrack input)? init,
-    TResult Function(List<Order> orders)? loaded,
+    TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)?
+        loaded,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -234,7 +251,10 @@ abstract class $OrderTrackStateLoadedCopyWith<$Res> {
   factory $OrderTrackStateLoadedCopyWith(OrderTrackStateLoaded value,
           $Res Function(OrderTrackStateLoaded) then) =
       _$OrderTrackStateLoadedCopyWithImpl<$Res>;
-  $Res call({List<Order> orders});
+  $Res call(
+      {List<Order> allOrders,
+      List<Order> filteredOrder,
+      List<OrderStatus> selectedQueryStatus});
 }
 
 /// @nodoc
@@ -250,13 +270,23 @@ class _$OrderTrackStateLoadedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? orders = freezed,
+    Object? allOrders = freezed,
+    Object? filteredOrder = freezed,
+    Object? selectedQueryStatus = freezed,
   }) {
     return _then(OrderTrackStateLoaded(
-      orders: orders == freezed
-          ? _value.orders
-          : orders // ignore: cast_nullable_to_non_nullable
+      allOrders: allOrders == freezed
+          ? _value.allOrders
+          : allOrders // ignore: cast_nullable_to_non_nullable
               as List<Order>,
+      filteredOrder: filteredOrder == freezed
+          ? _value.filteredOrder
+          : filteredOrder // ignore: cast_nullable_to_non_nullable
+              as List<Order>,
+      selectedQueryStatus: selectedQueryStatus == freezed
+          ? _value.selectedQueryStatus
+          : selectedQueryStatus // ignore: cast_nullable_to_non_nullable
+              as List<OrderStatus>,
     ));
   }
 }
@@ -264,14 +294,21 @@ class _$OrderTrackStateLoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OrderTrackStateLoaded implements OrderTrackStateLoaded {
-  const _$OrderTrackStateLoaded({required this.orders});
+  const _$OrderTrackStateLoaded(
+      {required this.allOrders,
+      required this.filteredOrder,
+      required this.selectedQueryStatus});
 
   @override
-  final List<Order> orders;
+  final List<Order> allOrders;
+  @override
+  final List<Order> filteredOrder;
+  @override
+  final List<OrderStatus> selectedQueryStatus;
 
   @override
   String toString() {
-    return 'OrderTrackState.loaded(orders: $orders)';
+    return 'OrderTrackState.loaded(allOrders: $allOrders, filteredOrder: $filteredOrder, selectedQueryStatus: $selectedQueryStatus)';
   }
 
   @override
@@ -279,12 +316,19 @@ class _$OrderTrackStateLoaded implements OrderTrackStateLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is OrderTrackStateLoaded &&
-            const DeepCollectionEquality().equals(other.orders, orders));
+            const DeepCollectionEquality().equals(other.allOrders, allOrders) &&
+            const DeepCollectionEquality()
+                .equals(other.filteredOrder, filteredOrder) &&
+            const DeepCollectionEquality()
+                .equals(other.selectedQueryStatus, selectedQueryStatus));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(orders));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(allOrders),
+      const DeepCollectionEquality().hash(filteredOrder),
+      const DeepCollectionEquality().hash(selectedQueryStatus));
 
   @JsonKey(ignore: true)
   @override
@@ -296,29 +340,35 @@ class _$OrderTrackStateLoaded implements OrderTrackStateLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(OrderTrack input) init,
-    required TResult Function(List<Order> orders) loaded,
+    required TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)
+        loaded,
   }) {
-    return loaded(orders);
+    return loaded(allOrders, filteredOrder, selectedQueryStatus);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(OrderTrack input)? init,
-    TResult Function(List<Order> orders)? loaded,
+    TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)?
+        loaded,
   }) {
-    return loaded?.call(orders);
+    return loaded?.call(allOrders, filteredOrder, selectedQueryStatus);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(OrderTrack input)? init,
-    TResult Function(List<Order> orders)? loaded,
+    TResult Function(List<Order> allOrders, List<Order> filteredOrder,
+            List<OrderStatus> selectedQueryStatus)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(orders);
+      return loaded(allOrders, filteredOrder, selectedQueryStatus);
     }
     return orElse();
   }
@@ -356,10 +406,15 @@ class _$OrderTrackStateLoaded implements OrderTrackStateLoaded {
 }
 
 abstract class OrderTrackStateLoaded implements OrderTrackState {
-  const factory OrderTrackStateLoaded({required List<Order> orders}) =
+  const factory OrderTrackStateLoaded(
+          {required List<Order> allOrders,
+          required List<Order> filteredOrder,
+          required List<OrderStatus> selectedQueryStatus}) =
       _$OrderTrackStateLoaded;
 
-  List<Order> get orders;
+  List<Order> get allOrders;
+  List<Order> get filteredOrder;
+  List<OrderStatus> get selectedQueryStatus;
   @JsonKey(ignore: true)
   $OrderTrackStateLoadedCopyWith<OrderTrackStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;

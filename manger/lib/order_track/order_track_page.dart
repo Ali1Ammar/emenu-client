@@ -27,97 +27,76 @@ class OrderTrackPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(orderTrackControllerProvider(orderTrack));
     final cont = ref.watch(orderTrackControllerProvider(orderTrack).notifier);
-    final permissons = ref.watch(loginProvider)!.user.permissons;
-    final selectedQueryStatus = useState(<OrderStatus>[]);
-    final queryStatusByPermissons = useMemoized(() => [
-          if (permissons.contains(UserPermissions.ResturantAdmin)) ...[
-            OrderStatus.DeliveredByKitchen,
-            OrderStatus.Done,
-            OrderStatus.DoneByKitchen,
-            OrderStatus.WaitInKitchen,
-            OrderStatus.WaitPayment
-          ] else ...[
-            if (permissons.contains(UserPermissions.Cacher))
-              OrderStatus.WaitPayment,
-            if (permissons.contains(UserPermissions.Kitchen))
-              OrderStatus.DoneByKitchen,
-            if (permissons.contains(UserPermissions.Waiter))
-              OrderStatus.DeliveredByKitchen,
-          ]
-        ]);
-    final selectedOrder = useMemoized(() {
-      return state.map(
-          init: (_) => null,
-          loaded: (loaded) => loaded.orders
-              .where((element) =>
-                  selectedQueryStatus.value.contains(element.status))
-              .toList());
-    }, [selectedQueryStatus.value, state]);
 
-    return ScaffoldPage(
-        header: Header(
-          title: orderTrack.title +
-              (selectedOrder == null ? "" : selectedOrder.length.toString()),
-          icons: [
-            FluentCheckBox<OrderStatus>(
-              onChangedSelected: (selected) {
-                selectedQueryStatus.value = selected;
-              },
-              buttonBuilder: (context, openr) => Button(
-                child: const Icon(FluentIcons.filter),
-                onPressed: openr,
+    return state.map(
+        init: (_) => const ScaffoldPage(
+              content: CenterLoading(),
+            ),
+        loaded: (state) {
+          Widget buildCard(context, i) {
+            final item = state.filteredOrder[i];
+            // final nextStatus = item.nextStatus();
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: OrderCard(
+                key: ValueKey(item.id),
+                order: item,
+                onPayed: item.isPayed
+                    ? null
+                    : () {
+                        cont.clickPay(item);
+                      },
+                onCancel: item.status == OrderStatus.Done
+                    ? null
+                    : () {
+                        cont.clickChangeStatus(item, OrderStatus.Canceled);
+                      },
+                onDeliverd: item.status == OrderStatus.DoneByKitchen
+                    ? () {
+                        cont.clickDeliverd(
+                          item,
+                        );
+                      }
+                    : null,
+                onDoneKitchen: item.status == OrderStatus.WaitInKitchen
+                    ? () {
+                        cont.clickChangeStatus(item, OrderStatus.DoneByKitchen);
+                      }
+                    : null,
               ),
-              items: queryStatusByPermissons
-                  .map((e) => FluentCheckBoxItem<OrderStatus>(
-                      Text(e.toArabic), false, e))
-                  .toList(),
-            )
-          ],
-        ),
-        content: state.map(
-            init: (_) => const CenterLoading(),
-            loaded: (state) {
-              Widget buildCard(context, i) {
-                final item = selectedOrder![i];
-                // final nextStatus = item.nextStatus();
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: OrderCard(
-                    key: ValueKey(item.id),
-                    order: item,
-                    onPayed: item.isPayed
-                        ? null
-                        : () {
-                            cont.clickPay(item);
-                          },
-                    onCancel: item.status == OrderStatus.Done
-                        ? null
-                        : () {
-                            cont.clickChangeStatus(item, OrderStatus.Canceled);
-                          },
-                    onDeliverd: item.status == OrderStatus.DoneByKitchen
-                        ? () {
-                            cont.clickDeliverd(
-                              item,
-                            );
-                          }
-                        : null,
-                    onDoneKitchen: item.status == OrderStatus.WaitInKitchen
-                        ? () {
-                            cont.clickChangeStatus(
-                                item, OrderStatus.DoneByKitchen);
-                          }
-                        : null,
-                  ),
-                );
-              }
+            );
+          }
 
-              return MasonryGridView.builder(
-                  gridDelegate:
-                      const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 700),
-                  itemCount: selectedOrder!.length,
-                  itemBuilder: buildCard);
-            }));
+          return ScaffoldPage(
+            header: Header(
+              title: orderTrack.title +
+                  (state.filteredOrder.isEmpty
+                      ? ""
+                      : state.filteredOrder.length.toString()),
+              icons: [
+                FluentCheckBox<OrderStatus>(
+                  onChangedSelected: (selected) {
+                    cont.changeSelectedQueryStatus(selected);
+                  },
+                  defualtValues: state.selectedQueryStatus,
+                  buttonBuilder: (context, openr) => Button(
+                    child: const Icon(FluentIcons.filter),
+                    onPressed: openr,
+                  ),
+                  items: state.selectedQueryStatus
+                      .map((e) => FluentCheckBoxItem<OrderStatus>(
+                          Text(e.toArabic), false, e))
+                      .toList(),
+                )
+              ],
+            ),
+            content: MasonryGridView.builder(
+                gridDelegate:
+                    const SliverSimpleGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 700),
+                itemCount: state.filteredOrder.length,
+                itemBuilder: buildCard),
+          );
+        });
   }
 }

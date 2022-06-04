@@ -47,6 +47,7 @@ class LoginControllerr extends ChangeNotifier {
             read);
       } else {
         showErrorDialogViaRead(e, read);
+        rethrow;
       }
     }
   }

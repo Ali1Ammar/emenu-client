@@ -53,7 +53,9 @@ class DioService {
       CreateFeedback? createFeedback, String token) async {
     return await dio
         .post("/order/done",
-            data: createFeedback?.toJson(),
+            data: {
+              "data":createFeedback?.toJson()
+            },
             options: Options(headers: {
               'Authorization': 'Bearer $token',
             }))

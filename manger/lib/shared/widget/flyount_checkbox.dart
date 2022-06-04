@@ -5,11 +5,13 @@ class FluentCheckBox<T> extends StatefulWidget {
   final ValueChanged<List<T>> onChangedSelected;
   final Widget Function(BuildContext context, VoidCallback opener)
       buttonBuilder;
+          final List<T>? defualtValues;
+
   const FluentCheckBox(
       {Key? key,
       required this.items,
       required this.onChangedSelected,
-      required this.buttonBuilder})
+      required this.buttonBuilder,  this.defualtValues})
       : super(key: key);
 
   @override
@@ -21,6 +23,9 @@ class _FluentCheckBoxState<T> extends State<FluentCheckBox<T>> {
   final checkedSet = <T>{};
   @override
   void initState() {
+    if(widget.defualtValues!=null){
+      checkedSet.addAll(widget.defualtValues!);
+    }
     for (var element in widget.items) {
       if (element.checked) {
         checkedSet.add(element.value);

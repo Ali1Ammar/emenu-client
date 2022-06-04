@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/app_setting/setting_controller.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
+import 'package:manger/login/login_provider.dart';
 import 'package:manger/order_track/order_track_controller.dart';
 import 'package:manger/main/auto_router.dart';
 import 'package:manger/new_rest/new_category.dart';
@@ -57,6 +58,15 @@ class HomeResturantMangePage extends ConsumerWidget {
                     !isDark
                         ? FluentIcons.brightness
                         : FluentIcons.lower_brightness,
+                    size: 20,
+                  )),
+                      IconButton(
+                  onPressed: () {
+                    ref.refresh(loginProvider.notifier);
+                    ref.read(autoRouteProvider).pushAndPopUntil(SystemLoginPageRoute(),predicate: (_)=>true);
+                  },
+                  icon: Icon(
+                   FluentIcons.sign_out,
                     size: 20,
                   )),
               Column(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:manger/login/login_provider.dart';
 import 'package:manger/order_track/order_track_state.dart';
 import 'package:manger/shared/service/order_service.dart';
 import 'package:manger/shared/service/socketio_service.dart';
@@ -28,30 +29,53 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
     });
   }
 
+  reCalcFilterOrder() {
+    state.mapOrNull(loaded: (loaded) {
+      state = loaded.copyWith(
+          filteredOrder: loaded.allOrders
+              .where((element) =>
+                  loaded.selectedQueryStatus.contains(element.status))
+              .toList());
+    });
+  }
+
   lisienToScoket() {
     subscription?.cancel();
     subscriptionChange?.cancel();
 
     final streams = input.getStreamOrder(read(socketIoServiceProvider));
     subscription = streams.item1.listen((event) {
-      state.map(
-          init: (_) {
-            state = OrderTrackState.loaded(orders: event);
-          },
-          loaded: (_) => state = _.copyWith(orders: _.orders..addAll(event)));
+      state.map(init: (_) {
+        state = OrderTrackState.loaded(
+            allOrders: event,
+            filteredOrder: event,
+            selectedQueryStatus:
+                read(loginProvider)!.user.queryStatusPermission);
+      }, loaded: (_) {
+        state = _.copyWith(allOrders: [..._.allOrders, ...event]);
+        reCalcFilterOrder();
+      });
     });
     subscriptionChange = streams.item2.listen((event) {
       state.mapOrNull(loaded: (_) {
         final orderIndex =
-            _.orders.indexWhere((element) => element.id == event.id);
+            _.allOrders.indexWhere((element) => element.id == event.id);
+
         if (orderIndex != -1) {
-          final oldOrder = _.orders[orderIndex];
+          final oldOrder = _.allOrders[orderIndex];
           final newOrder =
               oldOrder.copyWith(isPayed: event.isPayed, status: event.status);
-          _.orders[orderIndex] = newOrder;
-          state = _.copyWith(orders: _.orders);
+          _.allOrders[orderIndex] = newOrder;
+          state = _.copyWith(allOrders: [..._.allOrders]);
+          reCalcFilterOrder();
         }
       });
+    });
+  }
+
+  changeSelectedQueryStatus(List<OrderStatus> selectedQueryStatus) {
+    state.mapOrNull(loaded: (loaded) {
+      state = loaded.copyWith(selectedQueryStatus: selectedQueryStatus);
     });
   }
 

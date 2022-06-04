@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:shared/shared.dart';
 
 part "user.g.dart";
 
@@ -17,6 +18,23 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+@JsonKey(ignore: true)
+  late List<OrderStatus> queryStatusPermission = [
+    if (permissons.contains(UserPermissions.ResturantAdmin)) ...[
+      OrderStatus.DeliveredByKitchen,
+      OrderStatus.Done,
+      OrderStatus.DoneByKitchen,
+      OrderStatus.WaitInKitchen,
+      OrderStatus.WaitPayment
+    ] else ...[
+      if (permissons.contains(UserPermissions.Cacher)) OrderStatus.WaitPayment,
+      if (permissons.contains(UserPermissions.Kitchen))
+        OrderStatus.DoneByKitchen,
+      if (permissons.contains(UserPermissions.Waiter))
+        OrderStatus.DeliveredByKitchen,
+    ]
+  ];
 }
 
 enum UserPermissions {
@@ -28,7 +46,7 @@ enum UserPermissions {
   Cacher,
   // ignore: constant_identifier_names
   Kitchen,
-    // ignore: constant_identifier_names
+  // ignore: constant_identifier_names
   Waiter
 }
 

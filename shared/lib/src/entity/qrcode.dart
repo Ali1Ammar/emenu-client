@@ -17,14 +17,16 @@ class QrCodeData {
 
   factory QrCodeData.fromUri(Uri uri) =>
       QrCodeData.fromMap(uri.queryParameters);
-  Uri toUri() => Uri(
-      scheme: "http", host: uri, path: qrCodePath, queryParameters: toMap());
+  Uri toUri()  {
+    return Uri.http(
+        domain,  qrCodePath,  toMap());
+  }
 
   Map<String, dynamic> toMap() {
     return {
       // "resturantId": resturantId,
       // "orderTypeId": orderTypeId,
-      "spotId": spotId
+      "spotId": spotId.toString()
     };
   }
 }

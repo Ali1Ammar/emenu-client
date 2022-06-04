@@ -3,7 +3,6 @@ import 'package:customer/widget/qr_code_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:shared/shared.dart';
 
 class SelectStartWidget extends StatelessWidget {
   final void Function(String qrCode) onReadQrCode;
