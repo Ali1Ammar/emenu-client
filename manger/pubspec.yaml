@@ -52,6 +52,7 @@ dev_dependencies:
   json_serializable:
   auto_route_generator:
   build_runner:
+  msix: ^3.6.2
 
 scripts: script.yaml
 
