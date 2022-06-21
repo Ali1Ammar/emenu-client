@@ -44,7 +44,7 @@ class SelectStartWidget extends StatelessWidget {
                   builder: (_) =>
                       GetNumberDialog(onComplete: onCompleteGetSpotId));
             },
-            child: const Text("ادحال رقم طاولة")),
+            child: const Text("ادخال رقم طاولة")),
         BigButton(onPressed: onManualEnter, child: const Text("ادخال يدوي")),
       ],
     );
