@@ -6,20 +6,24 @@ part "user.g.dart";
 @JsonSerializable()
 class User {
   final int id;
+  final String name;
   final String userName;
   final int? resturantId;
   final List<UserPermissions> permissons;
   @JsonKey(ignore: true)
   late bool isSystemAdmin;
+  @JsonKey(ignore: true)
+  late bool isRestAdmin;
 
-  User(this.id, this.userName, this.resturantId, this.permissons) {
+  User(this.id, this.userName, this.resturantId, this.permissons, this.name) {
     isSystemAdmin = permissons.contains(UserPermissions.SystemAdmin);
+    isRestAdmin = permissons.contains(UserPermissions.ResturantAdmin);
   }
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-@JsonKey(ignore: true)
+  @JsonKey(ignore: true)
   late List<OrderStatus> queryStatusPermission = [
     if (permissons.contains(UserPermissions.ResturantAdmin)) ...[
       OrderStatus.DeliveredByKitchen,
@@ -49,6 +53,12 @@ enum UserPermissions {
   // ignore: constant_identifier_names
   Waiter
 }
+
+const resturnatPermissions = [
+  UserPermissions.Kitchen,
+  UserPermissions.Cacher,
+  UserPermissions.Waiter
+];
 
 extension UserPermissionsExt on UserPermissions {
   String get ar {

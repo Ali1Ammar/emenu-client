@@ -17,7 +17,7 @@ Future<void> main() async {
     ]);
   }
   runApp(DevicePreview(
-    enabled:   !Platform.isAndroid ,
+    enabled:  false ,
         tools: [
         ...DevicePreview.defaultTools,
         DevicePreviewScreenshot(

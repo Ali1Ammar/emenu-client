@@ -5,8 +5,8 @@ import 'package:manger/shared/dio_client.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
-final resturantServiceProvider =
-    Provider.autoDispose((_) => ResturantService(_.watch(dioProvicerWithToken)));
+final resturantServiceProvider = Provider.autoDispose(
+    (_) => ResturantService(_.watch(dioProvicerWithToken)));
 
 class ResturantService {
   final Dio dio;
@@ -35,6 +35,12 @@ class ResturantService {
     return (res.data as List).map((e) => Meal.fromJson(e)).toList();
   }
 
+  Future<List<User>> getLinkedResturantStaff() async {
+    final res = await dio.get(
+      '/resturantadmin/staff',
+    );
+    return (res.data as List).map((e) => User.fromJson(e)).toList();
+  }
 
   Future<RealtionResturant> getResturantViaId(int id) async {
     final res = await dio.get(
@@ -55,16 +61,15 @@ class ResturantService {
     await dio.post('/admin/resturant/$id/active/$val');
   }
 
-    Future<void> changeActiveViaCurrent(bool val) async {
+  Future<void> changeActiveViaCurrent(bool val) async {
     await dio.post('/resturantadmin/active/$val');
   }
 
-    Future<void> changeMealActive(int id, bool val) async {
+  Future<void> changeMealActive(int id, bool val) async {
     await dio.post('/resturantadmin/meal/$id/active/$val');
   }
 
-
-    Future<List<CustomerFeedBack>> getCustomerFeedback() async {
+  Future<List<CustomerFeedBack>> getCustomerFeedback() async {
     final res = await dio.get(
       '/resturantadmin/feedback',
     );

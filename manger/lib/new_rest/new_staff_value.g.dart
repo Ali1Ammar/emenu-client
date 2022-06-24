@@ -1,26 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'new_staff_value.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
-      json['id'] as int,
-      json['userName'] as String,
-      json['resturantId'] as int?,
-      (json['permissons'] as List<dynamic>)
+NewStaffDto _$NewStaffDtoFromJson(Map<String, dynamic> json) => NewStaffDto(
+      name: json['name'] as String,
+      userName: json['userName'] as String,
+      password: json['password'] as String,
+      permissons: (json['permissons'] as List<dynamic>)
           .map((e) => $enumDecode(_$UserPermissionsEnumMap, e))
           .toList(),
-      json['name'] as String,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
+Map<String, dynamic> _$NewStaffDtoToJson(NewStaffDto instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'userName': instance.userName,
-      'resturantId': instance.resturantId,
+      'password': instance.password,
       'permissons':
           instance.permissons.map((e) => _$UserPermissionsEnumMap[e]).toList(),
     };

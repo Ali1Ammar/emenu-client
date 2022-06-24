@@ -4,6 +4,7 @@ import 'package:manger/new_rest/meal/new_meal_value.dart';
 import 'package:manger/new_rest/new_category_value.dart';
 import 'package:manger/new_rest/new_ordertype_value.dart';
 import 'package:manger/new_rest/new_spot_vale.dart';
+import 'package:manger/new_rest/new_staff_value.dart';
 import 'package:manger/shared/dio_client.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
@@ -50,6 +51,19 @@ class AddResturantService {
     final json = dto.toJson();
     await dio.post('/resturantadmin/customerSpot', data: json);
   }
+
+  Future<User> addStaff(NewStaffDto dto) async {
+    final json = dto.toJson();
+    final res=await dio.post('/resturantadmin/staff', data: json);
+        return User.fromJson(res.data);
+  }
+
+
+  Future<void> deleteStaff(String id) async {
+    await dio.delete('/resturantadmin/staff/$id');
+  }
+
+
 
   Future<void> addKitchen(String name) async {
     await dio.post('/resturantadmin/kitchen', data: {"name": name});

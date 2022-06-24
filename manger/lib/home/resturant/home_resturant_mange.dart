@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/app_setting/setting_controller.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/login/login_provider.dart';
+import 'package:manger/login/user.dart';
 import 'package:manger/order_track/order_track_controller.dart';
 import 'package:manger/main/auto_router.dart';
 import 'package:manger/new_rest/new_category.dart';
@@ -24,7 +25,10 @@ class HomeResturantMangePage extends ConsumerWidget {
     var shouldDisplayKitchen = rest?.orderType
         .any((element) => element.selectKitchenVia != SelectKitchenVia.None);
     final isDark = FluentTheme.of(context).brightness == Brightness.dark;
-
+    final isRestAdmin = ref
+        .watch(loginProvider)
+        ?.user
+        .isRestAdmin ?? false;
     return ScaffoldPage(
       header: PageHeader(
         title: Row(
@@ -60,13 +64,15 @@ class HomeResturantMangePage extends ConsumerWidget {
                         : FluentIcons.lower_brightness,
                     size: 20,
                   )),
-                      IconButton(
+              IconButton(
                   onPressed: () {
                     ref.refresh(loginProvider.notifier);
-                    ref.read(autoRouteProvider).pushAndPopUntil(SystemLoginPageRoute(),predicate: (_)=>true);
+                    ref.read(autoRouteProvider).pushAndPopUntil(
+                        const SystemLoginPageRoute(),
+                        predicate: (_) => true);
                   },
-                  icon: Icon(
-                   FluentIcons.sign_out,
+                  icon: const Icon(
+                    FluentIcons.sign_out,
                     size: 20,
                   )),
               Column(
@@ -137,15 +143,9 @@ class HomeResturantMangePage extends ConsumerWidget {
                                 OrderTrackPageRoute(
                                     orderTrack: OrderTrack.kitchen(e)));
                           })),
-                    // FilledButton(
-                    //     child: centerTextButton("اعدادت المطابخ", context),
-                    //     onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت طرق الطلب", context),
                         onPressed: null),
-                    // FilledButton(
-                    //     child: centerTextButton("اعدادت المطعم", context),
-                    //     onPressed: null),
                     FilledButton(
                         child: centerTextButton("اعدادت التصنيفات", context),
                         onPressed: null),
@@ -163,9 +163,14 @@ class HomeResturantMangePage extends ConsumerWidget {
                               .read(autoRouteProvider)
                               .push(const CustomerFeedbackPageRoute());
                         }),
-                    // FilledButton(
-                    //     child: centerTextButton("الاحصائيات", context),
-                    //     onPressed: null),
+                    if (isRestAdmin)
+                      FilledButton(
+                          child: centerTextButton("ادارة الموطفين ", context),
+                          onPressed: () {
+                            ref
+                                .read(autoRouteProvider)
+                                .push(const StaffMangePageRoute());
+                          }),
                   ]
                 ].map((e) => e).toList(),
               ),
