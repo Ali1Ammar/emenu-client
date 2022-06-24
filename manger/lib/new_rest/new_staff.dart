@@ -28,7 +28,7 @@ class CreateStaffWidget extends HookWidget {
           child: Column(
             children: [
               TextFormBox(
-                header: "اسم الموضف",
+                header: "اسم الموظف",
                 validator: FormValidator.required,
                 onChanged: (v) {
                   item.name = v;

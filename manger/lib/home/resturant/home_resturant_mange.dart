@@ -170,7 +170,7 @@ class HomeResturantMangePage extends ConsumerWidget {
                         }),
                     if (isRestAdmin)
                       FilledButton(
-                          child: centerTextButton("ادارة الموطفين ", context),
+                          child: centerTextButton("ادارة الموظفين ", context),
                           onPressed: () {
                             ref
                                 .read(autoRouteProvider)

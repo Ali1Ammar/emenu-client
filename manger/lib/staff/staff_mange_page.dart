@@ -17,7 +17,7 @@ class StaffMangePage extends ConsumerWidget {
     final cont = ref.watch(staffMangerControllerProvider.notifier);
 
     return ScaffoldPage(
-      header: const Header(title: "ادارة الموضفيين"),
+      header: const Header(title: "ادارة الموظفيين"),
       content: state.map<Widget>(
           init: (_) => _.isError ? const Text("error") : const CenterLoading(),
           loaded: (state) {
