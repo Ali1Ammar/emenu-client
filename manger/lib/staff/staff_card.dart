@@ -4,12 +4,12 @@ import 'package:manger/shared/widget/labeled_widget.dart';
 
 class StaffCard extends StatelessWidget {
   final User item;
-  final VoidCallback onEdit;
+  // final VoidCallback onEdit;
   final VoidCallback onDelete;
   const StaffCard(
       {Key? key,
       required this.item,
-      required this.onEdit,
+      // required this.onEdit,
       required this.onDelete})
       : super(key: key);
 
@@ -36,8 +36,8 @@ class StaffCard extends StatelessWidget {
                   IconButton(
                       onPressed: onDelete,
                       icon: const Icon(FluentIcons.delete)),
-                IconButton(
-                    onPressed: onEdit, icon: const Icon(FluentIcons.edit))
+                // IconButton(
+                //     onPressed: onEdit, icon: const Icon(FluentIcons.edit))
               ],
             )
           ],

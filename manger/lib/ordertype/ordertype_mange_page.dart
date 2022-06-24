@@ -1,23 +1,23 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:manger/new_rest/new_staff.dart';
+import 'package:manger/ordertype/new_ordertype.dart';
 import 'package:manger/shared/grid_view_custom.dart';
 import 'package:manger/shared/widget/header.dart';
 
-import 'package:manger/staff/staff_card.dart';
-import 'package:manger/staff/staff_mange_controller.dart';
+import 'package:manger/ordertype/ordertype_card.dart';
+import 'package:manger/ordertype/ordertype_mange_controller.dart';
 import 'package:shared/shared.dart';
 
-class StaffMangePage extends ConsumerWidget {
-  const StaffMangePage({Key? key}) : super(key: key);
+class OrderTypeMangePage extends ConsumerWidget {
+  const OrderTypeMangePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(staffMangerControllerProvider);
-    final cont = ref.watch(staffMangerControllerProvider.notifier);
+    final state = ref.watch(ordertypeMangerControllerProvider);
+    final cont = ref.watch(ordertypeMangerControllerProvider.notifier);
 
     return ScaffoldPage(
-      header: const Header(title: "ادارة الموضفيين"),
+      header: const Header(title: "ادارة طرق الطلب"),
       content: state.map<Widget>(
           init: (_) => _.isError ? const Text("error") : const CenterLoading(),
           loaded: (state) {
@@ -26,32 +26,31 @@ class StaffMangePage extends ConsumerWidget {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (state.isRefreshing) const CenterLoading(),
-                  CreateStaffWidget(
+                  CreateOrderTypeWidget(
                     onDone: (done) {
-                      cont.addStaff(done);
+                      cont.addOrderType(done);
                     },
                     onCancel: () {
-                      cont
-                          .setEditMode(false, null);
+                      cont.setEditMode(false, null);
                     },
                   ),
                 ],
               );
             }
             return GridViewCustomBuilder(
-              itemCount: state.staffs.length + 1,
+              itemCount: state.orderType.length + 1,
               itemBuilder: (context, i) {
                 if (i == 0) {
                   return FilledButton(
                     onPressed: () {
                       ref
-                          .read(staffMangerControllerProvider.notifier)
+                          .read(ordertypeMangerControllerProvider.notifier)
                           .setEditMode(true, null);
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text("اضافة موضف جديدة"),
+                        Text("اضافة جديدة"),
                         SizedBox(
                           height: 30,
                         ),
@@ -60,12 +59,12 @@ class StaffMangePage extends ConsumerWidget {
                     ),
                   );
                 } else {
-                  final item = state.staffs[i - 1];
-                  return StaffCard(
+                  final item = state.orderType[i - 1];
+                  return OrderTypeCard(
                     item: item,
                     // onEdit: () {
                     //   ref
-                    //       .read(staffMangerControllerProvider.notifier)
+                    //       .read(ordertypeMangerControllerProvider.notifier)
                     //       .setEditMode(true, i - 1);
                     // },
                     onDelete: () async {

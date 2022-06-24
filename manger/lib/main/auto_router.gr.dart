@@ -60,6 +60,10 @@ class _$AppRouter extends RootStackRouter {
     StaffMangePageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const StaffMangePage());
+    },
+    OrderTypeMangePageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const OrderTypeMangePage());
     }
   };
 
@@ -76,7 +80,9 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(CustomerFeedbackPageRoute.name,
             path: '/customer-feedback-page'),
         RouteConfig(CustomerSpotPageRoute.name, path: '/customer-spot-page'),
-        RouteConfig(StaffMangePageRoute.name, path: '/staff-mange-page')
+        RouteConfig(StaffMangePageRoute.name, path: '/staff-mange-page'),
+        RouteConfig(OrderTypeMangePageRoute.name,
+            path: '/order-type-mange-page')
       ];
 }
 
@@ -197,4 +203,13 @@ class StaffMangePageRoute extends PageRouteInfo<void> {
       : super(StaffMangePageRoute.name, path: '/staff-mange-page');
 
   static const String name = 'StaffMangePageRoute';
+}
+
+/// generated route for
+/// [OrderTypeMangePage]
+class OrderTypeMangePageRoute extends PageRouteInfo<void> {
+  const OrderTypeMangePageRoute()
+      : super(OrderTypeMangePageRoute.name, path: '/order-type-mange-page');
+
+  static const String name = 'OrderTypeMangePageRoute';
 }

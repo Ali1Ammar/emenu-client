@@ -42,9 +42,11 @@ class AddResturantService {
     return Meal.fromJson(res.data);
   }
 
-  Future<void> addOrderType(NewOrderTypeValue dto) async {
+  Future<OrderType> addOrderType(NewOrderTypeValue dto) async {
     final json = dto.toJson();
-    await dio.post('/resturantadmin/order-type', data: json);
+    final res = await dio.post('/resturantadmin/order-type', data: json);
+            return OrderType.fromJson(res.data);
+
   }
 
   Future<void> addSpot(NewSpotValue dto) async {
@@ -61,6 +63,10 @@ class AddResturantService {
 
   Future<void> deleteStaff(String id) async {
     await dio.delete('/resturantadmin/staff/$id');
+  }
+
+    Future<void> deleteOrderType(String id) async {
+    await dio.delete('/resturantadmin/ordertype/$id');
   }
 
 

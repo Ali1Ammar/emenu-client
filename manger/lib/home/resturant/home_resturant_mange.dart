@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:manger/app_setting/setting_controller.dart';
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/login/login_provider.dart';
-import 'package:manger/login/user.dart';
 import 'package:manger/order_track/order_track_controller.dart';
 import 'package:manger/main/auto_router.dart';
 import 'package:manger/new_rest/new_category.dart';
@@ -145,7 +144,9 @@ class HomeResturantMangePage extends ConsumerWidget {
                           })),
                     FilledButton(
                         child: centerTextButton("اعدادت طرق الطلب", context),
-                        onPressed: null),
+                        onPressed: (){
+                           ref.read(autoRouteProvider).push( const OrderTypeMangePageRoute()  );
+                        }),
                     FilledButton(
                         child: centerTextButton("اعدادت التصنيفات", context),
                         onPressed: null),

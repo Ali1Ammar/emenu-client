@@ -8,6 +8,7 @@ import 'package:manger/order_track/order_track_page.dart';
 import 'package:manger/login/system_login_page.dart';
 import 'package:manger/meal/meal_mange_page.dart';
 import 'package:manger/new_rest/new_rest_page.dart';
+import 'package:manger/ordertype/ordertype_mange_page.dart';
 import 'package:manger/staff/staff_mange_page.dart';
 import 'package:manger/user_feedback/feedback_page.dart';
 import 'package:riverpod/riverpod.dart';
@@ -35,8 +36,8 @@ final autoRouteProvider =
     AutoRoute(page: OrderTrackPage),
     AutoRoute(page: CustomerFeedbackPage),
     AutoRoute(page: CustomerSpotPage),
-        AutoRoute(page: StaffMangePage)
-    
+    AutoRoute(page: StaffMangePage),
+    AutoRoute(page: OrderTypeMangePage)
   ],
 )
 class AppRouter extends _$AppRouter {}
