@@ -1,30 +1,30 @@
 import 'package:manger/home/resturant/resturant_home_controller.dart';
 import 'package:manger/login/user.dart';
-import 'package:manger/new_rest/new_ordertype_value.dart';
+import 'package:manger/new_rest/new_category_value.dart';
 import 'package:manger/shared/dialog.dart';
 import 'package:manger/shared/service/add_to_rest_service.dart';
 import 'package:manger/shared/service/resturnat_service.dart';
-import 'package:manger/ordertype/ordertype_mange_state.dart';
+import 'package:manger/category/category_mange_state.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:shared/shared.dart';
 
-final ordertypeMangerControllerProvider = StateNotifierProvider.autoDispose<
-        OrderTypeMangeController, OrderTypeMangeState>(
-    (_) => OrderTypeMangeController(_.read, _.watch(resturantServiceProvider)));
+final categoryMangerControllerProvider = StateNotifierProvider.autoDispose<
+        CategoryMangeController, CategoryMangeState>(
+    (_) => CategoryMangeController(_.read, _.watch(resturantServiceProvider)));
 
-class OrderTypeMangeController extends StateController<OrderTypeMangeState> {
+class CategoryMangeController extends StateController<CategoryMangeState> {
   final ResturantService resturantService;
   final Reader read;
-  OrderTypeMangeController(this.read, this.resturantService)
-      : super(const OrderTypeMangeState.init()) {
+  CategoryMangeController(this.read, this.resturantService)
+      : super(const CategoryMangeState.init()) {
     init();
   }
 
   init() async {
     try {
-      final ordertypes = read(currentLinkedResturant).value!.orderType;
-      state = OrderTypeMangeState.loaded(
-        orderType: ordertypes,
+      final categorys = read(currentLinkedResturant).value!.mainCategory;
+      state = CategoryMangeState.loaded(
+        categorys: categorys,
       );
     } catch (e, s) {
       debugLog(e, s);
@@ -39,7 +39,7 @@ class OrderTypeMangeController extends StateController<OrderTypeMangeState> {
             _.copyWith(editMode: value, oldEdited: null, isRefreshing: false));
   }
 
-  addOrderType(NewOrderTypeValue value) async {
+  addCategory(NewCategoryValue value) async {
     try {
       state = state.map(
           init: (_) => _,
@@ -48,12 +48,12 @@ class OrderTypeMangeController extends StateController<OrderTypeMangeState> {
               ));
 
       final future =
-          await read(addResturantServiceProvider).addOrderType(value);
-                      final ordertypes = read(currentLinkedResturant).value!.orderType..add(future) ;
+          await read(addResturantServiceProvider).addCategorty(value);
+      final categorys = read(currentLinkedResturant).value!.mainCategory
+        ..add(future);
 
       state = state.map(
-          init: (_) => _,
-          loaded: (_) => _.copyWith(orderType:ordertypes));
+          init: (_) => _, loaded: (_) => _.copyWith(categorys: categorys));
       state = state.map(
           init: (_) => _,
           loaded: (_) => _.copyWith(isRefreshing: false, editMode: false));
@@ -65,10 +65,10 @@ class OrderTypeMangeController extends StateController<OrderTypeMangeState> {
     }
   }
 
-  // editOrderTypeDone(NewOrderTypeDto value) async {
+  // editCategoryDone(NewCategoryDto value) async {
   //   try {
   //     final _state = state;
-  //     if (_state is LodedOrderTypes && _state.oldEdited != null) {
+  //     if (_state is LodedCategorys && _state.oldEdited != null) {
   //       final old = _state.oldEdited!;
   //       state = state.map(
   //           init: (_) => _,
@@ -77,8 +77,8 @@ class OrderTypeMangeController extends StateController<OrderTypeMangeState> {
   //               ));
 
   //       final future =
-  //           await read(addResturantServiceProvider).editOrderType(value, old.old.id);
-  //       _state.ordertypes[old.index] = future;
+  //           await read(addResturantServiceProvider).editCategory(value, old.old.id);
+  //       _state.categorys[old.index] = future;
   //       state = _state.copyWith(
   //         isRefreshing: false,
   //         editMode: false,
@@ -92,14 +92,14 @@ class OrderTypeMangeController extends StateController<OrderTypeMangeState> {
   //   }
   // }
 
-  onDelete(OrderType item) async {
-    final _state = state;
-    if (_state is LodedOrderTypes) {
-      await read(addResturantServiceProvider)
-          .deleteOrderType(item.id.toString());
-      state = state.map(
-          init: (_) => _,
-          loaded: (_) => _.copyWith(orderType: _.orderType..remove(item)));
-    }
-  }
+  // onDelete(MainCategory item) async {
+  //   final _state = state;
+  //   if (_state is LodedCategorys) {
+  //     await read(addResturantServiceProvider)
+  //         .deleteCategory(item.id.toString());
+  //     state = state.map(
+  //         init: (_) => _,
+  //         loaded: (_) => _.copyWith(categorys: _.categorys..remove(item)));
+  //   }
+  // }
 }

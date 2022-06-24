@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:manger/category/category_mange_page.dart';
 import 'package:manger/customer_spot/customer_spot_page.dart';
 import 'package:manger/home/home_page.dart';
 import 'package:manger/home/resturant/home_resturant_mange.dart';
@@ -37,7 +38,10 @@ final autoRouteProvider =
     AutoRoute(page: CustomerFeedbackPage),
     AutoRoute(page: CustomerSpotPage),
     AutoRoute(page: StaffMangePage),
-    AutoRoute(page: OrderTypeMangePage)
+    AutoRoute(page: OrderTypeMangePage),
+        AutoRoute(page: CategoryMangePage),
+
+    
   ],
 )
 class AppRouter extends _$AppRouter {}

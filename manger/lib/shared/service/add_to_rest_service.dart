@@ -17,11 +17,13 @@ class AddResturantService {
 
   AddResturantService(this.dio);
 
-  Future<void> addCategorty(NewCategoryValue dto) async {
+  Future<MainCategory> addCategorty(NewCategoryValue dto) async {
     final json = dto.toJson();
     json['img'] = await MultipartFile.fromFile(dto.img!);
-    await dio.post('/resturantadmin/main-category',
+    final res = await dio.post('/resturantadmin/main-category',
         data: FormData.fromMap(json));
+            return MainCategory.fromJson(res.data);
+
   }
 
   Future<Meal> addMeal(NewMealValue dto) async {

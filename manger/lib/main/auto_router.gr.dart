@@ -64,6 +64,10 @@ class _$AppRouter extends RootStackRouter {
     OrderTypeMangePageRoute.name: (routeData) {
       return MaterialPageX<dynamic>(
           routeData: routeData, child: const OrderTypeMangePage());
+    },
+    CategoryMangePageRoute.name: (routeData) {
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: const CategoryMangePage());
     }
   };
 
@@ -82,7 +86,8 @@ class _$AppRouter extends RootStackRouter {
         RouteConfig(CustomerSpotPageRoute.name, path: '/customer-spot-page'),
         RouteConfig(StaffMangePageRoute.name, path: '/staff-mange-page'),
         RouteConfig(OrderTypeMangePageRoute.name,
-            path: '/order-type-mange-page')
+            path: '/order-type-mange-page'),
+        RouteConfig(CategoryMangePageRoute.name, path: '/category-mange-page')
       ];
 }
 
@@ -212,4 +217,13 @@ class OrderTypeMangePageRoute extends PageRouteInfo<void> {
       : super(OrderTypeMangePageRoute.name, path: '/order-type-mange-page');
 
   static const String name = 'OrderTypeMangePageRoute';
+}
+
+/// generated route for
+/// [CategoryMangePage]
+class CategoryMangePageRoute extends PageRouteInfo<void> {
+  const CategoryMangePageRoute()
+      : super(CategoryMangePageRoute.name, path: '/category-mange-page');
+
+  static const String name = 'CategoryMangePageRoute';
 }
