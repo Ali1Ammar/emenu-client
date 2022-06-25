@@ -171,7 +171,6 @@ const _$OrderStatusEnumMap = {
   OrderStatus.WaitPayment: 'WaitPayment',
   OrderStatus.WaitInKitchen: 'WaitInKitchen',
   OrderStatus.DoneByKitchen: 'DoneByKitchen',
-  OrderStatus.DeliveredByKitchen: 'DeliveredByKitchen',
   OrderStatus.Canceled: 'Canceled',
   OrderStatus.Done: 'Done',
 };

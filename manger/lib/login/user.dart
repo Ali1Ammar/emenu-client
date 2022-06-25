@@ -26,7 +26,6 @@ class User {
   @JsonKey(ignore: true)
   late List<OrderStatus> queryStatusPermission = [
     if (permissons.contains(UserPermissions.ResturantAdmin)) ...[
-      OrderStatus.DeliveredByKitchen,
       OrderStatus.Done,
       OrderStatus.DoneByKitchen,
       OrderStatus.WaitInKitchen,

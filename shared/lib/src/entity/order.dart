@@ -52,7 +52,6 @@ enum OrderStatus {
   WaitPayment,
   WaitInKitchen,
   DoneByKitchen,
-  DeliveredByKitchen,
   Canceled,
   Done,
 }
@@ -67,9 +66,6 @@ extension OrderStatusExt on OrderStatus {
 
       case OrderStatus.DoneByKitchen:
         return "اكتمل الطبح";
-
-      case OrderStatus.DeliveredByKitchen:
-        return "تم توصيل للزبون";
 
       case OrderStatus.Canceled:
         return "ملغي";

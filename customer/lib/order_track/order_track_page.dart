@@ -52,9 +52,7 @@ class OrderTrackPage extends HookConsumerWidget {
                   child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(state.order.type.deliverMsg, style: style)))
-            else if (((state.currentStatus == OrderStatus.DeliveredByKitchen ||
-                    state.currentStatus == OrderStatus.Done) &&
-                state.isPayed))
+            else if (state.currentStatus == OrderStatus.Done && state.isPayed)
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -110,8 +108,6 @@ class OrderTrackPage extends HookConsumerWidget {
 
   String generateSvgName(OrderStatus status) {
     switch (status) {
-      case OrderStatus.DeliveredByKitchen:
-        return "undraw_review_re_kgg1.svg";
       case OrderStatus.Done:
         return "undraw_hamburger_-8-ge6.svg";
       case OrderStatus.DoneByKitchen:
