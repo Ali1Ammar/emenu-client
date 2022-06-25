@@ -51,6 +51,7 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
             filteredOrder: event,
             selectedQueryStatus:
                 read(loginProvider)!.user.queryStatusPermission);
+        reCalcFilterOrder();
       }, loaded: (_) {
         state = _.copyWith(allOrders: [..._.allOrders, ...event]);
         reCalcFilterOrder();
@@ -76,25 +77,23 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
   changeSelectedQueryStatus(List<OrderStatus> selectedQueryStatus) {
     state.mapOrNull(loaded: (loaded) {
       state = loaded.copyWith(selectedQueryStatus: selectedQueryStatus);
+      reCalcFilterOrder();
     });
   }
 
   clickChangeStatus(Order order, OrderStatus status) async {
-    //TODO change the button at ui
     await read(orderServiceProvider).statusUpdate(order.id, status);
   }
 
   clickDeliverd(Order order) async {
-    //TODO change the button at ui
     await read(orderServiceProvider).statusUpdate(
         order.id,
-        order.type.paymentType == PaymentType.beforeTakeOrder
-            ? OrderStatus.DeliveredByKitchen
+        order.type.paymentType == PaymentType.afterTakeOrder
+            ? OrderStatus.WaitPayment
             : OrderStatus.Done);
   }
 
   clickPay(Order order) async {
-    //TODO change the button at ui
     await read(orderServiceProvider).payed(order.id);
   }
 

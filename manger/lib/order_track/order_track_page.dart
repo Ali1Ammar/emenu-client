@@ -35,13 +35,15 @@ class OrderTrackPage extends HookConsumerWidget {
         loaded: (state) {
           Widget buildCard(context, i) {
             final item = state.filteredOrder[i];
+            bool shouldShowPay = item.status == OrderStatus.WaitPayment;
+
             // final nextStatus = item.nextStatus();
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: OrderCard(
                 key: ValueKey(item.id),
                 order: item,
-                onPayed: item.isPayed
+                onPayed: !shouldShowPay
                     ? null
                     : () {
                         cont.clickPay(item);
@@ -83,7 +85,10 @@ class OrderTrackPage extends HookConsumerWidget {
                     child: const Icon(FluentIcons.filter),
                     onPressed: openr,
                   ),
-                  items: state.selectedQueryStatus
+                  items: ref
+                      .read(loginProvider)!
+                      .user
+                      .queryStatusPermission
                       .map((e) => FluentCheckBoxItem<OrderStatus>(
                           Text(e.toArabic), false, e))
                       .toList(),

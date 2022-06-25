@@ -33,7 +33,7 @@ class LoginControllerr extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool get showButton => _username != null && _password != null;
+  bool get showButton => (_username?.isNotEmpty??false) && (_password?.isNotEmpty??false);
 
   pressLogin() async {
     try {

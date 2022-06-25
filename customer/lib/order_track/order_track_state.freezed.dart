@@ -24,7 +24,6 @@ class _$OrderTrackStateTearOff {
       bool isListen,
       OrderStatus currentStatus,
       bool isPayed,
-      List<OrderStatus> statusStep,
       AsyncValue<CustomerFeedBack?>? feedBack) {
     return _OrderTrackState(
       order,
@@ -32,7 +31,6 @@ class _$OrderTrackStateTearOff {
       isListen,
       currentStatus,
       isPayed,
-      statusStep,
       feedBack,
     );
   }
@@ -48,7 +46,6 @@ mixin _$OrderTrackState {
   bool get isListen => throw _privateConstructorUsedError;
   OrderStatus get currentStatus => throw _privateConstructorUsedError;
   bool get isPayed => throw _privateConstructorUsedError;
-  List<OrderStatus> get statusStep => throw _privateConstructorUsedError;
   AsyncValue<CustomerFeedBack?>? get feedBack =>
       throw _privateConstructorUsedError;
 
@@ -68,7 +65,6 @@ abstract class $OrderTrackStateCopyWith<$Res> {
       bool isListen,
       OrderStatus currentStatus,
       bool isPayed,
-      List<OrderStatus> statusStep,
       AsyncValue<CustomerFeedBack?>? feedBack});
 }
 
@@ -88,7 +84,6 @@ class _$OrderTrackStateCopyWithImpl<$Res>
     Object? isListen = freezed,
     Object? currentStatus = freezed,
     Object? isPayed = freezed,
-    Object? statusStep = freezed,
     Object? feedBack = freezed,
   }) {
     return _then(_value.copyWith(
@@ -112,10 +107,6 @@ class _$OrderTrackStateCopyWithImpl<$Res>
           ? _value.isPayed
           : isPayed // ignore: cast_nullable_to_non_nullable
               as bool,
-      statusStep: statusStep == freezed
-          ? _value.statusStep
-          : statusStep // ignore: cast_nullable_to_non_nullable
-              as List<OrderStatus>,
       feedBack: feedBack == freezed
           ? _value.feedBack
           : feedBack // ignore: cast_nullable_to_non_nullable
@@ -137,7 +128,6 @@ abstract class _$OrderTrackStateCopyWith<$Res>
       bool isListen,
       OrderStatus currentStatus,
       bool isPayed,
-      List<OrderStatus> statusStep,
       AsyncValue<CustomerFeedBack?>? feedBack});
 }
 
@@ -159,7 +149,6 @@ class __$OrderTrackStateCopyWithImpl<$Res>
     Object? isListen = freezed,
     Object? currentStatus = freezed,
     Object? isPayed = freezed,
-    Object? statusStep = freezed,
     Object? feedBack = freezed,
   }) {
     return _then(_OrderTrackState(
@@ -183,10 +172,6 @@ class __$OrderTrackStateCopyWithImpl<$Res>
           ? _value.isPayed
           : isPayed // ignore: cast_nullable_to_non_nullable
               as bool,
-      statusStep == freezed
-          ? _value.statusStep
-          : statusStep // ignore: cast_nullable_to_non_nullable
-              as List<OrderStatus>,
       feedBack == freezed
           ? _value.feedBack
           : feedBack // ignore: cast_nullable_to_non_nullable
@@ -199,7 +184,7 @@ class __$OrderTrackStateCopyWithImpl<$Res>
 
 class _$_OrderTrackState implements _OrderTrackState {
   const _$_OrderTrackState(this.order, this.orderChange, this.isListen,
-      this.currentStatus, this.isPayed, this.statusStep, this.feedBack);
+      this.currentStatus, this.isPayed, this.feedBack);
 
   @override
   final Order order;
@@ -212,13 +197,11 @@ class _$_OrderTrackState implements _OrderTrackState {
   @override
   final bool isPayed;
   @override
-  final List<OrderStatus> statusStep;
-  @override
   final AsyncValue<CustomerFeedBack?>? feedBack;
 
   @override
   String toString() {
-    return 'OrderTrackState(order: $order, orderChange: $orderChange, isListen: $isListen, currentStatus: $currentStatus, isPayed: $isPayed, statusStep: $statusStep, feedBack: $feedBack)';
+    return 'OrderTrackState(order: $order, orderChange: $orderChange, isListen: $isListen, currentStatus: $currentStatus, isPayed: $isPayed, feedBack: $feedBack)';
   }
 
   @override
@@ -233,8 +216,6 @@ class _$_OrderTrackState implements _OrderTrackState {
             const DeepCollectionEquality()
                 .equals(other.currentStatus, currentStatus) &&
             const DeepCollectionEquality().equals(other.isPayed, isPayed) &&
-            const DeepCollectionEquality()
-                .equals(other.statusStep, statusStep) &&
             const DeepCollectionEquality().equals(other.feedBack, feedBack));
   }
 
@@ -246,7 +227,6 @@ class _$_OrderTrackState implements _OrderTrackState {
       const DeepCollectionEquality().hash(isListen),
       const DeepCollectionEquality().hash(currentStatus),
       const DeepCollectionEquality().hash(isPayed),
-      const DeepCollectionEquality().hash(statusStep),
       const DeepCollectionEquality().hash(feedBack));
 
   @JsonKey(ignore: true)
@@ -262,7 +242,6 @@ abstract class _OrderTrackState implements OrderTrackState {
       bool isListen,
       OrderStatus currentStatus,
       bool isPayed,
-      List<OrderStatus> statusStep,
       AsyncValue<CustomerFeedBack?>? feedBack) = _$_OrderTrackState;
 
   @override
@@ -275,8 +254,6 @@ abstract class _OrderTrackState implements OrderTrackState {
   OrderStatus get currentStatus;
   @override
   bool get isPayed;
-  @override
-  List<OrderStatus> get statusStep;
   @override
   AsyncValue<CustomerFeedBack?>? get feedBack;
   @override

@@ -34,9 +34,9 @@ class User {
     ] else ...[
       if (permissons.contains(UserPermissions.Cacher)) OrderStatus.WaitPayment,
       if (permissons.contains(UserPermissions.Kitchen))
-        OrderStatus.DoneByKitchen,
+        OrderStatus.WaitInKitchen,
       if (permissons.contains(UserPermissions.Waiter))
-        OrderStatus.DeliveredByKitchen,
+        OrderStatus.DoneByKitchen,
     ]
   ];
 }

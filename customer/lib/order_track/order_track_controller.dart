@@ -24,33 +24,8 @@ class OrderTrackController extends StateNotifier<OrderTrackState> {
   final DioService dioService;
   final ResponseCreateOrder responseOrder;
   OrderTrackController(this.responseOrder, this.ioService, this.dioService)
-      : super(OrderTrackState(
-            responseOrder.order,
-            [],
-            false,
-            responseOrder.order.status,
-            responseOrder.order.isPayed,
-            [],
-            null)) {
-    state = state.copyWith(statusStep: generateStepList());
-  }
-  List<OrderStatus> generateStepList() {
-    return state.order.type.paymentType == PaymentType.beforeTakeOrder
-        ? [
-            OrderStatus.WaitPayment,
-            OrderStatus.WaitInKitchen,
-            OrderStatus.DoneByKitchen,
-            OrderStatus.DeliveredByKitchen,
-            OrderStatus.Done
-          ]
-        : [
-            OrderStatus.WaitInKitchen,
-            OrderStatus.DoneByKitchen,
-            OrderStatus.DeliveredByKitchen,
-            OrderStatus.WaitPayment,
-            OrderStatus.Done
-          ];
-  }
+      : super(OrderTrackState(responseOrder.order, [], false,
+            responseOrder.order.status, responseOrder.order.isPayed, null));
 
   init() async {
     await subc?.cancel();
